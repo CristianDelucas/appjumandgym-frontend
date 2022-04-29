@@ -41,6 +41,7 @@ const Login = () => {
 
   return (
     <div className="c-login">
+    <div className="c-login__title">JUM AND GYM <br/> Nutrición y entrenamiento</div>
     <div className="c-login__content">
     <div className="f-description">
         <div className="f-description__logo"><img src={logo} alt="logo"/></div>
@@ -97,7 +98,7 @@ const Login = () => {
         <div className="f-login__footer"><input type="submit" value="Login" name="submit" className="input-button"/></div>
     </form>
     </div>
-    <div className="c-login__title">JUM AND GYM <br/> Nutrición y entrenamiento</div>
+    
     
     </div>
   )
