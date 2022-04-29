@@ -11,7 +11,9 @@ import web from '../../assets/img/web.png';
 const Login = () => {
 
     const [error,setError]=useState(false);
+    const navigate = useNavigate();
 
+    
     const {
         register,
         handleSubmit,
@@ -30,7 +32,7 @@ const Login = () => {
         //     localStorage.setItem('token',token)
         //     localStorage.setItem('userId',reqUserId )
         //     setError(false);
-        //     navigate('/home')
+             navigate('/home')
         // }catch(error){
         //     console.error(error);
         //     setError(true);
