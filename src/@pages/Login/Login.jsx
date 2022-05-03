@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineMail } from "react-icons/ai";
 import { BiKey } from "react-icons/bi";
 import { useForm } from "react-hook-form";
@@ -8,11 +8,23 @@ import logo from '../../assets/img/logo.png';
 import whatsapp from '../../assets/img/whatsapp.png';
 import instagram from '../../assets/img/instagram.png';
 import web from '../../assets/img/web.png';
+import useUser from '../../hooks/UseUser';
+
+
 const Login = () => {
 
-    const [error,setError]=useState(false);
-    const navigate = useNavigate();
+    //const [error,setError]=useState(false);
+    
 
+    const navigate = useNavigate();
+    const {state} = useLocation();
+    
+    console.log(state?.location?.pathname);
+    const {login, isLogged} = useUser;
+    useEffect(() => {
+        if(isLogged) navigate('/')
+        },[isLogged,navigate]);
+    
     
     const {
         register,
@@ -21,23 +33,13 @@ const Login = () => {
       } = useForm();
 
       const submit = (data) => {
-        singIn(data);
+        login();
       };
 
-      const singIn = async(user) =>{
-        // try{
-          
-        //     const {token, reqUserId } = await loginUser(user);
-            
-        //     localStorage.setItem('token',token)
-        //     localStorage.setItem('userId',reqUserId )
-        //     setError(false);
-             navigate('/home')
-        // }catch(error){
-        //     console.error(error);
-        //     setError(true);
-        // }
-    }
+    //   const singIn = (user) =>{
+    //     const {login, isLogged} = useUser;
+    //         login();
+    // }
 
   return (
     <div className="c-login">
@@ -46,14 +48,14 @@ const Login = () => {
     <div className="f-description">
         <div className="f-description__logo"><img src={logo} alt="logo"/></div>
         <div className="f-description__redes">
-        <a className="links" href="https://www.instagram.com/jumandgym/" target="_blank"><img src={web} alt="web"/></a>
-        <a className="links" href="https://www.instagram.com/jumandgym/" target="_blank"><img src={instagram} alt="instagram"/></a>
-            <a className="links" href="https://web.whatsapp.com/send?phone=34641040558&text=¡Hola JumAndGym!" target="_blank"><img src={whatsapp} alt="whatsapp"/></a>
+        <a className="links"  href="https://www.instagram.com/jumandgym/" target="_blank" rel="noreferrer"><img src={web} alt="web"/></a>
+        <a className="links" href="https://www.instagram.com/jumandgym/" target="_blank" rel="noreferrer"><img src={instagram} alt="instagram"/></a>
+            <a className="links" href="https://web.whatsapp.com/send?phone=34641040558&text=¡Hola JumAndGym!" target="_blank" rel="noreferrer"><img src={whatsapp} alt="whatsapp"/></a>
         </div>
     </div>
     
 
-    <form onSubmit={handleSubmit(submit)} className="f-login">
+    <form onSubmit={ handleSubmit(submit)} className="f-login">
         <div className="f-login__header"><p>Conectate</p></div>
         
             <div className="f-login__body">
@@ -95,7 +97,8 @@ const Login = () => {
             </div>
                 <div>¿Olvidaste la contraseña?</div>
             </div>
-        <div className="f-login__footer"><input type="submit" value="Login" name="submit" className="input-button"/></div>
+        <div className="f-login__footer">
+        <input type="submit" value="Login" name="submit" className="input-button"/></div>
     </form>
     </div>
     

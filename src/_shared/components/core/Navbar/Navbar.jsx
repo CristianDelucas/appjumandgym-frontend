@@ -3,12 +3,13 @@ import { GiJumpingRope } from "react-icons/gi";
 import { AiOutlineMenu } from "react-icons/ai";
 import { BiGridAlt, BiUser, BiBookContent,BiQuestionMark, BiLogOut } from "react-icons/bi";
 import logo from '../../../../assets/img/logo.png';
+import { Link } from "react-router-dom";
 
 import "./Navbar.scss";
 const Navbar = () => {
 
     
-    const [active, setActive] = useState(null);
+    const [active, setActive] = useState('');
     const [width, setWindowWidth] = useState(0)
 
     
@@ -56,28 +57,28 @@ const Navbar = () => {
         </div>
         <ul className="nav_list list-unstyled">
             <li>
-                <a href="#">
+                <Link to="/" onClick={()=>setActive('')}>
                     <BiGridAlt id="icon"/>
                     <span className="links_name">Dashboard</span>
-                </a>
+                </Link>
                 <span className="tooltip">Dashboard</span>
             </li>
             <li>
-                <a href="#">
+                <Link to="/training" onClick={()=>setActive('')}>
                     <BiBookContent id="icon"/>
                     <span className="links_name">Entrenamiento</span>
-                </a>
+                </Link>
                 <span className="tooltip">Entrenamiento</span>
             </li>
             <li>
-                <a href="#">
+                <Link to="/profile" onClick={()=>setActive('')}>
                     <BiUser id="icon"/>
                     <span className="links_name">Perfil</span>
-                </a>
+                </Link>
                 <span className="tooltip">Perfil</span>
             </li>
             <li>
-                <a href="#">
+                <a href="#" onClick={()=>setActive('')}>
                     <BiQuestionMark id="icon"/>
                     <span className="links_name">Preguntas frecuentes</span>
                 </a>
@@ -93,7 +94,8 @@ const Navbar = () => {
                     <div className="plan">2 meses Entrenamiento</div>
                 </div>
             </div>
-            <BiLogOut id="log_out"/>
+            <Link to="/login"><BiLogOut id="log_out" /></Link>
+            
         </div>
         </div>
     </div>
