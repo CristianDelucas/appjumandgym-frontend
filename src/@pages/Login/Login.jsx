@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineMail } from "react-icons/ai";
 import { BiKey } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 
+
 import logo from '../../assets/img/logo.png';
 import whatsapp from '../../assets/img/whatsapp.png';
 import instagram from '../../assets/img/instagram.png';
 import web from '../../assets/img/web.png';
-import useUser from '../../hooks/UseUser';
+import { useAuth } from '../../utils/useAuth/useAuth';
+
 
 
 const Login = () => {
-
     //const [error,setError]=useState(false);
     
 
@@ -20,10 +21,12 @@ const Login = () => {
     const {state} = useLocation();
     
     console.log(state?.location?.pathname);
-    const {login, isLogged} = useUser;
+    const {login,isAuthenticated } = useAuth();
+
     useEffect(() => {
-        if(isLogged) navigate('/')
-        },[isLogged,navigate]);
+
+        if(isAuthenticated) navigate('/');
+        },[]);
     
     
     const {
@@ -32,8 +35,10 @@ const Login = () => {
         formState: { errors },
       } = useForm();
 
-      const submit = (data) => {
+      const submit = async (data) => {
         login();
+        navigate('/');
+
       };
 
     //   const singIn = (user) =>{

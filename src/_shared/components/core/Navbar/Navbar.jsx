@@ -6,8 +6,9 @@ import logo from '../../../../assets/img/logo.png';
 import { Link } from "react-router-dom";
 
 import "./Navbar.scss";
+import useUser from '../../../../hooks/UseUser';
 const Navbar = () => {
-
+    const {isLogged, logout} = useUser();
     
     const [active, setActive] = useState('');
     const [width, setWindowWidth] = useState(0)
@@ -94,7 +95,7 @@ const Navbar = () => {
                     <div className="plan">2 meses Entrenamiento</div>
                 </div>
             </div>
-            <Link to="/login"><BiLogOut id="log_out" /></Link>
+            <Link to="/login" onClick={logout}><BiLogOut id="log_out" /></Link>
             
         </div>
         </div>

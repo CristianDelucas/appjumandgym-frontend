@@ -8,34 +8,35 @@ import Training from "./@pages/Training/Training";
 import Navbar from "./_shared/components/core/Navbar/Navbar";
 import Dashboard from "./@pages/Dashboard/Dashboard";
 import Profile from "./@pages/Profile/Profile";
-import { UserContextProvider } from "./context/UserContext";
+import { AuthProvider, useAuth } from "./utils/useAuth/useAuth";
 
-// const ProtectedRoute = ({ children }) =>{
-//   const { isAuthenticated } = useAuth();
-//   const location = useLocation();
+ const ProtectedRoute = ({ children }) =>{
+   const { isAuthenticated } = useAuth();
+   const location = useLocation();
 
-//   if(!isAuthenticated){
-//     return <Navigate to="/login" state={{location}}/>
-//   }
-//   return children;
-// }
+   if(!isAuthenticated){
+     return <Navigate to="/login" state={{location}}/>
+   }
+   return children;
+ }
 
 
 
 
 function App() {
   return (
+    <AuthProvider>
     <div className="App">
 
 
-       
+
         <Routes>
         
           <Route path='/login' element={<Login/>}/>
           
-          <Route path='/' element={<><Navbar/><div className="content"><Outlet/></div></>}>
+          <Route path='/' element={<ProtectedRoute><Navbar/><div className="content"><Outlet/></div></ProtectedRoute>}>
             <Route index element={<Dashboard/>}/>
-            <Route path="/training" element={<UserContextProvider><Training/></UserContextProvider>}/>
+            <Route path="/training" element={<Training/>}/>
             <Route path="/profile" element={<Profile/>}/>
           </Route>
           
@@ -44,6 +45,7 @@ function App() {
 
       
     </div>
+    </AuthProvider>
   );
 }
 

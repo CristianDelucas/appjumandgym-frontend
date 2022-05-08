@@ -1,14 +1,13 @@
-import  Context  from "../context/UserContext";
+import  UserContext  from "../context/UserContext";
 import {  useCallback, useContext} from "react";
 
 
-export default function useUser(){
-    const {jwt, setJWT} = useContext(Context);
-
-
+export function useUser(){
+    const {jwt, setJWT} = useContext(UserContext);
     //Cada vez que cambie el jwt, se ejecuta la funcion
     const login = useCallback(()=>{
-        setJWT('test')
+        console.log("login");
+        setJWT('test');
     }, [setJWT]);
 
     const logout = useCallback(()=>{
@@ -22,3 +21,5 @@ export default function useUser(){
         logout
     }
 }
+
+export default useUser;
