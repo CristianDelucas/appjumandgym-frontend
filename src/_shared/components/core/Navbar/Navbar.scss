@@ -91,7 +91,7 @@ $desktop: 1024px;
 
     &.active{
         width:240px;
-        transition: all 0s ease;
+        
 
             .tooltip{
                 display: none;
@@ -129,7 +129,9 @@ $desktop: 1024px;
                 
             }
 
-            
+            @include phone(){
+                width: 100%;
+            }
 
     }
 
