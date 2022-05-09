@@ -1,0 +1,72 @@
+.accordion-content{
+     display: grid;
+     max-height: 0;
+     overflow: hidden;
+     grid-template-columns: repeat(
+     auto-fit,
+     /* min-content editar --> */
+     minmax(250px
+         ,1fr
+         )
+     );
+     gap:16px;
+     transition: all 0.7s cubic-bezier(0,1,0,1);
+
+     &.show{
+            height: auto;
+            max-height: 99999px;
+            transition: all 0.8s cubic-bezier(1,0,1,0);
+     }
+
+     .card-training{
+         color: white;
+         display: flex;
+         border-radius: 5px;
+         flex-direction: column;
+         align-items: center;
+        &--title{
+            padding: 10px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        &--zone{
+            padding: 10px;
+        }
+        &--reps{
+            padding: 10px;
+        }
+     }
+
+ }
+
+.c-training{
+    padding: 10px;
+
+    .wrapper{
+        height: auto;
+        width: 100%;
+        justify-content: center;
+        
+
+        .accordion{
+            width: 100%;
+
+
+            .item{
+                background-color: wheat;
+                margin-bottom: 5px;
+                padding: 10px 20px;
+
+                .title{
+                    color: rgb(0, 0, 0);
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    cursor: pointer;
+                }
+            }
+        }
+
+    }
+
+}
