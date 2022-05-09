@@ -91,7 +91,7 @@ $desktop: 1024px;
 
     &.active{
         width:240px;
-        
+        transition: all 0s ease;
 
             .tooltip{
                 display: none;
