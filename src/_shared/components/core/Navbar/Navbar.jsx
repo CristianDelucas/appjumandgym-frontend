@@ -3,16 +3,15 @@ import { GiJumpingRope } from "react-icons/gi";
 import { AiOutlineMenu } from "react-icons/ai";
 import { BiGridAlt, BiUser, BiBookContent,BiQuestionMark, BiLogOut } from "react-icons/bi";
 import logo from '../../../../assets/img/logo.png';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./Navbar.scss";
-import useUser from '../../../../hooks/UseUser';
+import { useAuth } from '../../../../utils/useAuth/useAuth';
 const Navbar = () => {
-    const {isLogged, logout} = useUser();
-    
+    const {logout} = useAuth();
     const [active, setActive] = useState('');
     const [width, setWindowWidth] = useState(0)
-
+    const navigate = useNavigate();
     
 
     const sidebarActive = () =>{
@@ -23,6 +22,11 @@ const Navbar = () => {
         }
         
     };
+
+    const logoutUser = () =>{
+        logout();
+        navigate('/login');
+    }
 
     useEffect(() => { 
 
@@ -95,7 +99,7 @@ const Navbar = () => {
                     <div className="plan">2 meses Entrenamiento</div>
                 </div>
             </div>
-            <Link to="/login" onClick={logout}><BiLogOut id="log_out" /></Link>
+            <Link onClick={()=>logoutUser}><BiLogOut id="log_out" /></Link>
             
         </div>
         </div>
