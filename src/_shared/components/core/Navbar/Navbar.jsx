@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.scss";
 import { useAuth } from '../../../../utils/useAuth/useAuth';
 const Navbar = () => {
-    const {logout} = useAuth();
+    const {isAuthenticated,logout} = useAuth();
     const [active, setActive] = useState('');
     const [width, setWindowWidth] = useState(0)
     const navigate = useNavigate();
@@ -99,7 +99,7 @@ const Navbar = () => {
                     <div className="plan">2 meses Entrenamiento</div>
                 </div>
             </div>
-            <Link onClick={()=>logoutUser}><BiLogOut id="log_out" /></Link>
+            <BiLogOut id="log_out" onClick={logoutUser} />
             
         </div>
         </div>
