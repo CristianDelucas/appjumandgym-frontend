@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { useModal } from '../../hooks/useModal';
 import Modal from '../../_shared/components/Modals/Modal';
+import ReactPlayer from 'react-player'
 
 const Training = () => {
 
 
   const [selected, setSelected] = useState(null);
   const [isOpen,openModal,closeModal] = useModal(false);
+  const [urlVideo,setUrlVideo] = useState('');
   
+  const openVideo = (url) =>{
+    setUrlVideo(url);
+    openModal();
+  }
 
   const toggle = (i) => {
     if(selected === i){
@@ -46,7 +52,7 @@ const Training = () => {
                   </div>
 
                   <div className='card-training-button'>
-                    <button onClick={openModal}>Video</button>
+                    <button onClick={()=>openVideo(ejercicios.video)}>Video</button>
                   </div>
 
               </div>
@@ -63,7 +69,15 @@ const Training = () => {
       </div>
         
     <Modal isOpen={isOpen} closeModal={closeModal}>
-        hola
+      {isOpen && 
+      <ReactPlayer 
+      config={{vimeo:{ playerOptions: {responsive:true , title:true} }}}
+      controls={true}  
+      playing={true} 
+      width='100%' 
+      height='100%' 
+      url={urlVideo} 
+      />}
     </Modal>
     </div>
   )
@@ -90,7 +104,7 @@ const data = [{
     repeticiones: '15/12/10/8',
     descanso: '45',
     imagen: 'https://www.entrenamientos.com/uploads/exercise/curl-femoral-sentado-en-maquina-1887.png',
-    video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+    video: 'https://vimeo.com/169599296'
   },
   {
     ejercicio: 'Extension de pierna',
