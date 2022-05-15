@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useModal } from '../../hooks/useModal';
+import Modal from '../../_shared/components/Modals/Modal';
 
 const Training = () => {
 
 
   const [selected, setSelected] = useState(null);
+  const [isOpen,openModal,closeModal] = useModal(false);
+  
 
   const toggle = (i) => {
     if(selected === i){
@@ -31,11 +35,23 @@ const Training = () => {
               {/* Entrenamientos asociados a ese día */}
               {item.ejercicios.map((ejercicios, x) => {
                 return(
+                  <>
                 <div className='card-training' style={{background:`linear-gradient(180deg, rgba(0, 0, 0, 0.697) 10%, grey 180%),url(`+ejercicios.imagen+`)`, backgroundRepeat:'no-repeat', backgroundPositionX:'center', backgroundPositionY:'10%',backgroundSize:'cover'}}>
-                  <div className='card-training--title'>{ejercicios.ejercicio}</div>
-                  <div className='card-training--zone'>Musculo: {ejercicios.zona}</div>
-                  <div className='card-training--reps'>Repeticiones: {ejercicios.repeticiones}</div>
+                  
+                  <div className='card-training-content'>
+                    <div className='card-training-content--title'>{ejercicios.ejercicio}</div>
+                    <div className='card-training-content--zone'>Musculo: {ejercicios.zona}</div>
+                    <div className='card-training-content--reps'>Repeticiones: {ejercicios.repeticiones}</div>
+                    <div className='card-training-content--descanso'>Descanso: {ejercicios.descanso} segs</div>
+                  </div>
+
+                  <div className='card-training-button'>
+                    <button onClick={openModal}>Video</button>
+                  </div>
+
               </div>
+              
+              </>
               )})}
               </div>
 
@@ -46,7 +62,9 @@ const Training = () => {
         </div>
       </div>
         
-
+    <Modal isOpen={isOpen} closeModal={closeModal}>
+        hola
+    </Modal>
     </div>
   )
 }
@@ -55,12 +73,13 @@ export default Training
 
 
 const data = [{
-  entrenamiento: 'Pecho y hombros',
+  entrenamiento: 'Pecho y deltoides',
   ejercicios:[
   {
     ejercicio: 'Curl de biceps',
     zona: 'Biceps',
     repeticiones: '15/12/10/8',
+    descanso: '45',
     imagen: 'https://t2.uc.ltmcdn.com/es/posts/9/6/2/ejercicios_para_biceps_y_triceps_50269_orig.jpg',
     video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
 
@@ -69,6 +88,7 @@ const data = [{
     ejercicio: 'Extension de pierna',
     zona: 'Cuadriceps',
     repeticiones: '15/12/10/8',
+    descanso: '45',
     imagen: 'https://www.entrenamientos.com/uploads/exercise/curl-femoral-sentado-en-maquina-1887.png',
     video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   },
@@ -76,6 +96,7 @@ const data = [{
     ejercicio: 'Extension de pierna',
     zona: 'Cuadriceps',
     repeticiones: '15/12/10/8',
+    descanso: '45',
     imagen: 'https://www.entrenamientos.com/uploads/exercise/curl-femoral-sentado-en-maquina-1887.png',
     video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   },
@@ -83,6 +104,7 @@ const data = [{
     ejercicio: 'Extension de pierna',
     zona: 'Cuadriceps',
     repeticiones: '15/12/10/8',
+    descanso: '45',
     imagen: 'https://www.entrenamientos.com/uploads/exercise/curl-femoral-sentado-en-maquina-1887.png',
     video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   },
@@ -90,6 +112,7 @@ const data = [{
     ejercicio: 'Extension de pierna',
     zona: 'Cuadriceps',
     repeticiones: '15/12/10/8',
+    descanso: '45',
     imagen: 'https://www.entrenamientos.com/uploads/exercise/curl-femoral-sentado-en-maquina-1887.png',
     video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   }]
@@ -101,6 +124,7 @@ const data = [{
     ejercicio: 'Curl de biceps',
     zona: 'Biceps',
     repeticiones: '15/12/10/8',
+    descanso: '45',
     imagen: 'https://t2.uc.ltmcdn.com/es/posts/9/6/2/ejercicios_para_biceps_y_triceps_50269_orig.jpg',
     video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
 
@@ -116,17 +140,19 @@ const data = [{
     ejercicio: 'Extension de pierna',
     zona: 'Cuadriceps',
     repeticiones: '15/12/10/8',
+    descanso: '45',
     imagen: 'https://www.entrenamientos.com/uploads/exercise/curl-femoral-sentado-en-maquina-1887.png',
     video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   }]
 },
 {
-  entrenamiento: 'Espalda y hombros',
+  entrenamiento: 'Espalda y deltoides',
   ejercicios:[
   {
     ejercicio: 'Curl de biceps',
     zona: 'Biceps',
     repeticiones: '15/12/10/8',
+    descanso: '45',
     imagen: 'https://t2.uc.ltmcdn.com/es/posts/9/6/2/ejercicios_para_biceps_y_triceps_50269_orig.jpg',
     video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
 
@@ -142,6 +168,7 @@ const data = [{
     ejercicio: 'Extension de pierna',
     zona: 'Cuadriceps',
     repeticiones: '15/12/10/8',
+    descanso: '45',
     imagen: 'https://www.entrenamientos.com/uploads/exercise/curl-femoral-sentado-en-maquina-1887.png',
     video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   }]
@@ -153,6 +180,7 @@ const data = [{
     ejercicio: 'Curl de biceps',
     zona: 'Biceps',
     repeticiones: '15/12/10/8',
+    descanso: '45',
     imagen: 'https://t2.uc.ltmcdn.com/es/posts/9/6/2/ejercicios_para_biceps_y_triceps_50269_orig.jpg',
     video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
 
@@ -168,6 +196,7 @@ const data = [{
     ejercicio: 'Extension de pierna',
     zona: 'Cuadriceps',
     repeticiones: '15/12/10/8',
+    descanso: '45',
     imagen: 'https://www.entrenamientos.com/uploads/exercise/curl-femoral-sentado-en-maquina-1887.png',
     video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   }]
@@ -179,6 +208,7 @@ const data = [{
     ejercicio: 'Curl de biceps',
     zona: 'Biceps',
     repeticiones: '15/12/10/8',
+    descanso: '45',
     imagen: 'https://t2.uc.ltmcdn.com/es/posts/9/6/2/ejercicios_para_biceps_y_triceps_50269_orig.jpg',
     video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
 
@@ -187,6 +217,7 @@ const data = [{
     ejercicio: 'Extension de pierna',
     zona: 'Cuadriceps',
     repeticiones: '15/12/10/8',
+    descanso: '45',
     imagen: 'https://www.entrenamientos.com/uploads/exercise/curl-femoral-sentado-en-maquina-1887.png',
     video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   },
@@ -194,6 +225,7 @@ const data = [{
     ejercicio: 'Extension de pierna',
     zona: 'Cuadriceps',
     repeticiones: '15/12/10/8',
+    descanso: '45',
     imagen: 'https://www.entrenamientos.com/uploads/exercise/curl-femoral-sentado-en-maquina-1887.png',
     video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   }]

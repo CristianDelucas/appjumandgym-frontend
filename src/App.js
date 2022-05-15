@@ -25,7 +25,7 @@ import { AuthProvider, useAuth } from "./utils/useAuth/useAuth";
 
 function App() {
   return (
-    <AuthProvider>
+    // <AuthProvider>
     <div className="App">
 
 
@@ -34,7 +34,7 @@ function App() {
         
           <Route path='/login' element={<Login/>}/>
           
-          <Route path='/' element={<ProtectedRoute><Navbar/><div className="content"><Outlet/></div></ProtectedRoute>}>
+          <Route path='/' element={<><Navbar/><div className="content"><Outlet/></div></>}>
             <Route index element={<Dashboard/>}/>
             <Route path="/training" element={<Training/>}/>
             <Route path="/profile" element={<Profile/>}/>
@@ -45,7 +45,7 @@ function App() {
 
       
     </div>
-    </AuthProvider>
+    // </AuthProvider>
   );
 }
 
