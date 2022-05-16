@@ -7,9 +7,9 @@ const Modal = ({children, isOpen, closeModal}) => {
     const handleModalContainerClick = (e) => e.stopPropagation();
 
   return (
-    <article className={isOpen?'modal is-open':'modal'}>
+    <article className={isOpen?'modal is-open':'modal'} onClick={closeModal}>
         <div className='modal-container' onClick={handleModalContainerClick}>
-            <button onClick={closeModal} className='modal-close'>X</button>
+        <div onClick={closeModal} className='modal-close'>{'<'} VOLVER</div>
             {children}
         </div>
     </article>

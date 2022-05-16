@@ -67,18 +67,19 @@ const Training = () => {
               
         </div>
       </div>
-        
-    <Modal isOpen={isOpen} closeModal={closeModal}>
       {isOpen && 
+    <Modal isOpen={isOpen} closeModal={closeModal}>
+      
       <ReactPlayer 
-      config={{vimeo:{ playerOptions: {responsive:true , title:true} }}}
-      controls={true}  
-      playing={true} 
+      config={{vimeo:{ playerOptions: { title:true, transparent:false} }}}
+      controls 
+      title
       width='100%' 
       height='100%' 
       url={urlVideo} 
-      />}
+      />
     </Modal>
+      }
     </div>
   )
 }
@@ -112,7 +113,7 @@ const data = [{
     repeticiones: '15/12/10/8',
     descanso: '45',
     imagen: 'https://www.entrenamientos.com/uploads/exercise/curl-femoral-sentado-en-maquina-1887.png',
-    video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+    video: 'https://vimeo.com/708379044'
   },
   {
     ejercicio: 'Extension de pierna',
