@@ -4,7 +4,11 @@ import "./Modal.scss";
 const Modal = ({children, isOpen, closeModal}) => {
 
     //detenemos el evento del componente padre sobre el que se ejecuta el evento
-    const handleModalContainerClick = (e) => e.stopPropagation();
+    const handleModalContainerClick = (e) =>{
+        e.stopPropagation();
+        e.preventDefault();
+        this.props.history.goBack();
+    } 
 
   return (
     <article className={isOpen?'modal is-open':'modal'} onClick={closeModal}>
