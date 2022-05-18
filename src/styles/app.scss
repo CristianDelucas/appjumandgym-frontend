@@ -4,11 +4,22 @@
 @import 'base/mixins';
 @import 'base/globals';
 
-/*Layouts*/
 
-@import 'layouts/Login/Login';
-@import 'layouts/Home/Home';
-@import 'layouts/Training/Training';
-@import 'layouts/Loading/Loading';
-@import 'layouts/Whatsapp/Whatsapp';
+/*Components*/
+
+@import 'components/cards';
+
+/*Layout*/
+
+@import 'layout/grid';
+
+
+/*Pages*/
+
+@import 'pages/Login/Login';
+@import 'pages/Home/Home';
+@import 'pages/Dashboard/Dashboard';
+@import 'pages/Training/Training';
+@import 'pages/Loading/Loading';
+@import 'pages/Whatsapp/Whatsapp';
 
