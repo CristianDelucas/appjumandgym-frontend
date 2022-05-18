@@ -83,7 +83,7 @@ $desktop: 1024px;
             width: 100%;
             left: 0;
             top:70px;
-            height:calc(100% - 70px);
+            //height:calc(100% - 70px);
         }
     }
 
@@ -119,7 +119,7 @@ $desktop: 1024px;
 
             ~ .content{
                 width: calc(100% - 269px)!important;
-                left: 269px!important;
+                left: 268px!important;
 
                 @include phone {
                     z-index: -1;

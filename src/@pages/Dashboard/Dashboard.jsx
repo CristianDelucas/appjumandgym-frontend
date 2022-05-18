@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Chart from '../../_shared/components/Charts/Chart'
 
 const Dashboard = () => {
+
+  const [data, setData] = useState([]);
+
   return (
     <div className='c-dashboard'>
 
@@ -15,7 +19,7 @@ const Dashboard = () => {
       <div className='c-dashboard__content row'>
             <div className="col-12 col-sm-4 ">
               <div className="card">
-                <div className="card--title">Plan contratado</div>
+                <div className="card--title">PLAN CONTRATADO</div>
                 <div className="card--content">
                 Plan: <strong>Entrenamiento muscular</strong>
                 <br/>
@@ -29,7 +33,7 @@ const Dashboard = () => {
             </div>
             <div className="col-12 col-sm-4 ">
               <div className="card">
-                <div className="card--title">Información de rutina
+                <div className="card--title">INFORMACIÓN DE RUTINA
                   
                 </div>
                 <div className="card--content">
@@ -46,7 +50,7 @@ const Dashboard = () => {
             </div>
             <div className="col-12 col-sm-4">
               <div className="card">
-                <div className="card--title">Guia de app</div>
+                <div className="card--title">GUIA DE APP</div>
                 <div className="card--content">
                 ¿Donde ver mi rutina? <strong>Aquí</strong>
                 <br/>
@@ -60,13 +64,18 @@ const Dashboard = () => {
             </div>
             <div className="col-12 col-sm-6 ">
               <div className="card">
-                <div className="card--title">Progreso</div>
-                <div className="card--content">Este va a ser el contenido</div>
+                <div className="card--title">PROGRESO</div>
+                <div className="card--content">
+                <Chart
+                  labels={data.length === 0 ? ["01/01/21", "01/01/21", "01/01/21", "01/01/21" ,"01/01/21" ,"01/01/21" ] : data[0].labels}
+              data1={data.length === 0 ? [67, 69, 72, 75, 77, 77] : data[0].data[0].values}
+                />
+                </div>
               </div>
             </div>
             <div className="col-12 col-sm-3 ">
               <div className="card">
-                <div className="card--title">Accesos directos</div>
+                <div className="card--title">ACCESOS DIRECTOS</div>
                 <div className="card--content">
                 Rutinas <strong>Aquí</strong>
                 <br/>
@@ -80,7 +89,7 @@ const Dashboard = () => {
             </div>
             <div className="col-12 col-sm-3 ">
               <div className="card">
-                <div className="card--title">Redes sociales</div>
+                <div className="card--title">REDES SOCIALES</div>
                 <div className="card--content">Este va a ser el contenido</div>
               </div>
             </div>
