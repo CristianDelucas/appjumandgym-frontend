@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { GiJumpingRope } from "react-icons/gi";
 import { AiOutlineMenu } from "react-icons/ai";
-import { BiGridAlt, BiUser, BiBookContent,BiQuestionMark, BiLogOut } from "react-icons/bi";
+import { BiGridAlt, BiUser, BiBookContent,BiQuestionMark, BiLogOut , BiShieldQuarter} from "react-icons/bi";
 import logo from '../../../../assets/img/logo.png';
 import { Link, useNavigate } from "react-router-dom";
 
@@ -81,6 +81,13 @@ const Navbar = () => {
                     <span className="links_name">Perfil</span>
                 </Link>
                 <span className="tooltip">Perfil</span>
+            </li>
+            <li>
+                <Link to="/admin" onClick={()=>setActive('')}>
+                    <BiShieldQuarter id="icon"/>
+                    <span className="links_name">Admin</span>
+                </Link>
+                <span className="tooltip">Admin</span>
             </li>
             <li>
                 <a href="#" onClick={()=>setActive('')}>

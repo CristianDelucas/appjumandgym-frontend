@@ -6,4 +6,11 @@
     transition:all 0.3s ease;
     
     background-color: #312c6b70;
+        box-sizing: border-box;
+    }
+      
+      *,
+      *:after,
+      *::before {
+        box-sizing: inherit;
 }

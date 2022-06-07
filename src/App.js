@@ -9,6 +9,7 @@ import Navbar from "./_shared/components/core/Navbar/Navbar";
 import Dashboard from "./@pages/Dashboard/Dashboard";
 import Profile from "./@pages/Profile/Profile";
 import { AuthProvider, useAuth } from "./utils/useAuth/useAuth";
+import Admin from "./@pages/Admin/Admin";
 
  const ProtectedRoute = ({ children }) =>{
    const { isAuthenticated } = useAuth();
@@ -38,6 +39,7 @@ function App() {
             <Route index element={<Dashboard/>}/>
             <Route path="/training" element={<Training/>}/>
             <Route path="/profile" element={<Profile/>}/>
+            <Route path="/admin" element={<Admin/>}/>
           </Route>
           
           <Route path='*' element={<h1>Not found</h1>}/>

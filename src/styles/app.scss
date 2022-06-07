@@ -8,6 +8,7 @@
 /*Components*/
 
 @import 'components/cards';
+@import 'components/react-tabs';
 
 /*Layout*/
 
@@ -21,6 +22,12 @@
 @import 'pages/Dashboard/Dashboard';
 @import 'pages/Training/Training';
 @import 'pages/Profile/Profile';
+
+@import 'pages/Admin/Admin';
+@import 'pages/Admin/Clients/Clients';
+@import 'pages/Admin/Exercises/Exercises';
+@import 'pages/Admin/Routines/Routines';
+
 @import 'pages/Loading/Loading';
 @import 'pages/Whatsapp/Whatsapp';
 
