@@ -1,42 +1,22 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 const CrudFormRoutinesRow = ({
     numero,
     register,
     errors,
-    selectExercises,
-    selectFields,
-    setRutina,
-    rutina,
-    nrutina,
-    watch,
+    selectExercises
     }) => {
   
+    
 
-
-    useEffect(() => {
-        const data = {
-            nameExercise:watch(selectExercises[numero-1].nameExercise),
-            series:watch(selectExercises[numero-1].series),
-            repeticiones:watch(selectExercises[numero-1].repeticiones),
-            descanso:watch(selectExercises[numero-1].descanso)
-        }
-        console.log('dia ' + nrutina + ' ejercicios --->' + numero);
-        rutina[(nrutina-1)].dia[0].ejercicios[(numero-1)] = []
-        //console.log('dia'+ nrutina + 'ejercicio' + numero );
-        rutina[(nrutina-1)].dia[0].ejercicios[(numero-1)] =[data] ;
-        console.log(numero)
-        console.log(rutina);
-        
-    }, [watch(selectExercises[numero-1].nameExercise), watch(selectExercises[numero-1].series), watch(selectExercises[numero-1].repeticiones), watch(selectExercises[numero-1].descanso)]);
-
+   
     return (
     <div className='row'>
-        <div className='col-1'>
+        <div className='col-12 col-sm-1'>
                 <label></label>
                 <p> Ejercicio {numero}</p>  
         </div>
-        <div className='col'>
+        <div className='col-12 col-sm'>
             <label>EJERCICIO</label>
             <select {...register(selectExercises[numero-1].nameExercise, {required:{value:true, message:"Número de ejercicios requerido"}})}>
                     <option value="">--EJERCICIO--</option>
@@ -46,7 +26,7 @@ const CrudFormRoutinesRow = ({
             </select>
             {errors[selectExercises[numero-1].nameExercise] && <p className='error'>{errors[selectExercises[numero-1].nameExercise].message}</p>}
         </div>
-        <div className='col'>
+        <div className='col-12 col-sm'>
             <label>SERIES</label>
             <select {...register(selectExercises[numero-1].series, {required:{value:true, message:"Número de series requerido"}})}>
                 <option value="">--SERIES--</option>
@@ -56,7 +36,7 @@ const CrudFormRoutinesRow = ({
             </select>
             {errors[selectExercises[numero-1].series] && <p className='error'>{errors[selectExercises[numero-1].series].message}</p>}
         </div>
-        <div className='col'>
+        <div className='col-12 col-sm'>
             <label>REPETICIONES X SERIE</label>
             <select {...register(selectExercises[numero-1].repeticiones, {required:{value:true, message:"Número de repeticiones requerido"}})}>
                 <option value="">--REPETICIONES--</option>
@@ -68,7 +48,7 @@ const CrudFormRoutinesRow = ({
             </select>
             {errors[selectExercises[numero-1].repeticiones] && <p className='error'>{errors[selectExercises[numero-1].repeticiones].message}</p>}
         </div>
-        <div className='col'>
+        <div className='col-12 col-sm'>
             <label>DESCANSO X SERIE</label>
             <select {...register(selectExercises[numero-1].descanso, {required:{value:true, message:"Descanso requerido"}})}>
                 <option value="">--DESCANSO--</option>

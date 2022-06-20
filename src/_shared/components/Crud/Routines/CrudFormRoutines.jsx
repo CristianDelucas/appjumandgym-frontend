@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import CrudFormRoutinesRow from './CrudFormRoutinesRow';
 
- 
+
 
 
 
 const CrudFormRoutines = ({register,errors,nrutina, selectFields, watch, setRutina, rutina}) => {
 
-  //console.log(rutina[nrutina-1].dia);
+  
   const valueSelectField = selectFields[nrutina-1].nameObject;
   
   const [selectExercises, setSelectExercises] = useState([]);
@@ -18,11 +18,13 @@ const CrudFormRoutines = ({register,errors,nrutina, selectFields, watch, setRuti
     
 
     useEffect(() => {
+      
       const auxSelect = [];
       const aux = [];
-      const auxRutinaDias = rutina;
-      auxRutinaDias[nrutina-1].dia = [];
       setNumEjercicio([]);
+
+      
+
       for(let i = 1; i <= watch(valueSelectField); i++){
         aux.push(i);
         auxSelect.push({
@@ -30,18 +32,17 @@ const CrudFormRoutines = ({register,errors,nrutina, selectFields, watch, setRuti
           series:`seriesDia${nrutina}ejercicio${i}`,
           repeticiones:`repeticionesDia${nrutina}ejercicio${i}`,
           descanso:`descansoDia${nrutina}ejercicio${i}`});
-          
-      }
+      
+         // rutina[(nrutina-1)].dia[0].ejercicios.push(infEjercicio)
+        }
 
-      auxRutinaDias[nrutina-1].dia[0] = {
-        'musculosEntrenados':'Biceps y Triceps',
-        [`ejercicios`]:[]}; 
+      
       //console.log(auxRutinaDias);
-      setRutina(auxRutinaDias);
       //console.log('rutina')
       //console.log(rutina)
       setNumEjercicio(aux);
       setSelectExercises(auxSelect);
+        
     }, [watch(valueSelectField)]);
 
     

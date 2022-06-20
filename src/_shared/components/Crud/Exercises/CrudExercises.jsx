@@ -19,6 +19,7 @@ const CrudExercises = () => {
     const addData = (data) => {
         data.id = db.length + 1;
         setDb([...db, data]);
+        console.log(db)
 
     }
     const updateData = (data) => {

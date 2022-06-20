@@ -7,19 +7,71 @@ import { useForm } from 'react-hook-form';
  
 
   const initialDb = [
-  ];
+    {
+    "idRutina":'0',
+    "nombreRutina":'Rutina para hipertrofia',
+    "diasRutina":[{
+        "dia": [
+            {
+                "musculosEntrenados": "Biceps y Triceps",
+                "ejercicios": [
+                    
+                        {
+                            "nameExercise": "extension de pierna",
+                            "series": "2",
+                            "repeticiones": "2",
+                            "descanso": "60"
+                        }
+                    ,
+                        {
+                            "nameExercise": "extension de biceps",
+                            "series": "2",
+                            "repeticiones": "3",
+                            "descanso": "120"
+                        }
+                    
+                ]
+            }
+        ]
+    },
+    {
+        "dia": [
+            {
+                "musculosEntrenados": "Biceps y Triceps",
+                "ejercicios": [
+                    
+                        {
+                            "nameExercise": "extension de pierna",
+                            "series": "2",
+                            "repeticiones": "2",
+                            "descanso": "60"
+                        },
+                        {
+                            "nameExercise": "extension de biceps",
+                            "series": "2",
+                            "repeticiones": "2",
+                            "descanso": "60"
+                        }
+                    ]
+                
+            }
+        ]
+    }]
+  
+  }];
 
 
 const CrudRoutines = () => {
 
+    
     const [db, setDb] = useState(initialDb);
-    const [dataToEdit, setDataToEdit] = useState(null);
+    const [dataToEdit, setDataToEdit] = useState();
 
     //variable de estado para la rutina que se esta editando
     const [rutina, setRutina] = useState({});
 
     const addData = (data) => {
-        data.id = db.length + 1;
+        data.idRutina = db.length + 1;
         setDb([...db, data]);
 
     }
@@ -30,10 +82,10 @@ const CrudRoutines = () => {
 
 
     }
-    const deleteData = (id) => {
-        let isDelete = window.confirm(`¿Estás seguro de eliminar la rutina ´${id}´`);
+    const deleteData = (idRutina) => {
+        let isDelete = window.confirm(`¿Estás seguro de eliminar la rutina ´${idRutina}´`);
         if(isDelete){
-            let newData = db.filter(el => el.id !== id);
+            let newData = db.filter(el => el.idRutina !== idRutina);
             setDb(newData);
         }
         return;
@@ -43,7 +95,9 @@ const CrudRoutines = () => {
     }
 
 
-    const {register, handleSubmit, watch, reset, formState: {errors}} = useForm({});
+    const {register, handleSubmit, watch, reset,setValue, formState: {errors}} = useForm({
+      
+    });
 
 
     const [diasRutina, setDiasRutina] = useState([]);
@@ -53,38 +107,108 @@ const CrudRoutines = () => {
     
 
     useEffect(() => {
-      
+      const diasRutina = watch('diasRutina');
       
       const aux = [];
       const auxSelect = [];
       const auxRutina = [];
 
-      for(let i = 1; i <= watch('diasRutina'); i++){
+      for(let i = 1; i <= diasRutina; i++){
         aux.push(i);
         auxSelect.push({nameObject:`dia${i}`});
-        
-        //se crean las posiones de los dias en la rutina
-        auxRutina.push({[`dia`]:[]});
+
       }
-      setRutina(auxRutina);
       setSelectFields(auxSelect);
       setDiasRutina(aux);
       
       
       
     }, [watch('diasRutina')]);
+
+    const editValues = (el) => {
+      
+      
+      //elemnto.forEach((el) =>  {
+        
+        setValue('diasRutina', el.diasRutina.length);
+        setValue('nombreRutina', el.nombreRutina);
+        el.diasRutina.forEach((el,index) => {
+        
+        const dia = index+1;
+        
+        console.log('Objeto '+ index)
+        console.log(el)
+        el.dia.forEach(day => {
+          //console.log(day.musculosEntrenados)
+          setValue(`dia${dia}`, day.ejercicios.length);
+          console.log('numero de ejercicios -->'+day.ejercicios.length)
+          day.ejercicios.forEach((el,index) => {
+            //console.log(index)
+            const nejercicio = index+1;
+
+              setValue(`nameDia${dia}ejercicio${nejercicio}`, el.nameExercise);
+              setValue(`seriesDia${dia}ejercicio${nejercicio}`, el.series);
+              setValue(`repeticionesDia${dia}ejercicio${nejercicio}`, el.repeticiones);
+              setValue(`descansoDia${dia}ejercicio${nejercicio}`, el.descanso);
+            
+            
+          })
+        })
+
+        })
+          
+        //})
+        console.log(watch());
+        setRutina(initialDb[0]);
+        console.log(initialDb)
+      
+    }
   
     const submit = (data) => {
 
-      console.log(errors);
-      for (const property in data) {
+      //console.log(errors);
+      // for (const property in data) {
+
+      //   console.log(`${property}: ${data[property]}`);
+
+      //   if(property === 'diasRutina'){
+      //     console.log('verdad y su valor es'+ data[property])
+
+      //   }
+      // }
+      const rutina = {
         
-        console.log(`${property}: ${data[property]}`);
+        "nombreRutina":data.nombreRutina,
+        "diasRutina":[]
+      };
+      for(let i = 1; i<=data.diasRutina;i++){
+        rutina.diasRutina.push({[`dia`]:[]});
+        console.log(i);
+        rutina.diasRutina[i-1].dia.musculosEntrenados='Biceps';
+        const nEjercicios= data['dia'+i];
+        console.log(nEjercicios);
+        //numero de ejercicios de ese mismo dia
+        for(let n=1; n<=nEjercicios;n++){
+          const nEjercicio = n;
+          rutina.diasRutina[i-1].dia.push(
+            {
+              nameExercise:data[`nameDia${i}ejercicio${nEjercicio}`],
+              series:data[`seriesDia${i}ejercicio${nEjercicio}`],
+              repeticiones:data[`repeticionesDia${i}ejercicio${nEjercicio}`],
+              descanso:data[`descansoDia${i}ejercicio${nEjercicio}`]
+            });
+
+        }
       }
-      const aux = data
-      console.log(aux);
+      console.log(rutina);
+      addData(rutina);
+      
     }
 
+    const reiniciar =() => {
+      reset();
+      setRutina(null);
+    }
     
 
   return (
@@ -103,6 +227,10 @@ const CrudRoutines = () => {
                 <option value="7">7</option>
             </select>
       {errors.diasRutina && <p className="error">{errors.diasRutina.message}</p>}
+      </div>
+      <div>
+          <input className="input" type="text" name="nombreRutina" placeholder='Nombre de rutina' {...register('nombreRutina', {required:{value:true, message: 'Se requiere url miniatura'}})} />
+          {errors.nombreRutina && <span>{errors.nombreRutina.message}</span>}
       </div>
       
       { diasRutina === null ? "":  diasRutina.map((el,index) => (
@@ -137,14 +265,15 @@ const CrudRoutines = () => {
         </>)) }
 
         <button className="buttonBlue" type="submit">Crear rutina</button>
-            <button className="buttonBlue" >Limpiar</button>
+            <button className="buttonBlue" onClick={()=>reiniciar()} >Limpiar</button>
+            
         </form>
 
 
         <CrudTable 
         data={db} 
         deleteData={deleteData}
-        setDataToEdit={setDataToEdit}
+        editValues={editValues}
         />
     </div>
   )

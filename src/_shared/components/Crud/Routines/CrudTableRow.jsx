@@ -1,19 +1,18 @@
 import React from 'react'
 
-const CrudTableRow = ({el, setDataToEdit, deleteData}) => {
+const CrudTableRow = ({el, editValues, deleteData}) => {
 
-    const {id,ejercicio, zona, imagen, video} = el;
-
+    const {idRutina,nombreRutina, diasRutina} = el;
+  
 
   return (
-    <tr key={id}>
-                        <td >{ejercicio}</td>
-                        <td >{zona}</td>
-                        <td >{imagen}</td>
-                        <td >{video}</td>
-                        <td>
-                            <button onClick={() => setDataToEdit(el)}>Editar</button>
-                            <button onClick={()=>  deleteData(id)}>Eliminar</button>
+    <tr className='row' key={idRutina}>
+                        <td  className='col-12 col-sm' >{idRutina}</td>
+                        <td className='col-12 col-sm'>{nombreRutina}</td>
+                        <td className='col-12 col-sm'>{4}</td>
+                        <td className='col-12 col-sm'>
+                            <button onClick={() => editValues(el)}>Editar</button>
+                            <button onClick={()=>  deleteData(idRutina)}>Eliminar</button>
                         </td>
     </tr>
   )
