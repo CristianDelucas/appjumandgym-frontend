@@ -32,14 +32,9 @@ const CrudFormRoutines = ({register,errors,nrutina, selectFields, watch, setRuti
           series:`seriesDia${nrutina}ejercicio${i}`,
           repeticiones:`repeticionesDia${nrutina}ejercicio${i}`,
           descanso:`descansoDia${nrutina}ejercicio${i}`});
-      
-         // rutina[(nrutina-1)].dia[0].ejercicios.push(infEjercicio)
         }
 
       
-      //console.log(auxRutinaDias);
-      //console.log('rutina')
-      //console.log(rutina)
       setNumEjercicio(aux);
       setSelectExercises(auxSelect);
         

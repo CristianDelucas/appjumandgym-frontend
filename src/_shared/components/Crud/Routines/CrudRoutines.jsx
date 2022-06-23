@@ -8,12 +8,12 @@ import { useForm } from 'react-hook-form';
 
   const initialDb = [
     {
-    "idRutina":'0',
+    "idRutina":'1',
     "nombreRutina":'Rutina para hipertrofia',
-    "diasRutina":[{
-        "dia": [
+    "nDias":'2',
+    "dias":[
             {
-                "musculosEntrenados": "Biceps y Triceps",
+                "musculos": "Biceps y Triceps",
                 "ejercicios": [
                     
                         {
@@ -32,12 +32,9 @@ import { useForm } from 'react-hook-form';
                     
                 ]
             }
-        ]
-    },
-    {
-        "dia": [
+            ,
             {
-                "musculosEntrenados": "Biceps y Triceps",
+                "musculos": "Biceps y Triceps",
                 "ejercicios": [
                     
                         {
@@ -55,9 +52,7 @@ import { useForm } from 'react-hook-form';
                     ]
                 
             }
-        ]
-    }]
-  
+    ]
   }];
 
 
@@ -127,19 +122,16 @@ const CrudRoutines = () => {
 
     const editValues = (el) => {
       
+      reset()
       
-      //elemnto.forEach((el) =>  {
-        
-        setValue('diasRutina', el.diasRutina.length);
+        console.log('rutina a editar');
+        setValue('diasRutina', el.dias.length);
         setValue('nombreRutina', el.nombreRutina);
-        el.diasRutina.forEach((el,index) => {
+        el.dias.forEach((day,index) => {
         
         const dia = index+1;
         
         console.log('Objeto '+ index)
-        console.log(el)
-        el.dia.forEach(day => {
-          //console.log(day.musculosEntrenados)
           setValue(`dia${dia}`, day.ejercicios.length);
           console.log('numero de ejercicios -->'+day.ejercicios.length)
           day.ejercicios.forEach((el,index) => {
@@ -150,58 +142,56 @@ const CrudRoutines = () => {
               setValue(`seriesDia${dia}ejercicio${nejercicio}`, el.series);
               setValue(`repeticionesDia${dia}ejercicio${nejercicio}`, el.repeticiones);
               setValue(`descansoDia${dia}ejercicio${nejercicio}`, el.descanso);
-            
-            
           })
         })
-
-        })
           
-        //})
+        
+       
         console.log(watch());
         setRutina(initialDb[0]);
-        console.log(initialDb)
+        
       
     }
   
     const submit = (data) => {
 
-      //console.log(errors);
-      // for (const property in data) {
-
-      //   console.log(`${property}: ${data[property]}`);
-
-      //   if(property === 'diasRutina'){
-      //     console.log('verdad y su valor es'+ data[property])
-
-      //   }
-      // }
+      //inicializamos la variable de la rutina con parametros predeterminados
       const rutina = {
-        
         "nombreRutina":data.nombreRutina,
-        "diasRutina":[]
+        "nDias":data.diasRutina,
+        "nivel":'Principiante',
+        "dias":[]
       };
+      //realizamos una lectura sobre los datos que tenemos en el formulario
+      //dinamico y construimos el objeto para completar la rutina
       for(let i = 1; i<=data.diasRutina;i++){
-        rutina.diasRutina.push({[`dia`]:[]});
+        rutina.dias.push({});
         console.log(i);
-        rutina.diasRutina[i-1].dia.musculosEntrenados='Biceps';
+        rutina.dias[i-1].musculos='Biceps';
         const nEjercicios= data['dia'+i];
         console.log(nEjercicios);
         //numero de ejercicios de ese mismo dia
         for(let n=1; n<=nEjercicios;n++){
           const nEjercicio = n;
-          rutina.diasRutina[i-1].dia.push(
+          rutina.dias[i-1].ejercicios=[]
+          rutina.dias[i-1].ejercicios.push(
             {
               nameExercise:data[`nameDia${i}ejercicio${nEjercicio}`],
               series:data[`seriesDia${i}ejercicio${nEjercicio}`],
               repeticiones:data[`repeticionesDia${i}ejercicio${nEjercicio}`],
-              descanso:data[`descansoDia${i}ejercicio${nEjercicio}`]
+              descanso:data[`descansoDia${i}ejercicio${nEjercicio}`],
+              rir:'',
+              notasUsuario:'',
+              pesoLevantado:''
+              
             });
 
         }
       }
       console.log(rutina);
+      //añadimos la rutina a nuestra base de datos
       addData(rutina);
+      console.log(db);
       
     }
 
