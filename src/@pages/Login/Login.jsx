@@ -10,6 +10,8 @@ import whatsapp from '../../assets/img/whatsapp.png';
 import instagram from '../../assets/img/instagram.png';
 import web from '../../assets/img/web.png';
 import { useAuth } from '../../utils/useAuth/useAuth';
+import { loginUser } from '../../_shared/Api/ApiLogin';
+import { getRol } from '../../_shared/Api/ApiUser';
 
 
 
@@ -21,7 +23,7 @@ const Login = () => {
     const {state} = useLocation();
     
     console.log(state?.location?.pathname);
-    const {login,isAuthenticated } = useAuth();
+    const {login,authorization,isAuthenticated } = useAuth();
 
     useEffect(() => {
 
@@ -36,7 +38,19 @@ const Login = () => {
       } = useForm();
 
       const submit = async (data) => {
-        login();
+        const user = await loginUser(data);
+
+        //añadir información a localstore
+        localStorage.setItem('token',user.token);
+        localStorage.setItem('idUser',user.reqUserId);
+        if(user.token){
+            login();
+            const roles = await getRol(user.reqUserId);
+            console.log(roles);
+            if(roles){
+                authorization();
+            }
+        }
         navigate('/');
 
       };
@@ -71,6 +85,7 @@ const Login = () => {
                 className="login-input"
                 type="text"
                 name="email"
+                value={'admin@gmail.com'}
                 placeholder="Dirección de email"
                 {...register("email", {
                 required: { value: true, message: "Es obligatorio" },
@@ -90,6 +105,7 @@ const Login = () => {
                 type="password"
                 name="password"
                 placeholder="Password"
+                value={'123456'}
                 {...register("password", {
                 required: { value: true, message: "Es obligatorio" },
                 })}

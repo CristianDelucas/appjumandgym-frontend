@@ -8,11 +8,10 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.scss";
 import { useAuth } from '../../../../utils/useAuth/useAuth';
 const Navbar = () => {
-    const {isAuthenticated,logout} = useAuth();
+    const {isAuthenticated,isAuthorization,logout} = useAuth();
     const [active, setActive] = useState('');
     const [width, setWindowWidth] = useState(0)
     const navigate = useNavigate();
-    
 
     const sidebarActive = () =>{
         if(!active){
@@ -82,13 +81,14 @@ const Navbar = () => {
                 </Link>
                 <span className="tooltip">Perfil</span>
             </li>
-            <li>
+            {isAuthorization?<li>
                 <Link to="/admin" onClick={()=>setActive('')}>
                     <BiShieldQuarter id="icon"/>
                     <span className="links_name">Admin</span>
                 </Link>
                 <span className="tooltip">Admin</span>
-            </li>
+            </li>:''}
+            
             <li>
                 <a href="#" onClick={()=>setActive('')}>
                     <BiQuestionMark id="icon"/>

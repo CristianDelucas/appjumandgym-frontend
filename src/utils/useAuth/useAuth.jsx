@@ -10,20 +10,26 @@ export const useAuth = () =>{
 export const AuthProvider = ( { children } ) =>{
     
      const [isAuthenticated, setIsAuthenticated] = useState(false);
-     
+     const [isAuthorization, setAuthorization] = useState(false);
 
      const login = ()=>{
-         setIsAuthenticated(true);
+            setIsAuthenticated(true);
+     }
+
+     const authorization = ()=>{
+        setAuthorization(true);
      }
 
      const logout = ()=>{
-         setIsAuthenticated(false);
+        //borramos los datos guardados en el localstore
+        localStorage.clear();
+        setIsAuthenticated(false);
          
      }
 
 
     return(
-        <AuthContext.Provider value={{ isAuthenticated , login , logout }}>
+        <AuthContext.Provider value={{ isAuthenticated ,isAuthorization, login , authorization, logout }}>
             {children}
         </AuthContext.Provider>
     )
