@@ -9,9 +9,7 @@ import logo from '../../assets/img/logo.png';
 import whatsapp from '../../assets/img/whatsapp.png';
 import instagram from '../../assets/img/instagram.png';
 import web from '../../assets/img/web.png';
-import { useAuth } from '../../utils/useAuth/useAuth';
-import { loginUser } from '../../_shared/Api/ApiLogin';
-import { getRol } from '../../_shared/Api/ApiUser';
+import useAuth from '../../hooks/auth';
 
 
 
@@ -21,14 +19,9 @@ const Login = () => {
 
     const navigate = useNavigate();
     const {state} = useLocation();
-    
+    const { signIn,isLogged } = useAuth();
     console.log(state?.location?.pathname);
-    const {login,authorization,isAuthenticated } = useAuth();
 
-    useEffect(() => {
-
-        if(isAuthenticated) navigate('/');
-        },[]);
     
     
     const {
@@ -37,23 +30,11 @@ const Login = () => {
         formState: { errors },
       } = useForm();
 
-      const submit = async (data) => {
-        const user = await loginUser(data);
-
-        //añadir información a localstore
-        localStorage.setItem('token',user.token);
-        localStorage.setItem('idUser',user.reqUserId);
-        if(user.token){
-            login();
-            const roles = await getRol(user.reqUserId);
-            console.log(roles);
-            if(roles){
-                authorization();
-            }
-        }
-        navigate('/');
-
+      const submit = async (data, e) => {
+        e.preventDefault();
+        signIn(data)
       };
+
 
     //   const singIn = (user) =>{
     //     const {login, isLogged} = useUser;

@@ -6,9 +6,7 @@ import logo from '../../../../assets/img/logo.png';
 import { Link, useNavigate } from "react-router-dom";
 
 import "./Navbar.scss";
-import { useAuth } from '../../../../utils/useAuth/useAuth';
 const Navbar = () => {
-    const {isAuthenticated,isAuthorization,logout} = useAuth();
     const [active, setActive] = useState('');
     const [width, setWindowWidth] = useState(0)
     const navigate = useNavigate();
@@ -23,7 +21,6 @@ const Navbar = () => {
     };
 
     const logoutUser = () =>{
-        logout();
         navigate('/login');
     }
 
@@ -81,7 +78,7 @@ const Navbar = () => {
                 </Link>
                 <span className="tooltip">Perfil</span>
             </li>
-            {isAuthorization?<li>
+            {false?<li>
                 <Link to="/admin" onClick={()=>setActive('')}>
                     <BiShieldQuarter id="icon"/>
                     <span className="links_name">Admin</span>

@@ -8,7 +8,7 @@ import Training from "./@pages/Training/Training";
 import Navbar from "./_shared/components/core/Navbar/Navbar";
 import Dashboard from "./@pages/Dashboard/Dashboard";
 import Profile from "./@pages/Profile/Profile";
-import { AuthProvider } from "./utils/useAuth/useAuth";
+
 import Admin from "./@pages/Admin/Admin";
 
 //  const ProtectedRoute = ({ children }) =>{
@@ -30,7 +30,7 @@ function App() {
   const location = useLocation();
   
   return (
-     <AuthProvider>
+     
     <div className="App">
 
 
@@ -51,7 +51,6 @@ function App() {
 
       
     </div>
-     </AuthProvider>
   );
 }
 
