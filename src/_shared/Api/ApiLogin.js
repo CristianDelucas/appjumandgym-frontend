@@ -17,9 +17,7 @@ export const loginUser = async(user)=> {
         console.log('LOGEANDO');
         console.log(req.data);
 
-        
-
-        return req.data;
+        return req;
     }catch(error){
         console.error(error)
     }

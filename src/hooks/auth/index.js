@@ -17,8 +17,11 @@ function useAuth() {
     const post = async () => {
       try {
         const res = await loginUser(data);
+        console.log('ye1')
+        console.log(res.status)
         if (res.status === 201) {
-          window.sessionStorage.setItem("token", res.data);
+          console.log('ye2')
+          window.sessionStorage.setItem("token", JSON.stringify(res.data));
           setState({ loading: false, error: false });
           setJWT(res.data);
           navigate('/');
