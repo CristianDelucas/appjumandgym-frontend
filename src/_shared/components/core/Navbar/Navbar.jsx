@@ -78,7 +78,7 @@ const Navbar = () => {
                 </Link>
                 <span className="tooltip">Perfil</span>
             </li>
-            {false?<li>
+            {true?<li>
                 <Link to="/admin" onClick={()=>setActive('')}>
                     <BiShieldQuarter id="icon"/>
                     <span className="links_name">Admin</span>

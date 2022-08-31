@@ -16,7 +16,10 @@ function useAuth() {
     
     const post = async () => {
       try {
+        
         const res = await loginUser(data);
+        
+        
         console.log('ye1')
         console.log(res.status)
         if (res.status === 201) {

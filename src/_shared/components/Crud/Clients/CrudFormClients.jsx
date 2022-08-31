@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
+import { refreshUser } from '../../../Api/ApiRefresh';
 
  
 
@@ -56,6 +57,10 @@ const CrudFormClients = ({addData, updateData, dataToEdit, setDataToEdit}) => {
       reset( initialForm );
     }
 
+    const refreshPrueba = async () => {
+      const prueba = await refreshUser();
+      console.log(prueba);
+    }
 
 
   return (
@@ -87,7 +92,7 @@ const CrudFormClients = ({addData, updateData, dataToEdit, setDataToEdit}) => {
             
             <button className="buttonBlue" type="submit">{dataToEdit? "Editar":"Registrar"} cliente</button>
             <button className="buttonBlue"  onClick={()=>handleReset()}>Limpiar</button>
-           
+            <button className="buttonBlue"  onClick={()=>refreshPrueba()}>refreshPrueba</button>
         
         </form>
     </>

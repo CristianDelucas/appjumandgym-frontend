@@ -10,6 +10,7 @@ import whatsapp from '../../assets/img/whatsapp.png';
 import instagram from '../../assets/img/instagram.png';
 import web from '../../assets/img/web.png';
 import useAuth from '../../hooks/auth';
+import { refreshUser } from '../../_shared/Api/ApiRefresh';
 
 
 
@@ -32,7 +33,9 @@ const Login = () => {
 
       const submit = async (data, e) => {
         e.preventDefault();
-        signIn(data)
+        
+        
+        signIn(data);
       };
 
 
