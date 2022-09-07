@@ -14,8 +14,10 @@ const config= {
 export const getUser = async(id)=> {
     try{
         config.headers.Authorization=addToken();
-        const req = await axios.get(`${USER}/${id}`, config)
-        return req.data
+        const req = await axios.get(`${USER}/${id}`, config);
+        console.log('holaaa usuariooo');
+        req.data.status = req.status;
+        return req.data;
     }catch(error){
         console.error(error)
     }

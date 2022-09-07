@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState,useEffect } from 'react'
+import { AuthContext } from '../../context/auth';
+import useAuth from '../../hooks/auth';
 import Chart from '../../_shared/components/Charts/Chart'
 
 const Dashboard = () => {
 
   const [data, setData] = useState([]);
+  const { userName,roles } = useContext(AuthContext);
+
+  console.log(roles);
 
   return (
     <div className='c-dashboard'>
@@ -11,7 +16,8 @@ const Dashboard = () => {
       <div className='c-dashboard__header'>
         <div className='c-dashboard__header-title'>
         <div className='c-dashboard__header-title-text'>
-        Bienvenid@ a la aplicación, ¡PUMA!
+        Bienvenid@ a la aplicación, ¡{userName}!
+        
         </div>
         </div>
       </div>

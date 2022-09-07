@@ -69,7 +69,6 @@ const Login = () => {
                 className="login-input"
                 type="text"
                 name="email"
-                value={'admin@gmail.com'}
                 placeholder="Dirección de email"
                 {...register("email", {
                 required: { value: true, message: "Es obligatorio" },
@@ -103,7 +102,7 @@ const Login = () => {
                 <div>¿Olvidaste la contraseña?</div>
             </div>
         <div className="f-login__footer">
-        <input type="submit" value="Login" name="submit" className="input-button"/></div>
+        <input type="submit" value="Login" name="submit" className="input-button__login"/></div>
     </form>
     </div>
     

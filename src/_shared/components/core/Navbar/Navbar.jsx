@@ -6,10 +6,20 @@ import logo from '../../../../assets/img/logo.png';
 import { Link, useNavigate } from "react-router-dom";
 
 import "./Navbar.scss";
+import useAuth from '../../../../hooks/auth';
+import ProtectAuthRoutes from '../../../../protect/auth/ProtectAuthRoutes';
+
+
+const ROLES = {
+    'user': '62e29413d5f87b1c40b64929',
+    'moderator': '62e29413d5f87b1c40b6492a',
+    'admin': '62e29413d5f87b1c40b6492b'
+  }
+
 const Navbar = () => {
     const [active, setActive] = useState('');
     const [width, setWindowWidth] = useState(0)
-    const navigate = useNavigate();
+    const { logout } = useAuth();
 
     const sidebarActive = () =>{
         if(!active){
@@ -20,8 +30,9 @@ const Navbar = () => {
         
     };
 
-    const logoutUser = () =>{
-        navigate('/login');
+    const handleLogoutUser = () =>{
+        //desconectar borrado de cookies y tokenSession
+         logout();
     }
 
     useEffect(() => { 
@@ -78,13 +89,16 @@ const Navbar = () => {
                 </Link>
                 <span className="tooltip">Perfil</span>
             </li>
-            {true?<li>
+            <ProtectAuthRoutes allowedRoles={[ROLES.admin]}>
+            <li>
                 <Link to="/admin" onClick={()=>setActive('')}>
                     <BiShieldQuarter id="icon"/>
                     <span className="links_name">Admin</span>
                 </Link>
                 <span className="tooltip">Admin</span>
-            </li>:''}
+            </li>
+            </ProtectAuthRoutes>
+            
             
             <li>
                 <a href="#" onClick={()=>setActive('')}>
@@ -103,7 +117,7 @@ const Navbar = () => {
                     <div className="plan">2 meses Entrenamiento</div>
                 </div>
             </div>
-            <BiLogOut id="log_out" onClick={logoutUser} />
+            <BiLogOut id="log_out" onClick={handleLogoutUser} />
             
         </div>
         </div>

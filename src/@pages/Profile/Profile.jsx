@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
+import { useContext } from 'react';
+import { AuthContext } from '../../context/auth';
 import Chart from '../../_shared/components/Charts/Chart'
 
 const Profile = () => {
   const [data, setData] = useState([]);
+
+  const { fullname, email } = useContext(AuthContext);
+
   return (
     <div className='c-profile'>
       <div className='c-profile__header'>
@@ -11,7 +16,7 @@ const Profile = () => {
           <img src='https://cdn-icons-png.flaticon.com/512/1998/1998607.png' alt='logo-puma' />
         </div>
         <div className='c-profile__header-title-text'>
-            Juan Pérez Federico <br/>
+            {fullname} <br/>
             <span>2 meses de entrenamiento</span>
             </div>
         </div>
@@ -43,7 +48,7 @@ const Profile = () => {
                       Numero de telefono: <strong>685234234</strong>
                       <br/>
                       <br/>
-                      Email: <strong>ejemplo.eir@gmail.com</strong>
+                      Email: <strong>{email}</strong>
                       <br/>
                       <br/>
                       Instagram: <strong>@ejemploa</strong>
