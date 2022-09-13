@@ -1,6 +1,5 @@
-
-
-input[type="text"],
+.c-admin{
+  input[type="text"],
 input[type="email"],
 textarea {
   border: thin solid #dedede;
@@ -92,3 +91,5 @@ td {
   background-color: #170aa54d;
   border-radius: 5px;
 }
+}
+

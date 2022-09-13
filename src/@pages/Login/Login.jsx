@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from "react-router-dom";
-import { AiOutlineMail } from "react-icons/ai";
+import { AiOutlineMail, AiOutlineUser } from "react-icons/ai";
 import { BiKey } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 
 
 import logo from '../../assets/img/logo.png';
+import walker from '../../assets/img/walker.png';
+import imgform from '../../assets/img/img-form-low.png';
 import whatsapp from '../../assets/img/whatsapp.png';
 import instagram from '../../assets/img/instagram.png';
 import web from '../../assets/img/web.png';
@@ -46,67 +48,82 @@ const Login = () => {
 
   return (
     <div className="c-login">
-    <div className="c-login__title">JUM AND GYM <br/> Nutrición y entrenamiento</div>
-    <div className="c-login__content">
-    <div className="f-description">
-        <div className="f-description__logo"><img src={logo} alt="logo"/></div>
-        <div className="f-description__redes">
-        <a className="links"  href="https://www.instagram.com/jumandgym/" target="_blank" rel="noreferrer"><img src={web} alt="web"/></a>
-        <a className="links" href="https://www.instagram.com/jumandgym/" target="_blank" rel="noreferrer"><img src={instagram} alt="instagram"/></a>
-            <a className="links" href="https://web.whatsapp.com/send?phone=34641040558&text=¡Hola JumAndGym!" target="_blank" rel="noreferrer"><img src={whatsapp} alt="whatsapp"/></a>
+        <div className='c-login__container'>
+        <input type="checkbox" id='flip' hidden/>
+        <div className='cover'>
+            <div className='front'>
+                <img src={imgform} alt=""/>
+                <div className='text'>
+                    <span className='text-1'>¡Bienvenido PUMA!</span>
+                    <span className='text-2'>Conectate y superate cada día</span>
+                </div>
+            </div>
+            <div className='back'>
+                <img className='backImg' src={walker} alt=""/>
+                <div className='text'>
+                    <span className='text-1'>¡Registrate y unete!</span>
+                    <span className='text-2'>Disfruta de todas las ventajas de ser un PUMA</span>
+                </div>
+            </div>
         </div>
-    </div>
-    
-
-    <form onSubmit={ handleSubmit(submit)} className="f-login">
-        <div className="f-login__header"><p>Conectate</p></div>
-        
-            <div className="f-login__body">
-                <div >
-                <label>Correo Electrónico</label>
-                <div className="input-wrapper">
-                <input
-                className="login-input"
-                type="text"
-                name="email"
-                placeholder="Dirección de email"
-                {...register("email", {
-                required: { value: true, message: "Es obligatorio" },
-                })}
-                />
-                <span id="icon">
-                    <AiOutlineMail/>
-                </span>
+        <form onSubmit={ handleSubmit(submit)}>
+            <div className='form-content'>
+            <div className='login-form'>
+                <div className='title'>
+                    Login
                 </div>
-            {errors.email && <span style={{color: "red"}}>{errors.email.message}</span>}
-            </div>
-            <div>
-            <label>Contraseña</label>
-            <div className="input-wrapper">
-            <input
-                className="login-input"
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={'123456'}
-                {...register("password", {
+                <div className='input-boxes'>
+                    <div className='input-box'>
+                        <i className='fas fa-envelope'><AiOutlineMail/></i>
+                        <input type="text" name="email" placeholder="Introduce tu email" {...register("email", {
                 required: { value: true, message: "Es obligatorio" },
-                })}
-            />
-             <span id="icon">
-                    <BiKey/>
-                </span>
+                })}  />
+                    </div>
+                    <div className='input-box'>
+                        <i className='fas fa-envelope'><BiKey/></i>
+                        <input type="password" placeholder="Contraseña" name='password' 
+                            {...register("password", {
+                            required: { value: true, message: "Es obligatorio" },
+                            })}
+                        />
+                    </div>
+                    <div className='text'> <a href="#">¿Contraseña olvidada?</a></div>
+                    <div className='input-box'>
+                        <input type="submit" className='button' value="CONECTAR" required></input>
+                    </div>
                 </div>
-            {errors.password && <span style={{color: "red"}}>{errors.password.message}</span>}
+                <div className='text sign-up-text'>¿No tienes una cuenta? <label htmlFor="flip">Registrate ahora</label></div>
             </div>
-                <div>¿Olvidaste la contraseña?</div>
+            <div className='signup-form'>
+                <div className='title'>
+                    Signup
+                </div>
+                <div className='input-boxes'>
+                    <div className='input-box'>
+                        <i className='fas fa-envelope'><AiOutlineMail/></i>
+                        <input type="text" placeholder="Introduce tu email" ></input>
+                    </div>
+                    <div className='input-box'>
+                        <i className='fas fa-envelope'><AiOutlineUser/></i>
+                        <input type="text" placeholder="Nombre" ></input>
+                    </div>
+                    <div className='input-box'>
+                        <i className='fas fa-envelope'><AiOutlineUser/></i>
+                        <input type="text" placeholder="Apellidos" ></input>
+                    </div>
+                    <div className='input-box'>
+                        <i className='fas fa-envelope'><BiKey/></i>
+                        <input type="passsword" placeholder="Contraseña" ></input>
+                    </div>
+                    <div className='input-box'>
+                        <input type="submit" className='button' value="REGISTRAR" ></input>
+                    </div>
+                </div>
+                <div className='text sign-up-text'>¿Ya tienes una cuenta? <label htmlFor="flip">Conectate ahora</label></div>
             </div>
-        <div className="f-login__footer">
-        <input type="submit" value="Login" name="submit" className="input-button__login"/></div>
-    </form>
-    </div>
-    
-    
+            </div>
+        </form>
+        </div>
     </div>
   )
 }
