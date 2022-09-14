@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: center;
     background: #11101d;
-    padding: 30px;
+    padding: 0 30px;
     
 
     &__container{
@@ -21,6 +21,10 @@
         padding: 40px 30px;
         box-shadow: 0 5px 10px rgba(0,0,0,0.2);
         perspective: 2800px;
+
+        #flip{
+            display: none;
+        }
 
 
         #flip:checked ~ .cover{
@@ -223,6 +227,43 @@
                 }
 
             }
+        }
+
+        //responsive
+
+        @media (max-width: 730px){
+
+            
+
+                .cover{
+                    display: none;
+                }
+                form{
+        
+                    .form-content{
+        
+                        .login-form , .signup-form{
+                            width: 100%
+                        }
+    
+                        .signup-form{
+                            display: none;
+                        }
+                    }
+                }
+            
+
+            #flip:checked ~ form{
+                    .signup-form{
+                        display: block;
+                        width: 100%;
+                    }
+                    .login-form{
+                        display: none;
+                    }
+                
+            }
+
         }
 
     }

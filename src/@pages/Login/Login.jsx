@@ -49,7 +49,7 @@ const Login = () => {
   return (
     <div className="c-login">
         <div className='c-login__container'>
-        <input type="checkbox" id='flip' hidden/>
+        <input type="checkbox" id='flip' />
         <div className='cover'>
             <div className='front'>
                 <img src={imgform} alt=""/>
@@ -70,7 +70,7 @@ const Login = () => {
             <div className='form-content'>
             <div className='login-form'>
                 <div className='title'>
-                    Login
+                    Iniciar Sesión
                 </div>
                 <div className='input-boxes'>
                     <div className='input-box'>
@@ -78,7 +78,11 @@ const Login = () => {
                         <input type="text" name="email" placeholder="Introduce tu email" {...register("email", {
                 required: { value: true, message: "Es obligatorio" },
                 })}  />
+                
                     </div>
+                    <div>
+                {errors.email && <span style={{color: "red"}}>{errors.email.message}</span>}
+                </div>
                     <div className='input-box'>
                         <i className='fas fa-envelope'><BiKey/></i>
                         <input type="password" placeholder="Contraseña" name='password' 
@@ -86,17 +90,21 @@ const Login = () => {
                             required: { value: true, message: "Es obligatorio" },
                             })}
                         />
+                        
                     </div>
+                    <div>
+                        {errors.password && <span style={{color: "red"}}>{errors.password.message}</span>}
+                        </div>
                     <div className='text'> <a href="#">¿Contraseña olvidada?</a></div>
                     <div className='input-box'>
                         <input type="submit" className='button' value="CONECTAR" required></input>
                     </div>
                 </div>
-                <div className='text sign-up-text'>¿No tienes una cuenta? <label htmlFor="flip">Registrate ahora</label></div>
+                <div className='text sign-up-text'>¿No tienes una cuenta? <br/> <label htmlFor="flip">Registrate ahora</label></div>
             </div>
             <div className='signup-form'>
                 <div className='title'>
-                    Signup
+                    Registro
                 </div>
                 <div className='input-boxes'>
                     <div className='input-box'>
@@ -119,7 +127,7 @@ const Login = () => {
                         <input type="submit" className='button' value="REGISTRAR" ></input>
                     </div>
                 </div>
-                <div className='text sign-up-text'>¿Ya tienes una cuenta? <label htmlFor="flip">Conectate ahora</label></div>
+                <div className='text sign-up-text'>¿Ya tienes una cuenta? <br/> <label htmlFor="flip">Conectate ahora</label></div>
             </div>
             </div>
         </form>
