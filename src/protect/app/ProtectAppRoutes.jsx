@@ -6,6 +6,7 @@ import useAuth from "../../hooks/auth";
 function ProtectAppRoutes({ children }) {
   const { isLogged } = useAuth();
 
+  console.log('Comprobando si estas ---> conectado -->'+ isLogged)
   const navigate = useNavigate();
 
   useEffect(() => {

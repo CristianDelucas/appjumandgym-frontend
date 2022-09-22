@@ -1,17 +1,13 @@
-
-import React, { useContext } from 'react'
-import { AdminContext } from '../../../../context/AdminContext'
+import React from 'react'
 
 const CrudFormRoutinesRow = ({
     numero,
     register,
-    watch,
     errors,
     selectExercises
     }) => {
   
     
-    const {exercises} = useContext(AdminContext);
 
    
     return (
@@ -24,12 +20,9 @@ const CrudFormRoutinesRow = ({
             <label>EJERCICIO</label>
             <select {...register(selectExercises[numero-1].nameExercise, {required:{value:true, message:"Número de ejercicios requerido"}})}>
                     <option value="">--EJERCICIO--</option>
-                    {exercises && exercises.map( exercise =>{
-                        return (
-                            <option value={exercise._id}>{exercise.nombre}</option>
-                        )
-                    })}
-                    
+                    <option value="curl de biceps">curl de biceps</option>
+                    <option value="extension de biceps">extensión de biceps</option>
+                    <option value="extension de pierna">extension de pierna</option>
             </select>
             {errors[selectExercises[numero-1].nameExercise] && <p className='error'>{errors[selectExercises[numero-1].nameExercise].message}</p>}
         </div>
@@ -40,7 +33,6 @@ const CrudFormRoutinesRow = ({
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
-                <option value="4">4</option>
             </select>
             {errors[selectExercises[numero-1].series] && <p className='error'>{errors[selectExercises[numero-1].series].message}</p>}
         </div>
@@ -48,11 +40,11 @@ const CrudFormRoutinesRow = ({
             <label>REPETICIONES X SERIE</label>
             <select {...register(selectExercises[numero-1].repeticiones, {required:{value:true, message:"Número de repeticiones requerido"}})}>
                 <option value="">--REPETICIONES--</option>
-                <option value="6">6</option>
-                <option value="8">8</option>
-                <option value="10">10</option>
-                <option value="12">12</option>
-                <option value="15">15</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
             </select>
             {errors[selectExercises[numero-1].repeticiones] && <p className='error'>{errors[selectExercises[numero-1].repeticiones].message}</p>}
         </div>

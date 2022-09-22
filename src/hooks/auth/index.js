@@ -5,6 +5,7 @@ import { loginUser } from "../../_shared/Api/ApiLogin";
 import { registerUser } from "../../_shared/Api/ApiUser";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../../_shared/Api/ApiLogout";
+import { toast } from "react-toastify";
 
 
 function useAuth() {
@@ -25,8 +26,10 @@ function useAuth() {
         console.log(res.status)
         if (res.status === 201) {
           window.sessionStorage.setItem("token", JSON.stringify(res.data));
-          setState({ loading: false, error: false });
           setJWT(res.data);
+          
+          setState({ loading: false, error: false });
+          toast.success('¡Bienvenid@ PUMA!');
           navigate('/');
         }
       } catch (err) {
@@ -43,8 +46,10 @@ function useAuth() {
     const post = async () => {
       try {
         const res = await registerUser(data);
-        if (res.status === 201) {                    
-          setState({ loading: false, error: false });                    
+        if (res.status === 201) {           
+          toast.success('¡Registrado correctamente!');         
+          setState({ loading: false, error: false });      
+          navigate('/');              
         }
       } catch (err) {        
         setState({ loading: false, error: true });
@@ -64,7 +69,7 @@ function useAuth() {
           setJWT(undefined);
           removeUserProvider();  
           window.sessionStorage.removeItem("token");
-          console.log('Desconectado')  
+          toast('¡Vuelve pronto!');
           navigate('/login')              
         }
       } catch (err) {        

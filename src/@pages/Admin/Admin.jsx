@@ -4,9 +4,13 @@ import Clients from './Clients/Clients'
 import Exercises from './Exercises/Exercises'
 import Routines from './Routines/Routines'
 
+
 const Admin = () => {
+
+
   return (
     <div className='c-admin'>
+    
         <Tabs>
     <TabList>
       <Tab>Clientes</Tab>

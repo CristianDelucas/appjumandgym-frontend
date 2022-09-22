@@ -1,3 +1,4 @@
+import moment from 'moment/moment';
 import React, { useState } from 'react'
 import { useContext } from 'react';
 import { AuthContext } from '../../context/auth';
@@ -6,7 +7,7 @@ import Chart from '../../_shared/components/Charts/Chart'
 const Profile = () => {
   const [data, setData] = useState([]);
 
-  const { fullname, email } = useContext(AuthContext);
+  const { fullname, email, movil,fechaNacimiento } = useContext(AuthContext);
 
   return (
     <div className='c-profile'>
@@ -31,7 +32,7 @@ const Profile = () => {
                     <div className="card">
                       <div className="card--title">INFORMACIÓN PERSONAL</div>
                       <div className="card--content">
-                      Fecha nacimiento: <strong>28/03/1991</strong>
+                      Fecha nacimiento: <strong>{moment(fechaNacimiento).format('DD/MM/YYYY')}</strong>
                       <br/>
                       <br/>
                       Altura: <strong>177 cm</strong>
@@ -45,7 +46,7 @@ const Profile = () => {
                     <div className="card">
                       <div className="card--title">INFORMACIÓN DE CONTACTO</div>
                       <div className="card--content">
-                      Numero de telefono: <strong>685234234</strong>
+                      Numero de telefono: <strong>{movil}</strong>
                       <br/>
                       <br/>
                       Email: <strong>{email}</strong>
@@ -82,7 +83,7 @@ const Profile = () => {
               <div className="card">
                       <div className="card--title">INFORMACIÓN PERSONAL</div>
                       <div className="card--content">
-                      Fecha nacimiento: <strong>28/03/1991</strong>
+                      Fecha nacimiento: <strong>{moment(fechaNacimiento).format('DD/MM/YYYY')}</strong>
                       <br/>
                       <br/>
                       Altura: <strong>177 cm</strong>

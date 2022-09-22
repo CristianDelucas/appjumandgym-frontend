@@ -90,9 +90,9 @@ const Navbar = () => {
                 <span className="tooltip">Perfil</span>
             </li>
             <ProtectAuthRoutes allowedRoles={[ROLES.admin]}>
-            <li>
-                <Link to="/admin" onClick={()=>setActive('')}>
-                    <BiShieldQuarter id="icon"/>
+            <li className='link-auth'>
+                <Link id='auth'  to="/admin" onClick={()=>setActive('')}>
+                    <BiShieldQuarter  id="icon"/>
                     <span className="links_name">Admin</span>
                 </Link>
                 <span className="tooltip">Admin</span>

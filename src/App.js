@@ -1,6 +1,6 @@
 import React from "react";
 import Login from './@pages/Login/Login';
-
+import { ToastContainer, toast } from 'react-toastify';
 import { Routes, Route, Outlet } from "react-router-dom";
 
 import "./styles/app.scss";
@@ -12,6 +12,7 @@ import Profile from "./@pages/Profile/Profile";
 import Admin from "./@pages/Admin/Admin";
 import ProtectAppRoutes from "./protect/app/ProtectAppRoutes";
 import ProtectAuthRoutes from "./protect/auth/ProtectAuthRoutes";
+import { AdminProvider } from "./context/AdminContext";
 
 //  const ProtectedRoute = ({ children }) =>{
 //    const { isAuthenticated } = useAuth();
@@ -38,7 +39,17 @@ function App() {
   return (
      
     <div className="App">
-
+        <ToastContainer 
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+        />
     
 
         <Routes>
@@ -50,7 +61,7 @@ function App() {
             <Route path="/training" element={<Training/>}/>
             <Route path="/profile" element={<Profile/>}/>
             
-              <Route path="/admin" element={<ProtectAuthRoutes allowedRoles={[ROLES.admin]}><Admin/></ProtectAuthRoutes>}/>
+              <Route path="/admin" element={<ProtectAuthRoutes allowedRoles={[ROLES.admin]}><AdminProvider><Admin/></AdminProvider></ProtectAuthRoutes>}/>
             
             
           </Route>

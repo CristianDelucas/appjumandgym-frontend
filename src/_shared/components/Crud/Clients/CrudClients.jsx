@@ -1,38 +1,32 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import CrudFormClients from './CrudFormClients';
 import CrudTable from './CrudTable';
 import "../Crud.scss";
+import useAdmin from '../../../../hooks/admin';
+import { AdminContext } from '../../../../context/AdminContext';
 
- 
-
-  const initialDb = [
-  ];
 
 
 const CrudClients = () => {
 
-    const [db, setDb] = useState(initialDb);
+    const {createUser,updateExistUser,deleteUser } = useAdmin();
+    const {users,setUsers} = useContext(AdminContext);
+  
     const [dataToEdit, setDataToEdit] = useState(null);
 
 
-
     const addData = (data) => {
-        data.id = db.length + 1;
-        setDb([...db, data]);
-
+        createUser(data,users);
     }
     const updateData = (data) => {
-        console.log(data);
-        let newData = db.map(el => el.id === data.id ? data : el);
-        setDb(newData);
-
-
+        updateExistUser(data,users);
     }
-    const deleteData = (id) => {
-        let isDelete = window.confirm(`¿Estás seguro de eliminar el ejercicio ´${id}´`);
+    const deleteData = (_id) => {
+        let isDelete = window.confirm(`¿Estás seguro de eliminar el ejercicio ´${_id}´`);
         if(isDelete){
-            let newData = db.filter(el => el.id !== id);
-            setDb(newData);
+            deleteUser(_id);
+            let newData = users.filter(el => el._id !== _id);
+            setUsers(newData);
         }
         return;
         
@@ -49,7 +43,6 @@ const CrudClients = () => {
         setDataToEdit={setDataToEdit}
         />
         <CrudTable 
-        data={db} 
         deleteData={deleteData}
         setDataToEdit={setDataToEdit}
         />

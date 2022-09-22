@@ -46,6 +46,8 @@ const CrudFormRoutines = ({register,errors,nrutina, selectFields, watch, setRuti
   return (
     <>
     <div className='section-exercises'>
+    
+    
     <label>Nº de ejercicios</label>
     <select  {...register(`${valueSelectField}`, {required:{value:true, message:"Número de ejercicios requerido"}})}>
                   <option value="">--Nº EJERCICIOS--</option>

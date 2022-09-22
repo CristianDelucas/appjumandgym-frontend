@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AdminContext } from '../../../../context/AdminContext';
 import CrudTableRow from './CrudTableRow';
 
-const CrudTable = ({data, setDataToEdit, deleteData}) => {
+const CrudTable = ({ setDataToEdit, deleteData}) => {
+    
+    const {users} = useContext(AdminContext)
 
   return (
     <div>
@@ -9,18 +12,28 @@ const CrudTable = ({data, setDataToEdit, deleteData}) => {
         <table >
             <thead>
                 <tr>
+                    <th>EMAIL</th>
                     <th>NOMBRE</th>
-                    <th>ROL</th>
+                    <th>APELLIDOS</th>
+                    <th>MOVIL</th>
+                    <th>SEXO</th>
+                    <th>FECHA NACIMIENTO</th>
+                    <th>ALTURA</th>
+                    <th>PESO ACTUAL (Kg)</th>
+                    <th>OBJETIVO DESEADO</th>
+                    <th>ACTIVIDAD FISICA</th>
+                    <th>FIN PLAN</th>
+                    <th>ROLES</th>
                     <th>ESTADO</th>
                     <th>ACCIONES</th>
                 </tr>
             </thead>
             <tbody>
                 
-                    {data.length === 0 ? <tr><td colSpan={4}>Sin datos</td></tr>: data.map(el => (
+                    {users.length === 0 ? <tr><td colSpan={14}>Sin datos</td></tr>: users.map(el => (
                         <CrudTableRow 
                         el={el} 
-                        key={el.id} 
+                        key={el._id} 
                         setDataToEdit={setDataToEdit} 
                         deleteData={deleteData}/>
                     ))}

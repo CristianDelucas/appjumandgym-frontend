@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import { addToken } from '../../utils/jwt';
 import {USER} from './ApiRoutes';
 
@@ -10,6 +11,28 @@ const config= {
         "Access-Control-Allow-Origin": "*"
     }
 }
+
+
+export const getUsers = async()=> {
+    try{
+        
+        config.headers.Authorization=addToken();
+        console.log('Estot en get/users/ all');
+        const req = await axios.get(`${USER}/`, config);
+        
+        req.data.status = req.status;
+        console.log(req.data);
+        return req;
+    }catch(error){
+        if(error.request.status===403){
+            toast.error("Sesión caducada.");
+        }
+        if(error.request.status===0){
+            toast.error("Hubo un error, prueba más tarde.");
+        }
+        return error
+    }
+};
 
 export const getUser = async(id)=> {
     try{
@@ -46,9 +69,34 @@ export const verifyEmailAndMobile = async(email,mobile)=> {
 
 export const registerUser = async (userRegister) => {
     try {
-        const req = await axios.post(USER, userRegister, config)
-        return req
+        const req = await axios.post(USER, userRegister, config);
+        console.log('prueba');
+        console.log(req);
+        return req;
     } catch (error) {
-        console.error(error)
+        toast.error('El correo pertenece a una cuenta existente.'); 
     }
 }
+
+export const updateUser = async (_id,userUpdate) => {
+    try {
+        //cambiar metodo
+        const req = await axios.put(`${USER}/${_id}`, userUpdate, config);
+        console.log('PRUEBA DE ACTUALIZANDO');
+        console.log(req);
+        return req;
+    } catch (error) {
+        toast.error('El correo pertenece a una cuenta existente.'); 
+    }
+}
+
+export const deleteUserById = async(_id)=> {
+    try{
+        config.headers.Authorization=addToken();
+        const req = await axios.delete(`${USER}/${_id}`, config);
+        console.log(req);
+        return req;
+    }catch(error){
+        console.error(error)
+    }
+};

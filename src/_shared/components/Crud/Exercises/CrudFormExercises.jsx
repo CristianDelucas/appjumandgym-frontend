@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
+import { AiOutlineMail } from 'react-icons/ai';
 
  
 
   const initialForm = {
-    ejercicio: '',
-    zona: '',
-    imagen: '',
-    video: '',
-    id:null
+    nombre: '',
+    musculo: '',
+    url_miniatura: '',
+    url_video: '',
+    _id:null
   }
 
 
@@ -17,33 +18,30 @@ const CrudFormExercises = ({addData, updateData, dataToEdit, setDataToEdit}) => 
 
 
 
-    const {register, handleSubmit, watch, reset, formState: {errors}} = useForm({
-      ejercicio: '',
-      zona: '',
-      imagen: '',
-      video: '',
+    const {register, handleSubmit, reset, formState: {errors}} = useForm({
+      nombre: '',
+      musculo: '',
+      url_miniatura: '',
+      url_video: '',
+      _id:null
       
     });
 
     useEffect(() => {
       if(dataToEdit){
+        reset(initialForm);
         reset(dataToEdit);
       }
     }, [dataToEdit])
 
 
 
-
-    const [form, setForm] = useState(initialForm);
-
-
-    
-
-    const submit = (data) => {
-
-        if(!data.id){
+    const submit = (data,e) => {
+        e.preventDefault();
+        if(!data._id){
           addData(data);
         }else{
+          console.log('intentando editar');
           updateData(data);
           setDataToEdit(null);
         }
@@ -59,13 +57,22 @@ const CrudFormExercises = ({addData, updateData, dataToEdit, setDataToEdit}) => 
   return (
     <>
     <h3>{dataToEdit? "Editar":"Añadir"} ejercicio</h3>
-    <form onSubmit={handleSubmit(submit)}>
-            <div>
-                <input className="input" type="text" name="ejercicio" placeholder='Nombre de ejercicio'  {...register('ejercicio', {required:{value:true, message:"Es obligatorio"}})} />
-                {errors.ejercicio && <span>{errors.ejercicio.message}</span>}
+    <form className='container' onSubmit={handleSubmit(submit)}>
+      <div className='row input-boxes '>
+            <div className='col-12 col-lg-4 col-xl-3  input-box'>
+            <i>
+              <AiOutlineMail />
+            </i>
+            <span className="input-box__title">Nombre del ejercicio</span>
+                <input className="input" type="text" label="email" name="nombre" placeholder='Nombre de ejercicio'  {...register('nombre', {required:{value:true, message:"Es obligatorio"}})} />
+                {errors.nombre && <span className="error-message">{errors.nombre.message}</span>}
             </div>
-            <div>
-            <select  {...register('zona', {required:{value:true, message:"Zona de musculo requerido"}})}>
+            <div className='col-12 col-lg-4 col-xl-3  input-box'>
+            <i>
+              <AiOutlineMail />
+            </i>
+            <span className="input-box__title">Músculo</span>
+            <select  {...register('musculo', {required:{value:true, message:"Zona de musculo requerido"}})}>
                 <option value="">--Musculo del ejercicio--</option>
                 <option value="cuadriceps">CUADRICEPS</option>
                 <option value="biceps">BICEPS</option>
@@ -76,21 +83,33 @@ const CrudFormExercises = ({addData, updateData, dataToEdit, setDataToEdit}) => 
                 <option value="abdomen">ABDOMEN</option>
                 <option value="deltoides">DELTOIDES</option>
             </select>
-            {errors.zona && <span>{errors.zona.message}</span>}
+            {errors.musculo && <span className="error-message">{errors.musculo.message}</span>}
             </div>
             
-            <div>
-                <input className="input" type="text" name="imagen" placeholder='Url miniatura' {...register('imagen', {required:{value:true, message: 'Se requiere url miniatura'}})} />
-                {errors.imagen && <span>{errors.imagen.message}</span>}
+            <div className='col-12 col-lg-4 col-xl-3  input-box'>
+            <i>
+              <AiOutlineMail />
+            </i>
+            <span className="input-box__title">Url imagen</span>
+                <input className="input" type="text" name="imagen" placeholder='Url miniatura' {...register('url_miniatura', {required:{value:true, message: 'Se requiere url miniatura'}})} />
+                {errors.url_miniatura && <span className="error-message">{errors.url_miniatura.message}</span>}
             </div>
             
-            <div>
-                <input className="input" type="text" name="video" placeholder='Url video' {...register('video', {required:{value:true, message: 'Se requiere url video'}})} />
-                {errors.video && <span>{errors.video.message}</span>}
+            <div className='col-12 col-lg-4 col-xl-3  input-box'>
+            <i>
+              <AiOutlineMail />
+            </i>
+            <span className="input-box__title">Url video</span>
+                <input className="input" type="text" name="url_video" placeholder='Url video' {...register('url_video', {required:{value:true, message: 'Se requiere url video'}})} />
+                {errors.url_video && <span className="error-message">{errors.url_video.message}</span>}
+            </div>
+            </div>
+            <div className="input-buttons">
+            <button className=" col-6" type="submit">{dataToEdit? "Editar":"Registrar"} ejercicio</button>
+            <button className=" col-6"  onClick={()=>handleReset()}>Limpiar</button>
+
             </div>
             
-            <button className="buttonBlue" type="submit">{dataToEdit? "Editar":"Registrar"} ejercicio</button>
-            <button className="buttonBlue"  onClick={()=>handleReset()}>Limpiar</button>
            
         
         </form>

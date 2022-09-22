@@ -14,13 +14,13 @@ export const AuthProvider = ( { children } ) =>{
     const [user, setUser] = useState(undefined);
     const [userName, setUserName] = useState(undefined);
     const [fullname, setFullname] = useState(undefined);
+    const [movil, setMovil] = useState(undefined);
+    const [fechaNacimiento, setFechaNacimiento] = useState(undefined);
     const [email, setEmail] = useState(undefined);
     const [avatar, setAvatar] = useState(undefined);
     const [roles, setRoles] = useState(undefined);
 
-    //comprobación de si esta conectado y si esta autorizado para ciertas rutas
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [isAuthorization, setAuthorization] = useState(false);
+    
 
     const removeUserProvider = () =>{
 
@@ -44,6 +44,8 @@ export const AuthProvider = ( { children } ) =>{
         setUserId(res._id);
         setFullname(res.nombre + ' ' + res.apellidos);
         setUserName(res.nombre);
+        setFechaNacimiento(res.fecha_nacimiento);
+        setMovil(res.movil);
         setEmail(res.email);
         setRoles(res.roles);
         setAvatar(res.avatar?.url);
@@ -59,22 +61,23 @@ export const AuthProvider = ( { children } ) =>{
 
     return(
         <AuthContext.Provider 
-        value={{
-                jwt,
-                user,
-                userId,
-                fullname,
-                userName,
-                avatar,
-                isAuthenticated,
-                isAuthorization,
-                email,
-                roles,
-                setUserId,
-                setJWT,
-                removeUserProvider
-               }}>
-            {children}
+            value={{
+                    jwt,
+                    user,
+                    userId,
+                    fullname,
+                    userName,
+                    fechaNacimiento,
+                    avatar,
+                    movil,
+                    email,
+                    roles,
+                    
+                    setUserId,
+                    setJWT,
+                    removeUserProvider
+                  }}>
+                {children}
         </AuthContext.Provider>
     )
 }

@@ -8,9 +8,8 @@ const ProtectAuthRoutes = ({ allowedRoles, children }) => {
   const { roles } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  //revisar
-  console.log(roles);
-  console.log(allowedRoles);
+  
+  
   const resultado = roles?.find(role => allowedRoles?.includes(role));
   
 

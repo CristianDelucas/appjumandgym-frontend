@@ -14,7 +14,7 @@ export const logoutUser = async()=> {
         //Desconectando usuario
         axios.defaults.withCredentials = true
         const req = await axios.get(LOGOUT, config);
-
+        
         return req;
     }catch(error){
         console.error(error)

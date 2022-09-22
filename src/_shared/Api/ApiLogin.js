@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import {LOGIN} from './ApiRoutes';
 const config= {
     headers : {
@@ -13,12 +14,16 @@ export const loginUser = async(user)=> {
     try{
         console.log(user);
         const req = await axios.post(LOGIN, user, config);
-        
-        console.log('LOGEANDO');
-        console.log(req.data);
-
         return req;
     }catch(error){
-        console.error(error)
+        console.error(error);
+        
+        if(    error.request.status===404 
+            || error.request.status===0 
+            || error.request.status===500){
+            toast.error("Hubo un error, prueba más tarde.");
+        }else{
+            toast.error("Email ó contraseña incorrecta");
+        }
     }
 }
