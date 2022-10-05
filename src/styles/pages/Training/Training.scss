@@ -62,25 +62,68 @@
                         align-items: center;
                         text-align: center;
 
+                        &.isBiserie{
+                            border: 5px solid var(--toastify-color-info);
+                        }
+                        &--number,&--biserie{
+                            display: flex;
+                            height: 100%;
+                            color: #11101d;
+                            background-color: #adadad;
+                            justify-content: space-around;
+                            align-items: center;
+                            width: 25px;
+                            > * {
+                                font-size: 20px;
+                                font-weight: 700;
+
+                            }
+                            
+                        }
+                        &--biserie{
+                            >*{
+                                width: 10px;
+                                font-size: 15px;
+                                word-wrap: break-word;
+                            text-align:center;
+                            }
+
+                        }
+
                         &-content{
                             display: flex;
                             flex-direction: column;
                             width: 80%;
                             &--title{
-                                padding: 10px;
                                 font-size: 20px;
                                 font-weight: bold;
+                                padding: 10px 0;
+                                
                             }
-                            &--zone{
-                                padding: 10px;
+                            &--zone ,&--reps,&--reps,&--series,&--descanso{
+                                text-align: left;
+                                padding: 10px 0px 10px 50px;
                             }
-                            &--reps{
-                                padding: 10px;
-                            }
-                            &--descanso{
-                                padding: 10px;
+                        }
+                        &-button{
+                            display: flex;
+                            flex-direction: column;
+                            place-items: center;
+                            width: 10%;
+                            
+                            svg{
+                            position: relative;
+                            cursor: pointer;
+                            height: 40px;
+                            width: 40px;
+                            transition: all 0.7s cubic-bezier(0,1,0,1);
+                            &:hover{
+                                height: 50px;
+                                width: 50px;
                             }
 
+                            }
+                            
                         }
                        
                     }

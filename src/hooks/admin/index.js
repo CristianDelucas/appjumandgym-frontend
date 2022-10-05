@@ -20,10 +20,11 @@ function useAdmin() {
     setState({ loading: true, error: false });
     
     const post = async () => {
+      setState({ loading: true, error: false });
       try {
         
        // console.log('estoy pasando por aqui')
-
+       
         const res = await getUsers();
         
         
@@ -49,16 +50,17 @@ function useAdmin() {
   }, [setUsers]);
 
   //creación de usuario
-  const createUser = useCallback((data,vUsers) => {
+  const createUser = useCallback((data) => {
     const post = async () => {
       try {
+        setState({ loading: true, error: false });
         data.password = '123456';
         data.movil = 123456
         const res = await registerUser(data);
-        console.log(res.status);
+
         if (res.status === 201) {           
           toast.success('¡Usuario creado correctamente!');
-          setUsers([...vUsers,res.data])
+          setUsers(users=> [...users,res.data])
           setState({ loading: false, error: false });   
         }
       } catch (err) {        
@@ -70,16 +72,15 @@ function useAdmin() {
   }, []);
 
   //actualización de usuario
-  const updateExistUser = useCallback((data,vUsers) => {
+  const updateExistUser = useCallback((data) => {
     const post = async () => {
       try {
-        
+        setState({ loading: true, error: false });
         const res = await updateUser(data._id,data);
 
-        if (res.status === 200) {           
-          
-          let newUsers = vUsers.map(el => el._id === res.data._id ? res.data : el);
-          setUsers(newUsers);
+        if (res.status === 200) {   
+
+          setUsers(users => users.map(el => el._id === res.data._id ? res.data : el));
           toast.success('¡Usuario actualizado correctamente!');
           setState({ loading: false, error: false });   
         }
@@ -93,12 +94,15 @@ function useAdmin() {
 
   //eliminación de usuario
   const deleteUser = useCallback((_id) => {
+    setState({ loading: true, error: false });
     const post = async () => {
       try {
+        
         const res = await deleteUserById(_id);
-        console.log(res.status);
+
         if (res.status === 204) {           
           toast.success(`Usuario con ${_id} borrado`);
+          setUsers(users => users.filter(el => el._id !== _id))
           setState({ loading: false, error: false });  
         }
       } catch (err) {        
@@ -141,17 +145,18 @@ function useAdmin() {
       }
     };
     post();
-  }, [setExercises]);
+  }, []);
 
   //creación de usuario
-  const createExercise = useCallback((data,vExercises) => {
+  const createExercise = useCallback((data) => {
     const post = async () => {
       try {
-
+        setState({ loading: true, error: true });
+        console.log('creando ejercicio')
         const res = await registerExercise(data);
         console.log(res.status);
         if (res.status === 201) {    
-          setExercises([...vExercises,res.data])
+          setExercises(exercises => [...exercises,res.data])
           toast.success('Ejercicio creado correctamente!');
           setState({ loading: false, error: false });   
         }
@@ -164,7 +169,7 @@ function useAdmin() {
   }, []);
 
   //actualización de ejercicio
-  const updateExercise = useCallback((data,vExercises) => {
+  const updateExercise = useCallback((data) => {
     const post = async () => {
       try {
         
@@ -172,9 +177,7 @@ function useAdmin() {
 
         if (res.status === 200) {     
           
-          let newExercises = vExercises.map(el => el._id === res.data._id ? res.data : el);
-          
-          setExercises(newExercises);
+          setExercises(exercises => exercises.map(el => el._id === res.data._id ? res.data : el));
           toast.success('Ejercicio actualizado correctamente!');
           setState({ loading: false, error: false });   
         }
@@ -186,7 +189,7 @@ function useAdmin() {
     post();
   }, []);
 
-   //eliminación de usuario
+   //eliminación de ejercicio
    const deleteExercise = useCallback((_id) => {
     const post = async () => {
       try {
@@ -194,6 +197,7 @@ function useAdmin() {
         console.log(res.status);
         if (res.status === 204) {           
           toast.success(`Ejercicio con ${_id} borrado`);
+          setExercises(exercises => exercises.filter(el => el._id !== _id))
           setState({ loading: false, error: false });  
         }
       } catch (err) {        

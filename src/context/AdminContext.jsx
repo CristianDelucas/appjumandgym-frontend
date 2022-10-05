@@ -12,7 +12,7 @@ export const AdminProvider = ( { children } ) =>{
     //recoger estas variables en una misma
     const [users, setUsers] = useState([]);
     const [exercises, setExercises] = useState([]);
-    const [routines, setRoutines] = useState(undefined);
+    const [routines, setRoutines] = useState([]);
     const navigate = useNavigate();
     const removeAdminProvider = () =>{
 
@@ -55,7 +55,7 @@ export const AdminProvider = ( { children } ) =>{
     };
 
     useEffect(() => {
-        getUsersProvider();
+      getUsersProvider();
         getExercisesProvider();
       }, []);
 
@@ -68,6 +68,7 @@ export const AdminProvider = ( { children } ) =>{
                 exercises,
                 setExercises,
                 routines,
+                setRoutines,
                 removeAdminProvider
                }}>
             {children}

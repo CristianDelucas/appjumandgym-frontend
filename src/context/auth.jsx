@@ -1,6 +1,7 @@
 import {  createContext, useEffect, useState } from "react";
 import { getUser } from "../_shared/Api/ApiUser";
 import jwtDecode from "jwt-decode";
+import { getRoutineByIdUser } from "../_shared/Api/Routine/ApiRoutine";
 
 export const AuthContext = createContext({});
 
@@ -19,6 +20,7 @@ export const AuthProvider = ( { children } ) =>{
     const [email, setEmail] = useState(undefined);
     const [avatar, setAvatar] = useState(undefined);
     const [roles, setRoles] = useState(undefined);
+    const [routine, setRoutine] = useState(undefined);
 
     
 
@@ -31,6 +33,7 @@ export const AuthProvider = ( { children } ) =>{
         setEmail(undefined);
         setRoles(undefined);
         setAvatar(undefined);
+        setRoutine(undefined);
 
     }
 
@@ -51,10 +54,23 @@ export const AuthProvider = ( { children } ) =>{
         setAvatar(res.avatar?.url);
       }
     };
+    const getRoutine = async () => {
+      //recoger datos del token
+      //const token = jwtDecode(jwt);
+      console.log(jwt.reqUserId)
+      const res = await getRoutineByIdUser(jwt.reqUserId);
+      console.log(res.status);
+      if (res.status === 200) {
+        console.log('hola')
+        setRoutine(res);
+      }
+    };
+
 
     useEffect(() => {
         if (Boolean(jwt)) {
           getUserProvider();
+          getRoutine();
         }
       }, [jwt]);
 
@@ -72,6 +88,7 @@ export const AuthProvider = ( { children } ) =>{
                     movil,
                     email,
                     roles,
+                    routine,
                     
                     setUserId,
                     setJWT,
