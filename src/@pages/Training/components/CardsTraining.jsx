@@ -78,20 +78,20 @@ export default function CardsTraining({ ejercicios ,indexExercises}) {
         <div className="card-training--number"><label>{indexExercises+1}</label></div>
           <div className="card-training-content">
             
-            <div className="card-training-content--title">
+          <div className="card-training-content--title">
                 {ejercicio.nombre}
             </div>
             <div className="card-training-content--zone">
               <b>Grupo muscular:</b> {ejercicios.zona}
             </div>
             <div className="card-training-content--series">
-              Series: {ejercicios.series}
+            <b>Series:</b> {ejercicios.series}
             </div>
             <div className="card-training-content--reps">
-              Repeticiones: {ejercicios.repeticiones[index]}
+            <b>Repeticiones:</b> {ejercicios.repeticiones[index]}
             </div>
             <div className="card-training-content--descanso">
-              Descanso: {ejercicios.descanso} segs
+            <b>Descanso:</b>  {ejercicios.descanso}''
             </div>
           </div>
           <div className="card-training-button">
