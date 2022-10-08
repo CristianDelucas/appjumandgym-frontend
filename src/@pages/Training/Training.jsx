@@ -28,8 +28,9 @@ const Training = () => {
     <div className='c-training'>
     <div className='wrapper'>
         <div className='accordion'>
-          
-        {routine.dias.map((item, i) => {
+        {routine===undefined ? 
+        <div className='card'>
+        <div className='card--title'>SIN RUTINA ASIGNADA</div></div>:routine.dias.map((item, i) => {
           return (
             <div className='item'>
                 <div className='title' onClick={() => toggle(i)}>

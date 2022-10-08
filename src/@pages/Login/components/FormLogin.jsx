@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { AiOutlineMail, AiOutlineUser } from "react-icons/ai";
 import { BiKey } from "react-icons/bi";
 import { HiEye, HiEyeOff } from "react-icons/hi";
+import { Link } from 'react-router-dom';
 import useAuth from '../../../hooks/auth';
 
 
@@ -64,7 +65,7 @@ const FormLogin = () => {
                     <div>
                         
                         </div>
-                    <div className='text'> <a href="#">¿Contraseña olvidada?</a></div>
+                    <div className='text'> <Link to="/forgotpassword">¿Contraseña olvidada?</Link></div>
                     <div className='input-box'>
                         <input type="submit" className='button' value="CONECTAR" required/>
                     </div>

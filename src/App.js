@@ -13,6 +13,8 @@ import Admin from "./@pages/Admin/Admin";
 import ProtectAppRoutes from "./protect/app/ProtectAppRoutes";
 import ProtectAuthRoutes from "./protect/auth/ProtectAuthRoutes";
 import { AdminProvider } from "./context/AdminContext";
+import ForgotPassword from "./@pages/ForgotPassword/ForgotPassword";
+import ResetPassword from "./@pages/ResetPassword/ResetPassword";
 
 //  const ProtectedRoute = ({ children }) =>{
 //    const { isAuthenticated } = useAuth();
@@ -49,12 +51,17 @@ function App() {
             pauseOnFocusLoss
             draggable
             pauseOnHover
+            
         />
     
 
         <Routes>
           {/* PUBLIC ROUTES*/}
           <Route path='/login' element={<Login/>}/>
+          <Route path='/forgotpassword'>
+            <Route index element={<ForgotPassword/>}/>
+            <Route path=':id/:token' element={<ResetPassword/>}/>
+          </Route>
           {/* PRIVATE ROUTES*/}
           <Route path='/' element={<ProtectAppRoutes><Navbar/><div className="content"><Outlet/></div></ProtectAppRoutes>}>
             <Route index element={<Dashboard/>}/>
