@@ -18,7 +18,7 @@ const ForgotPassword = () => {
         const sendEmail = await sendEmailForgotPassword(data);
         
         if(sendEmail.status ===200){
-          toast.done('¡Bienvenid@ PUMA!');
+          navigate('/login');
         }
       };
 
