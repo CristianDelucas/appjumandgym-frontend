@@ -69,12 +69,16 @@ export const verifyEmailAndMobile = async(email,mobile)=> {
 
 export const registerUser = async (userRegister) => {
     try {
-        const req = await axios.post(USER, userRegister, config);
-        console.log('prueba');
+        const req = await toast.promise(axios.post(USER, userRegister, config),
+        {
+            pending: "Registrando...",
+            success: `Usuario con email ${userRegister.email} registrado!`,
+            error: {render({data}){return data.response.data.message}},
+          });
         console.log(req);
         return req;
     } catch (error) {
-        toast.error('El correo pertenece a una cuenta existente.'); 
+        console.log(error);
     }
 }
 

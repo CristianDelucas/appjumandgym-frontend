@@ -10,20 +10,18 @@ const config= {
     },
      withCredentials: true
 }
+
 export const loginUser = async(user)=> {
     try{
         console.log(user);
-        const req = await axios.post(LOGIN, user, config);
+        const req = await toast.promise(axios.post(LOGIN, user, config),
+        {
+            pending: "Iniciando sesión...",
+            success: `¡Bienvenido ${user.email}! `,
+            error: {render({data}){return data.response.data.message}},
+          });
         return req;
     }catch(error){
         console.error(error);
-        
-        if(    error.request.status===404 
-            || error.request.status===0 
-            || error.request.status===500){
-            toast.error("Hubo un error, prueba más tarde.");
-        }else{
-            toast.error("Email ó contraseña incorrecta");
-        }
     }
 }

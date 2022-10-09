@@ -1,73 +1,57 @@
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import { AUTH } from '../ApiRoutes';
+import axios from "axios";
+import { toast } from "react-toastify";
+import { AUTH } from "../ApiRoutes";
 
-const config= {
-    headers : {
-        
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
-    },
-     withCredentials: true
-}
-export const sendEmailForgotPassword = async(email)=> {
-    try{
-        const req = await axios.put(`${AUTH}/forgotpassword`, email, config);
+const config = {
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  },
+  withCredentials: true,
+};
+export const sendEmailForgotPassword = async (email) => {
+  try {
+    const req = await toast.promise(
+      axios.put(`${AUTH}/forgotpassword`, email, config),
+      {
+        pending: "Enviando correo...",
+        success: "¡Correo enviado!",
+        error: {render({data}){return data.response.data.message}},
+      }
+    );
+    return req;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-        if(req.status===200){
-            toast.success("¡Correo enviado!")
-        }
+export const validIdAndResetToken = async (id, resetToken) => {
+  try {
+    const req = await axios.get(
+      `${AUTH}/forgotpassword/${id}/${resetToken}`,
+      config
+    );
+    return req;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-        return req;
-    }catch(error){
-        console.error(error);
-        
-        if(    error.request.status===404 
-            || error.request.status===0 
-            || error.request.status===500){
-            toast.error("Hubo un error, prueba más tarde.");
-        }else{
-            toast.error("Email ó contraseña incorrecta");
-        }
-    }
-}
+export const resetPassword = async (id, resetToken, password) => {
+  try {
+    const req = await toast.promise( axios.post(
+      `${AUTH}/resetpassword/${id}/${resetToken}`,
+      password,
+      config
+    ),{
+        pending: "Cambiando contraseña...",
+        success: "¡Contraseña cambiada!",
+        error: "¡No se pudo cambiar la contraseña!",
+    });
 
-export const validIdAndResetToken = async(id,resetToken)=> {
-    try{
-        const req = await axios.get(`${AUTH}/forgotpassword/${id}/${resetToken}`, config);
-        return req;
-    }catch(error){
-        console.error(error);
-        
-        if(    error.request.status===404 
-            || error.request.status===0 
-            || error.request.status===500){
-            toast.error("Hubo un error, prueba más tarde.");
-        }else{
-            toast.error("Email ó contraseña incorrecta");
-        }
-    }
-}
-
-export const resetPassword = async(id,resetToken,password)=> {
-    try{
-        const req = await axios.post(`${AUTH}/resetpassword/${id}/${resetToken}`,password, config);
-        
-        if(req.status===200){
-            toast.success("¡Contraseña cambiada!")
-        }
-        
-        return req;
-    }catch(error){
-        console.error(error);
-        
-        if(    error.request.status===404 
-            || error.request.status===0 
-            || error.request.status===500){
-            toast.error("Hubo un error, prueba más tarde.");
-        }else{
-            toast.error("Email ó contraseña incorrecta");
-        }
-    }
-}
+    return req;
+  } catch (error) {
+    console.error(error);
+  }
+};

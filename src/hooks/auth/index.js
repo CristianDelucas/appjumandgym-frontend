@@ -27,9 +27,7 @@ function useAuth() {
         if (res.status === 201) {
           window.sessionStorage.setItem("token", JSON.stringify(res.data));
           setJWT(res.data);
-          
           setState({ loading: false, error: false });
-          toast.success('¡Bienvenid@ PUMA!');
           navigate('/');
         }
       } catch (err) {
@@ -46,8 +44,7 @@ function useAuth() {
     const post = async () => {
       try {
         const res = await registerUser(data);
-        if (res.status === 201) {           
-          toast.success('¡Registrado correctamente!');         
+        if (res.status === 201) {                  
           setState({ loading: false, error: false });      
           navigate('/');              
         }
@@ -69,7 +66,6 @@ function useAuth() {
           setJWT(undefined);
           removeUserProvider();  
           window.sessionStorage.removeItem("token");
-          toast('¡Vuelve pronto!');
           navigate('/login')              
         }
       } catch (err) {        

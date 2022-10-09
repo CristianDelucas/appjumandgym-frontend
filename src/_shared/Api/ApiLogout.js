@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import {LOGOUT} from './ApiRoutes';
 const config= {
     headers : {
@@ -13,7 +14,12 @@ export const logoutUser = async()=> {
     try{
         //Desconectando usuario
         axios.defaults.withCredentials = true
-        const req = await axios.get(LOGOUT, config);
+        const req = await toast.promise(axios.get(LOGOUT, config),
+        {
+            pending: "Desconectando...",
+            success: `¡Hasta pronto PUMA!`,
+            error: {render({data}){return data.response.data.message}},
+          });
         
         return req;
     }catch(error){

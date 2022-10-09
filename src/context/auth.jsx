@@ -41,7 +41,6 @@ export const AuthProvider = ( { children } ) =>{
       //recoger datos del token
       //const token = jwtDecode(jwt);
       const res = await getUser(jwt.reqUserId);
-      console.log(res.status);
       if (res.status === 200) {
         setUser(res);
         setUserId(res._id);
