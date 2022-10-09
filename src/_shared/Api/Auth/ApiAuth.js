@@ -14,6 +14,11 @@ const config= {
 export const sendEmailForgotPassword = async(email)=> {
     try{
         const req = await axios.put(`${AUTH}/forgotpassword`, email, config);
+
+        if(req.status===200){
+            toast.success("¡Correo enviado!")
+        }
+
         return req;
     }catch(error){
         console.error(error);
@@ -48,6 +53,11 @@ export const validIdAndResetToken = async(id,resetToken)=> {
 export const resetPassword = async(id,resetToken,password)=> {
     try{
         const req = await axios.post(`${AUTH}/resetpassword/${id}/${resetToken}`,password, config);
+        
+        if(req.status===200){
+            toast.success("¡Contraseña cambiada!")
+        }
+        
         return req;
     }catch(error){
         console.error(error);
