@@ -5,7 +5,6 @@ import "../Crud.scss";
 import useAdmin from '../../../../hooks/admin';
 
 
-
 const CrudClients = () => {
 
     const {createUser,updateExistUser,deleteUser } = useAdmin();
@@ -42,6 +41,7 @@ const CrudClients = () => {
         deleteData={deleteData}
         setDataToEdit={setDataToEdit}
         />
+        
     </>
   )
 }

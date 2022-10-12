@@ -23,12 +23,6 @@ export const getExercises = async()=> {
         console.log(req.data);
         return req;
     }catch(error){
-        if(error.request.status===403){
-            toast.error("Sesión caducada.");
-        }
-        if(error.request.status===0){
-            toast.error("Hubo un error, prueba más tarde.");
-        }
         console.error(error);
     }
 };
@@ -47,29 +41,39 @@ export const getExerciseById = async(id)=> {
 
 export const registerExercise = async (exerciseRegister) => {
     try {
-        const req = await axios.post(EXERCISE, exerciseRegister, config);
-        console.log('prueba');
-        console.log(req);
+        const req = await toast.promise(axios.post(EXERCISE, exerciseRegister, config),{
+            pending: `Creando ejercicio <${exerciseRegister.nombre}>...`,
+            success: `¡Ejercicio <${exerciseRegister.nombre}> creado!`,
+            error: {render({data}){return data.response.data.message}},
+          });
         return req;
     } catch (error) {
-        toast.error('El ejercicio ya existe.'); 
+        console.log(error); 
     }
 }
 
 export const updateExerciseByID = async (_id,exerciseUpdate) => {
     try {
         //cambiar metodo
-        const req = await axios.put(`${EXERCISE}/${_id}`, exerciseUpdate, config);
+        const req = await toast.promise(axios.put(`${EXERCISE}/${_id}`, exerciseUpdate, config),{
+            pending: `Modificando ejercicio <${exerciseUpdate.nombre}>...`,
+            success: `¡Ejercicio <${exerciseUpdate.nombre}> modificado!`,
+            error: {render({data}){return data.response.data.message}},
+          });
         return req;
     } catch (error) {
-        toast.error('Hubo un error.'); 
+        console.log(error); 
     }
 }
 
 export const deleteExerciseById = async(_id)=> {
     try{
         config.headers.Authorization=addToken();
-        const req = await axios.delete(`${EXERCISE}/${_id}`, config);
+        const req = await toast.promise(axios.delete(`${EXERCISE}/${_id}`, config),{
+            pending: `Borrando ejercicio <${_id}>...`,
+            success: `¡Ejercicio con ID: <${_id}> eliminado!`,
+            error: {render({data}){return data.response.data.message}},
+          });
         
         return req;
     }catch(error){

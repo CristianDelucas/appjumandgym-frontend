@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { AdminContext } from '../../../../context/AdminContext';
 import CrudTableRow from './CrudTableRow';
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 
 const CrudTable = ({ setDataToEdit, deleteData}) => {
 
@@ -9,19 +10,19 @@ const CrudTable = ({ setDataToEdit, deleteData}) => {
   return (
     <div>
         <h3>Tabla de datos</h3>
-        <table >
-            <thead>
-                <tr>
-                    <th>Nombre ejercicio</th>
-                    <th>Músculo</th>
-                    <th>Imagen</th>
-                    <th>Video</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
+        <Table >
+            <Thead>
+                <Tr>
+                    <Th>Nombre ejercicio</Th>
+                    <Th>Músculo</Th>
+                    <Th>Imagen</Th>
+                    <Th>Video</Th>
+                    <Th>Acciones</Th>
+                </Tr>
+            </Thead>
+            <Tbody>
                 
-                    {exercises.length === 0 ? <tr><td colSpan={5}>Sin datos</td></tr>: exercises.map(el => (
+                    {exercises.length === 0 ? <Th><Td colSpan={5}>Sin datos</Td></Th>: exercises.map(el => (
                         <CrudTableRow 
                         el={el} 
                         key={el._id} 
@@ -30,8 +31,8 @@ const CrudTable = ({ setDataToEdit, deleteData}) => {
                     ))}
                     
                 
-            </tbody>
-        </table>
+            </Tbody>
+        </Table>
     </div>
   )
 }

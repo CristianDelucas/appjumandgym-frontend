@@ -57,11 +57,11 @@ export const AuthProvider = ( { children } ) =>{
       //recoger datos del token
       //const token = jwtDecode(jwt);
       console.log(jwt.reqUserId)
-      const res = await getRoutineByIdUser(jwt.reqUserId);
-      console.log(res.status);
-      if (res.status === 200) {
+      const {data,status} = await getRoutineByIdUser(jwt.reqUserId);
+      
+      if (status === 200) {
         console.log('hola')
-        setRoutine(res);
+        setRoutine(prev=>data);
       }
     };
 

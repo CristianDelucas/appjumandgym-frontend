@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AdminContext } from "../../context/AdminContext";
 import { deleteExerciseById, getExercises, registerExercise, updateExerciseByID } from "../../_shared/Api/Exercise/ApiExercise";
+import { logoutUser } from "../../_shared/Api/ApiLogout";
 
 
 function useAdmin() {
@@ -20,14 +21,13 @@ function useAdmin() {
     setState({ loading: true, error: false });
     
     const post = async () => {
-      setState({ loading: true, error: false });
       try {
         
        // console.log('estoy pasando por aqui')
        
         const res = await getUsers();
         
-        
+        console.log('hola')
         console.log(res.status)
         if (res.status === 200) {
           
@@ -47,7 +47,7 @@ function useAdmin() {
       }
     };
     post();
-  }, [setUsers]);
+  }, [setUsers,navigate]);
 
   //creación de usuario
   const createUser = useCallback((data) => {
@@ -59,7 +59,6 @@ function useAdmin() {
         const res = await registerUser(data);
 
         if (res.status === 201) {           
-          toast.success('¡Usuario creado correctamente!');
           setUsers(users=> [...users,res.data])
           setState({ loading: false, error: false });   
         }
@@ -81,7 +80,7 @@ function useAdmin() {
         if (res.status === 200) {   
 
           setUsers(users => users.map(el => el._id === res.data._id ? res.data : el));
-          toast.success('¡Usuario actualizado correctamente!');
+          
           setState({ loading: false, error: false });   
         }
       } catch (err) {        
@@ -101,7 +100,7 @@ function useAdmin() {
         const res = await deleteUserById(_id);
 
         if (res.status === 204) {           
-          toast.success(`Usuario con ${_id} borrado`);
+          
           setUsers(users => users.filter(el => el._id !== _id))
           setState({ loading: false, error: false });  
         }
@@ -131,7 +130,7 @@ function useAdmin() {
           
           setExercises(res);
 
-          toast.success('¡Ejercicios cargados ✅!');
+          
           setState({ loading: false, error: false });
         }
         if (res.status === 403){
@@ -157,7 +156,7 @@ function useAdmin() {
         console.log(res.status);
         if (res.status === 201) {    
           setExercises(exercises => [...exercises,res.data])
-          toast.success('Ejercicio creado correctamente!');
+          
           setState({ loading: false, error: false });   
         }
       } catch (err) {        
@@ -178,7 +177,7 @@ function useAdmin() {
         if (res.status === 200) {     
           
           setExercises(exercises => exercises.map(el => el._id === res.data._id ? res.data : el));
-          toast.success('Ejercicio actualizado correctamente!');
+          
           setState({ loading: false, error: false });   
         }
       } catch (err) {        
@@ -196,7 +195,7 @@ function useAdmin() {
         const res = await deleteExerciseById(_id);
         console.log(res.status);
         if (res.status === 204) {           
-          toast.success(`Ejercicio con ${_id} borrado`);
+          
           setExercises(exercises => exercises.filter(el => el._id !== _id))
           setState({ loading: false, error: false });  
         }

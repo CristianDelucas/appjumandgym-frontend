@@ -15,7 +15,7 @@ export const loginUser = async(user)=> {
     try{
         console.log(user);
         const req = await toast.promise(axios.post(LOGIN, user, config),
-        {
+            {
             pending: "Iniciando sesión...",
             success: `¡Bienvenido ${user.email}! `,
             error: {render({data}){return data.response.data.message}},

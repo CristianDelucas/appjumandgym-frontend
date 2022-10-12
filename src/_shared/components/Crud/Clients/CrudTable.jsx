@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { AdminContext } from '../../../../context/AdminContext';
 import CrudTableRow from './CrudTableRow';
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+
 
 const CrudTable = ({ setDataToEdit, deleteData}) => {
     
@@ -9,28 +11,22 @@ const CrudTable = ({ setDataToEdit, deleteData}) => {
   return (
     <div>
         <h3>Tabla de datos</h3>
-        <table >
-            <thead>
-                <tr>
-                    <th>EMAIL</th>
-                    <th>NOMBRE</th>
-                    <th>APELLIDOS</th>
-                    <th>MOVIL</th>
-                    <th>SEXO</th>
-                    <th>FECHA NACIMIENTO</th>
-                    <th>ALTURA</th>
-                    <th>PESO ACTUAL (Kg)</th>
-                    <th>OBJETIVO DESEADO</th>
-                    <th>ACTIVIDAD FISICA</th>
-                    <th>FIN PLAN</th>
-                    <th>ROLES</th>
-                    <th>ESTADO</th>
-                    <th>ACCIONES</th>
-                </tr>
-            </thead>
-            <tbody>
+        <Table >
+            <Thead>
+                <Tr>
+                    <Th>EMAIL</Th>
+                    <Th>NOMBRE Y APELLIDOS</Th>
+                    <Th>MOVIL</Th>
+                    <Th>SEXO</Th>
+                    <Th>FIN PLAN</Th>
+                    <Th>ROLES</Th>
+                    <Th>ESTADO</Th>
+                    <Th>ACCIONES</Th>
+                </Tr>
+            </Thead>
+            <Tbody>
                 
-                    {users.length === 0 ? <tr><td colSpan={14}>Sin datos</td></tr>: users.map(el => (
+                    {users.length === 0 ? <Th><Td colSpan={14}>Sin datos</Td></Th>: users.map(el => (
                         <CrudTableRow 
                         el={el} 
                         key={el._id} 
@@ -39,8 +35,8 @@ const CrudTable = ({ setDataToEdit, deleteData}) => {
                     ))}
                     
                 
-            </tbody>
-        </table>
+            </Tbody>
+        </Table>
     </div>
   )
 }

@@ -1,10 +1,11 @@
 .c-admin {
-
+  color:white;
   .container {
     max-width: 100%;
+    
 
     .input-boxes {
-      background-color: #11101d;
+      background-color: #3c395a;
       margin-top: 10px;
       margin-bottom: 10px;
       border-radius: 5px;
@@ -154,6 +155,11 @@
     border-spacing: 0;
     border-collapse: collapse;
     width: 100%;
+  }
+
+  th{
+    background-color: #11101d;
+    color: white;
   }
 
   th,

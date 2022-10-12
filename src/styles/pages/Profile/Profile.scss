@@ -9,8 +9,8 @@
         width: 100%;
         height: 100%;
         height: 17rem;
-        background-color: #11101d;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.767);
+        background-color: $color--primary;
+        box-shadow: 0px 0px 10px $color--shadow--section;
 
         .c-profile__header-title{
             margin-left: 20px;
@@ -23,8 +23,8 @@
                 width: 100px;
                 height: 100px;
                 border-radius: 50%;
-                border: 2px solid #fff;
-                background-color: #fff;
+                border: 2px solid $color--background-image;
+                background-color: $color--background-image;
                 margin-right: 10px;
 
                 img{
@@ -36,19 +36,19 @@
             .c-profile__header-title-text{
                 font-size: 1.5rem;
                 font-weight: bold;
-                color: white;
+                color:  $color--text;
                 word-wrap: break-word;
                 padding: 10px ;
                 span{
                     font-size: 1.1rem;
                     font-weight: normal;
-                    color: #fff;
+                    color:  $color--text;
                 }
             }
         }
         .c-profile__header-footer{
             height: 20%;
-            background-color: #3c395a;
+            background-color: $color--background--section--secundary;
             border-bottom-left-radius: 4px;
                 border-bottom-right-radius: 4px;
         }

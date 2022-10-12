@@ -88,6 +88,10 @@ $desktop: 1024px;
         }
     }
 
+    @include phone {
+        padding: 6px 0px;
+    }
+
     
 
     &.active{
@@ -126,6 +130,7 @@ $desktop: 1024px;
                     z-index: -1;
                     width: 100%!important;
                     left: 0!important;
+
                 }
                 
             }

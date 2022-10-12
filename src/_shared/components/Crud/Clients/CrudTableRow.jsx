@@ -1,6 +1,8 @@
 import moment from 'moment/moment';
 import React from 'react'
-
+import { AiOutlineForm } from 'react-icons/ai';
+import { FiTrash2 } from 'react-icons/fi';
+import { Tr, Td } from 'react-super-responsive-table';
 const CrudTableRow = ({el, setDataToEdit, deleteData}) => {
 
 
@@ -11,40 +13,29 @@ const CrudTableRow = ({el, setDataToEdit, deleteData}) => {
             email,
             movil,
             sexo,
-            fecha_nacimiento,
-            altura,
-            peso,
-            objetivo,
-            actividad,
             fin_plan,
             roles,
             estado} = el;
 
     
 
-    const formatFecha_nacimiento = moment(fecha_nacimiento).format('DD-MM-YYYY');
+   
     const formatFin_plan = moment(fin_plan).format('DD-MM-YYYY');
 
   return (
-    <tr key={_id}>
-                        <td >{email}</td>
-                        <td >{nombre}</td>
-                        <td >{apellidos}</td>
-                        <td> {movil}</td>
-                        <td> {sexo}</td>
-                        <td> {formatFecha_nacimiento}</td>
-                        <td> {altura}</td>
-                        <td> {peso}</td>
-                        <td> {objetivo}</td>
-                        <td> {actividad}</td>
-                        <td> {formatFin_plan}</td>
-                        <td> {roles.map((el,index) => (<>{el.name} </>) )}</td>
-                        <td >{estado}</td>
-                        <td>
-                            <button onClick={() => setDataToEdit(el)}>Editar</button>
-                            <button onClick={()=>  deleteData(_id)}>Eliminar</button>
-                        </td>
-    </tr>
+    <Tr key={_id}>
+                        <Td >{email}</Td>
+                        <Td >{nombre} {apellidos}</Td>
+                        <Td> {movil}</Td>
+                        <Td> {sexo}</Td>
+                        <Td> {formatFin_plan}</Td>
+                        <Td> {roles.map((el,index) => (<>{el.name} </>) )}</Td>
+                        <Td >{estado}</Td>
+                        <Td>
+                        <button className='button-update' onClick={() => setDataToEdit(el)}><AiOutlineForm/></button>
+                            <button className='button-delete' onClick={()=>  deleteData(_id)}><FiTrash2/></button>
+                        </Td>
+    </Tr>
   )
 }
 

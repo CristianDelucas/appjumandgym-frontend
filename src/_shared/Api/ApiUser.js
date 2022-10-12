@@ -17,20 +17,11 @@ export const getUsers = async()=> {
     try{
         
         config.headers.Authorization=addToken();
-        console.log('Estot en get/users/ all');
-        const req = await axios.get(`${USER}/`, config);
-        
-        req.data.status = req.status;
-        console.log(req.data);
+        const req = await axios.get(`${USER}/`, config)
         return req;
+
     }catch(error){
-        if(error.request.status===403){
-            toast.error("Sesión caducada.");
-        }
-        if(error.request.status===0){
-            toast.error("Hubo un error, prueba más tarde.");
-        }
-        return error
+        return error.response;
     }
 };
 
@@ -56,15 +47,6 @@ export const getRol = async(id)=> {
     }
 };
 
-export const verifyEmailAndMobile = async(email,mobile)=> {
-    try{
-        config.headers.Authorization=addToken();
-        const req = await axios.get(`${USER}/validateUser/${email}/${mobile}`, config)
-        return req.data
-    }catch(error){
-        console.error(error)
-    }
-};
 
 
 export const registerUser = async (userRegister) => {
@@ -85,19 +67,27 @@ export const registerUser = async (userRegister) => {
 export const updateUser = async (_id,userUpdate) => {
     try {
         //cambiar metodo
-        const req = await axios.put(`${USER}/${_id}`, userUpdate, config);
-        console.log('PRUEBA DE ACTUALIZANDO');
-        console.log(req);
+        const req = await toast.promise(axios.put(`${USER}/${_id}`, userUpdate, config),
+        {
+            pending: "Modificando usuario...",
+            success: `¡Usuario con email ${userUpdate.email} actualizado!`,
+            error: {render({data}){return data.response.data.message}},
+          });
         return req;
     } catch (error) {
-        toast.error('El correo pertenece a una cuenta existente.'); 
+        console.log(error)
     }
 }
 
 export const deleteUserById = async(_id)=> {
     try{
         config.headers.Authorization=addToken();
-        const req = await axios.delete(`${USER}/${_id}`, config);
+        const req = await toast.promise(axios.delete(`${USER}/${_id}`, config),
+        {
+            pending: "Eliminando...",
+            success: `¡Usuario con ID ${_id} eliminado!`,
+            error: {render({data}){return data.response.data.message}},
+          });
         console.log(req);
         return req;
     }catch(error){

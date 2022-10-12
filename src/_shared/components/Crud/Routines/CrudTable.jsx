@@ -1,4 +1,5 @@
 import React from 'react'
+import { Table, Tbody, Td, Th, Thead, Tr } from 'react-super-responsive-table';
 import CrudTableRow from './CrudTableRow';
 
 const CrudTable = ({data, editValues, deleteData}) => {
@@ -6,18 +7,18 @@ const CrudTable = ({data, editValues, deleteData}) => {
   return (
     <div>
         <h3>Tabla de datos</h3>
-        <table >
-            <thead>
-                <tr className='row'>
-                    <th className='col-12 col-sm'>Id rutina</th>
-                    <th className='col-12 col-sm'>Nombre Rutina</th>
-                    <th className='col-12 col-sm'>Días</th>
-                    <th className='col-12 col-sm'>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
+        <Table >
+            <Thead>
+                <Tr className='row'>
+                    <Th className='col-12 col-sm'>Id rutina</Th>
+                    <Th className='col-12 col-sm'>Nombre Rutina</Th>
+                    <Th className='col-12 col-sm'>Días</Th>
+                    <Th className='col-12 col-sm'>Acciones</Th>
+                </Tr>
+            </Thead>
+            <Tbody>
                 
-                    {data.length === 0 ? <tr><td colSpan={5}>Sin datos</td></tr>: data.map(el => (
+                    {data.length === 0 ? <Tr><Td colSpan={5}>Sin datos</Td></Tr>: data.map(el => (
                         <CrudTableRow 
                         el={el} 
                         key={el.idRutina}
@@ -26,8 +27,8 @@ const CrudTable = ({data, editValues, deleteData}) => {
                     ))}
                     
                 
-            </tbody>
-        </table>
+            </Tbody>
+        </Table>
     </div>
   )
 }

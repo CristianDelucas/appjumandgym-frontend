@@ -1,5 +1,7 @@
+import { useCallback } from "react";
 import {  createContext, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { logoutUser } from "../_shared/Api/ApiLogout";
 import { getUsers } from "../_shared/Api/ApiUser";
 import { getExercises } from "../_shared/Api/Exercise/ApiExercise";
 
@@ -16,29 +18,30 @@ export const AdminProvider = ( { children } ) =>{
     const navigate = useNavigate();
     const removeAdminProvider = () =>{
 
-        setUsers([]);
-        setExercises([]);
-        setRoutines(undefined);
+        setUsers(users=>[]);
+        setExercises(exercises=>[]);
+        setRoutines(routines=>[]);
 
     }
 
 
-    const getUsersProvider = async () => {
+    const getUsersProvider = useCallback(async () => {
 
       try{
-
             const res = await getUsers();
+            console.log(res)
           if (res.request.status === 200) {
             setUsers(res.data);
           }
-          if (res.request.status === 403){
+          if (res.request.status === 403 || undefined){
               removeAdminProvider();
+              await logoutUser();
               navigate('/login')
       }
       }catch(error){
       }
-    };
-    const getExercisesProvider = async () => {
+    },[navigate]);
+    const getExercisesProvider = useCallback(async () => {
 
       try{
 
@@ -46,18 +49,19 @@ export const AdminProvider = ( { children } ) =>{
           if (res.request.status === 200) {
             setExercises(res.data);
           }
-          if (res.request.status === 403){
+          if (res.request.status === 403 || undefined){
               removeAdminProvider();
+              await logoutUser();
               navigate('/login')
-      }
+            }
       }catch(error){
       }
-    };
+    },[navigate]);
 
     useEffect(() => {
-      getUsersProvider();
+        getUsersProvider();
         getExercisesProvider();
-      }, []);
+      }, [getUsersProvider,getExercisesProvider]);
 
 
     return(
