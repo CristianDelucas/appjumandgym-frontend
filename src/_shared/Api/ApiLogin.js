@@ -18,7 +18,7 @@ export const loginUser = async(user)=> {
             {
             pending: "Iniciando sesión...",
             success: `¡Bienvenido ${user.email}! `,
-            error: 'No se pudo conectar',
+            error: {render({data}){return data.response.data.message}},
           });
         return req;
     }catch(error){

@@ -11,7 +11,7 @@ const CrudTableRow = ({el, setDataToEdit, deleteData}) => {
     <Tr key={_id}>
                         <Td >{nombre}</Td>
                         <Td >{musculo}</Td>
-                        <Td >{url_miniatura}</Td>
+                        <Td ><img className='img--table' src={url_miniatura} alt={nombre}/></Td>
                         <Td >{url_video}</Td>
                         <Td>
                             <button className='button-update' onClick={() => setDataToEdit(el)}><AiOutlineForm/></button>
