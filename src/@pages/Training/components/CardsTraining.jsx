@@ -2,13 +2,22 @@ import { useState } from "react";
 import ReactPlayer from "react-player";
 import { useModal } from "../../../hooks/useModal";
 import Modal from "../../../_shared/components/Modals/Modal";
-import { AiOutlinePlayCircle } from "react-icons/ai";
+import ReactTooltip from 'react-tooltip';
+import { AiOutlineInfoCircle, AiOutlinePlayCircle } from "react-icons/ai";
 export default function CardsTraining({ ejercicios ,indexExercises}) {
   const [isOpen, openModal, closeModal] = useModal(false);
+  const [isOpenInfo, openModalInfo, closeModalTwo] = useModal(false);
   const [urlVideo, setUrlVideo] = useState("");
 
   const openVideo = (url) => {
     setUrlVideo(url);
+    openModal();
+  };
+
+  console.log(ejercicios)
+
+  const openInfo = (indicaciones) => {
+    setUrlVideo(indicaciones);
     openModal();
   };
 
@@ -53,7 +62,10 @@ export default function CardsTraining({ ejercicios ,indexExercises}) {
           <div className="card-training-button">
           <AiOutlinePlayCircle alt="video"  onClick={() => openVideo(ejercicio.url_video)}/>
           </div>
-          
+          <div className="card-training-info">
+            <AiOutlineInfoCircle data-tip={ejercicio.indicaciones} alt="info"/>
+            <ReactTooltip place="left" type="light" effect="solid"/>
+          </div>
           
           
         </div>
@@ -103,6 +115,8 @@ export default function CardsTraining({ ejercicios ,indexExercises}) {
         </div>
         )})
       )}
+
+      {}
 
       {isOpen && (
         <Modal isOpen={isOpen} closeModal={closeModal}>

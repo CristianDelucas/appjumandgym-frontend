@@ -141,6 +141,22 @@
                             }
                             
                         }
+
+                        &-info{
+                            display: flex;
+
+                            
+                            
+                            svg{
+                            position: relative;
+                            top: -83px;
+                            right: 12px;
+                            height: 30px;
+                            width: 30px;
+                            cursor: pointer;
+
+                            }
+                        }
                        
                     }
                

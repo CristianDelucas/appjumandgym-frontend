@@ -56,6 +56,7 @@ export const registerExercise = async (exerciseRegister) => {
 export const updateExerciseByID = async (_id,exerciseUpdate) => {
     try {
         //cambiar metodo
+        config.headers.Authorization=addToken();
         const req = await toast.promise(axios.put(`${EXERCISE}/${_id}`, exerciseUpdate, config),{
             pending: `Modificando ejercicio <${exerciseUpdate.nombre}>...`,
             success: `¡Ejercicio <${exerciseUpdate.nombre}> modificado!`,
