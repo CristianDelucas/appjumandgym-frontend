@@ -14,14 +14,15 @@ const config= {
 export const loginUser = async(user)=> {
     try{
         console.log(user);
-        const req = await toast.promise(axios.post(LOGIN, user, config),
+        const {data,status} = await toast.promise(axios.post(LOGIN, user, config),
             {
             pending: "Iniciando sesión...",
             success: `¡Bienvenido ${user.email}! `,
-            error: {render({data}){return data.response.data.message}},
+            error: {render({data}){return (data.response.status===0)?'Error de red':data.response.data.message}},
           });
-        return req;
+          console.log({data,status})
+        return {data,status};
     }catch(error){
-        console.error(error);
+        return {status:error.response.status}
     }
 }

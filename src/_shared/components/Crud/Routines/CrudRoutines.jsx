@@ -4,13 +4,15 @@ import CrudTable from "./CrudTable";
 import "../Crud.scss";
 import { useForm, Controller } from "react-hook-form";
 import { AdminContext } from "../../../../context/AdminContext";
-import { AiOutlineUser } from "react-icons/ai";
+import { AiOutlineProfile } from "react-icons/ai";
 import Select from "react-select";
 import { createRoutine } from "../../../Api/Routine/ApiRoutine";
+import { BiBookmarks, BiPencil } from "react-icons/bi";
 const initialDb = [
   {
     idRutina: "1",
     id_user: "62e29735ee75a0b1f0504794",
+    indicaciones:"En este entrenamiento quiero que se haga siempre sin cardio, durante 4 semanas.",
     nombreRutina: "Rutina para hipertrofia",
     nDias: "1",
     dias: [
@@ -101,6 +103,7 @@ const CrudRoutines = () => {
     console.log("rutina a editar");
     setValue("nombreRutina", el.nombreRutina);
     setValue("diasRutina", el.dias.length);
+    setValue("indicaciones", el.indicaciones);
     setValue("id_user", USERSOPTIONS.find(user => user.value===el.idCliente));
     
     el.dias.forEach((day, index) => {
@@ -137,6 +140,7 @@ const CrudRoutines = () => {
       nombre_rutina: data.nombreRutina,
       id_user: data.id_user.value,
       numero_dias: data.diasRutina,
+      indicaciones: data.indicaciones,
       nivel: "Principiante",
       dias: [],
     };
@@ -182,11 +186,9 @@ const CrudRoutines = () => {
     <div>
       <form className="container" onSubmit={handleSubmit(submit)}>
         <div className="row input-boxes ">
-          
-
           <div className="col-12 col-lg-4 col-xl-3  input-box">
             <i>
-              <AiOutlineUser />
+              <AiOutlineProfile />
             </i>
             <span className="input-box__title">Nombre de rutina</span>
             <input
@@ -206,7 +208,7 @@ const CrudRoutines = () => {
           </div>
           <div className="col-12 col-lg-4 col-xl-3  input-box">
             <i>
-              <AiOutlineUser />
+              <BiBookmarks />
             </i>
             <span className="input-box__title">Número de sesiones</span>
             <select
@@ -228,6 +230,27 @@ const CrudRoutines = () => {
             </select>
             {errors.diasRutina && (
               <span className="error-message">{errors.diasRutina.message}</span>
+            )}
+          </div>
+          <div className="col-12 col-lg-4 col-xl-3  input-box">
+            <i>
+              <BiPencil />
+            </i>
+            <span className="input-box__title">Indicaciones de la rutina</span>
+            <input
+              className="input"
+              type="text"
+              label="indicaciones"
+              name="indicaciones"
+              placeholder="Indicaciones de la rutina"
+              {...register("indicaciones", {
+                required: { value: true, message: "Es obligatorio" },
+              })}
+            />
+            {errors.indicaciones && (
+              <span className="error-message">
+                {errors.indicaciones.message}
+              </span>
             )}
           </div>
           <div className="col-12 col-lg-4 col-xl-3  input-box">

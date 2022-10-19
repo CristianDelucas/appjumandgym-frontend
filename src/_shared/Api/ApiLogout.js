@@ -20,7 +20,24 @@ export const logoutUser = async()=> {
             success: `¡Hasta pronto PUMA!`,
             error: {render({data}){return data.response.data.message}},
           });
-        
+          window.sessionStorage.clear()
+        return req;
+    }catch(error){
+        console.error(error)
+    }
+}
+
+export const logoutUserExpired = async()=> {
+    try{
+        //Desconectando usuario
+        axios.defaults.withCredentials = true
+        const req = await toast.promise(axios.get(LOGOUT, config),
+        {
+            pending: "Desconectando...",
+            success: {render:'Sesión caducada, vuelve a conectar',type:'warning'},
+            error: {render({data}){return data.response.data.message}},
+          });
+          window.sessionStorage.clear()
         return req;
     }catch(error){
         console.error(error)

@@ -33,8 +33,6 @@ const CrudTable = ({ setDataToEdit, deleteData}) => {
                         setDataToEdit={setDataToEdit} 
                         deleteData={deleteData}/>
                     ))}
-                    
-                
             </Tbody>
         </Table>
     </div>

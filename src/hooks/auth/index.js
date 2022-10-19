@@ -5,7 +5,6 @@ import { loginUser } from "../../_shared/Api/ApiLogin";
 import { registerUser } from "../../_shared/Api/ApiUser";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../../_shared/Api/ApiLogout";
-import { toast } from "react-toastify";
 
 
 function useAuth() {
@@ -14,21 +13,25 @@ function useAuth() {
   const navigate = useNavigate();
 
   //login
-  const signIn = useCallback((data) => {
+  const signIn = useCallback((_data) => {
     setState({ loading: true, error: false });
     
     const post = async () => {
       try {
         
-        const res = await loginUser(data);
+        const {data,status} = await loginUser(_data);
         
         
-        console.log(res.status)
-        if (res.status === 201) {
-          window.sessionStorage.setItem("token", JSON.stringify(res.data));
-          setJWT(res.data);
+        console.log(status)
+        if (status === 201) {
+          window.sessionStorage.setItem("token", JSON.stringify(data));
+          setJWT(data);
           setState({ loading: false, error: false });
           navigate('/');
+        }
+        if(status === 0){
+          window.sessionStorage.removeItem("token");
+          setState({ loading: false, error: true });
         }
       } catch (err) {
         window.sessionStorage.removeItem("token");
@@ -37,7 +40,7 @@ function useAuth() {
       }
     };
     post();
-  }, [setJWT]);
+  }, [setJWT,navigate]);
 
   //registro
   const signUp = useCallback((data) => {
@@ -54,7 +57,7 @@ function useAuth() {
       }
     };
     post()
-  }, []);
+  }, [navigate]);
 
   //desconexión
   const logout = useCallback(() => {
@@ -74,7 +77,7 @@ function useAuth() {
       }
     };
     post()
-  }, []) 
+  }, [navigate,removeUserProvider,setJWT]) 
 
   return {
     signIn,

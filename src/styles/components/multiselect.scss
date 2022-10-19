@@ -1,7 +1,15 @@
+.css-b62m3t-container{
+    color: #444;
+}
+.css-qc6sy-singleValue{
+    font-size: 18px;
+    font-weight: normal;
+    min-height: 1.2em;
+    color: #444;
+}
 .css-1s2u09g-control{
     min-height: 50px!important;
     border-radius: 0px!important;
-    font-size: 18px;
     
     border-bottom: 2px solid #11101d!important;
     input{
@@ -14,6 +22,8 @@
     border-radius: 0px!important;
     border-color: inherit!important;
     box-shadow: none!important;
+    
+    color: black;
     &:hover{
         border-color: inherit!important;
     }

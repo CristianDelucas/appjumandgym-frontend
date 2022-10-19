@@ -7,7 +7,7 @@ import Chart from '../../_shared/components/Charts/Chart'
 const Profile = () => {
   const [data, setData] = useState([]);
 
-  const { fullname, email, movil,fechaNacimiento } = useContext(AuthContext);
+  const { fullname, email, movil,fechaNacimiento,altura,objetivo,routine } = useContext(AuthContext);
 
   return (
     <div className='c-profile'>
@@ -35,10 +35,10 @@ const Profile = () => {
                       Fecha nacimiento: <strong>{moment(fechaNacimiento).format('DD/MM/YYYY')}</strong>
                       <br/>
                       <br/>
-                      Altura: <strong>177 cm</strong>
+                      Altura: <strong>{altura} cm</strong>
                       <br/>
                       <br/>
-                      Usuario con rutina: <strong>Si</strong>
+                      Usuario con rutina: <strong>{routine?'Si':'No'}</strong>
                       </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@ const Profile = () => {
                       Plan: <strong>2 meses</strong>
                       <br/>
                       <br/>
-                      Tipo: <strong>Entrenamiento muscular</strong>
+                      Tipo: <strong>{objetivo}</strong>
                       </div>
                     </div>
               </div>
@@ -86,10 +86,7 @@ const Profile = () => {
                       Fecha nacimiento: <strong>{moment(fechaNacimiento).format('DD/MM/YYYY')}</strong>
                       <br/>
                       <br/>
-                      Altura: <strong>177 cm</strong>
-                      <br/>
-                      <br/>
-                      Usuario con rutina: <strong>Si</strong>
+                      Altura: <strong>{altura} cm</strong>
                       </div>
                     </div>
               </div>

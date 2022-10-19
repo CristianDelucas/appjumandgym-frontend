@@ -4,14 +4,15 @@ import { FiTrash2 } from 'react-icons/fi';
 import { Tr, Td } from 'react-super-responsive-table';
 const CrudTableRow = ({el, setDataToEdit, deleteData}) => {
 
-    const {_id,nombre, musculo, url_miniatura, url_video} = el;
+    const {_id,nombre, musculo,indicaciones, url_miniatura, url_video} = el;
 
 
   return (
     <Tr key={_id}>
                         <Td >{nombre}</Td>
                         <Td >{musculo}</Td>
-                        <Td ><img className='img--table' src={url_miniatura} alt={nombre}/></Td>
+                        <Td>{indicaciones}</Td>
+                        <Td ><img src={url_miniatura} alt={nombre}/></Td>
                         <Td >{url_video}</Td>
                         <Td>
                             <button className='button-update' onClick={() => setDataToEdit(el)}><AiOutlineForm/></button>

@@ -1,9 +1,8 @@
 import { useCallback } from "react";
 import {  createContext, useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { logoutUser } from "../_shared/Api/ApiLogout";
-import { getUsers } from "../_shared/Api/ApiUser";
-import { getExercises } from "../_shared/Api/Exercise/ApiExercise";
+import {  useNavigate } from "react-router-dom";
+import {  logoutUserExpired } from "../_shared/Api/ApiLogout";
+import { getUsersAndExercises } from "../_shared/Api/AxiosAll/AxiosAll";
 
 export const AdminContext = createContext({});
 
@@ -24,44 +23,29 @@ export const AdminProvider = ( { children } ) =>{
 
     }
 
+    const getUsersAndExercisesProvider = useCallback(() =>{
+      const post = async () =>{
+        const {_users,_exercises,status} = await getUsersAndExercises();
 
-    const getUsersProvider = useCallback(async () => {
+        console.log(_exercises)
 
-      try{
-            const res = await getUsers();
-            console.log(res)
-          if (res.request.status === 200) {
-            setUsers(res.data);
-          }
-          if (res.request.status === 403 || undefined){
-              removeAdminProvider();
-              await logoutUser();
-              navigate('/login')
+        if(status === 200){
+          setUsers(_users);
+          setExercises(_exercises);
+        }
+        if(status === 403){
+          removeAdminProvider();
+            await logoutUserExpired();
+            navigate('/login')
+        }
+
       }
-      }catch(error){
-      }
-    },[navigate]);
-    const getExercisesProvider = useCallback(async () => {
-
-      try{
-
-            const res = await getExercises();
-          if (res.request.status === 200) {
-            setExercises(res.data);
-          }
-          if (res.request.status === 403 || undefined){
-              removeAdminProvider();
-              await logoutUser();
-              navigate('/login')
-            }
-      }catch(error){
-      }
-    },[navigate]);
+      post();
+    },[navigate])
 
     useEffect(() => {
-        getUsersProvider();
-        getExercisesProvider();
-      }, [getUsersProvider,getExercisesProvider]);
+      getUsersAndExercisesProvider()
+      }, [getUsersAndExercisesProvider]);
 
 
     return(

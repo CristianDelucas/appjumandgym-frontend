@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { GiJumpingRope } from "react-icons/gi";
 import { AiOutlineMenu } from "react-icons/ai";
 import { BiGridAlt, BiUser, BiBookContent,BiQuestionMark, BiLogOut , BiShieldQuarter} from "react-icons/bi";
@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.scss";
 import useAuth from '../../../../hooks/auth';
 import ProtectAuthRoutes from '../../../../protect/auth/ProtectAuthRoutes';
+import { AuthContext } from '../../../../context/auth';
 
 
 const ROLES = {
@@ -20,6 +21,7 @@ const Navbar = () => {
     const [active, setActive] = useState('');
     const [width, setWindowWidth] = useState(0)
     const { logout } = useAuth();
+    const {fullname} = useContext(AuthContext)
 
     const sidebarActive = () =>{
         if(!active){
@@ -113,7 +115,7 @@ const Navbar = () => {
             <div className="profile__details">
                 <img src={logo} alt="logo"/>
                 <div className="name__plan">
-                    <div className="name">Juanito</div>
+                    <div className="name">{fullname}</div>
                     <div className="plan">2 meses Entrenamiento</div>
                 </div>
             </div>

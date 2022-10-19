@@ -18,7 +18,7 @@ const CrudTable = ({data, editValues, deleteData}) => {
             </Thead>
             <Tbody>
                 
-                    {data.length === 0 ? <Tr><Td colSpan={5}>Sin datos</Td></Tr>: data.map(el => (
+                    {data.length === 0 ? <Tr><Td colSpan={4}>Sin datos</Td></Tr>: data.map(el => (
                         <CrudTableRow 
                         el={el} 
                         key={el.idRutina}

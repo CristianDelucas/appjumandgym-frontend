@@ -15,6 +15,7 @@ const CrudTable = ({ setDataToEdit, deleteData}) => {
                 <Tr>
                     <Th>Nombre ejercicio</Th>
                     <Th>Músculo</Th>
+                    <Th>Indicaciones</Th>
                     <Th>Imagen</Th>
                     <Th>Video</Th>
                     <Th>Acciones</Th>
@@ -22,7 +23,7 @@ const CrudTable = ({ setDataToEdit, deleteData}) => {
             </Thead>
             <Tbody>
                 
-                    {exercises.length === 0 ? <Th><Td colSpan={5}>Sin datos</Td></Th>: exercises.map(el => (
+                    {exercises.length === 0 ? <Th><Td colSpan={6}>Sin datos</Td></Th>: exercises.map(el => (
                         <CrudTableRow 
                         el={el} 
                         key={el._id} 

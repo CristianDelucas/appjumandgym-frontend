@@ -1,3 +1,5 @@
+
+
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { addToken } from '../../utils/jwt';
@@ -12,28 +14,34 @@ const config= {
     }
 }
 
+// axios.interceptors.response.use(
+//     response => response,
+//     error => {
+//         if(error.response.status === 403){
+//             console.log('hola');
+//         }
+//     }
+// )
 
 export const getUsers = async()=> {
     try{
         
         config.headers.Authorization=addToken();
-        const req = await axios.get(`${USER}/`, config)
-        return req;
+        const {data,status} = await axios.get(`${USER}/`, config)
+        return {data,status};
 
     }catch(error){
-        return error.response;
+        return {status:error.response.status}
     }
 };
 
 export const getUser = async(id)=> {
     try{
         config.headers.Authorization=addToken();
-        const req = await axios.get(`${USER}/${id}`, config);
-        console.log('holaaa usuariooo');
-        req.data.status = req.status;
-        return req.data;
+        const {data,status} = await axios.get(`${USER}/${id}`, config);
+        return {data,status}
     }catch(error){
-        console.error(error)
+        return {status:error.response.status}
     }
 };
 
@@ -43,7 +51,7 @@ export const getRol = async(id)=> {
         const req = await axios.get(`${USER}/rol/${id}`, config)
         return req.data
     }catch(error){
-        console.error(error)
+        return {status:error.response.status}
     }
 };
 
@@ -51,16 +59,16 @@ export const getRol = async(id)=> {
 
 export const registerUser = async (userRegister) => {
     try {
-        const req = await toast.promise(axios.post(USER, userRegister, config),
+        const {data,status} = await toast.promise(axios.post(USER, userRegister, config),
         {
             pending: "Registrando...",
             success: `Usuario con email ${userRegister.email} registrado!`,
-            error: {render({data}){return data.response.data.message}},
+            error: {render({data}){return (data.response.status===0)?'Error de red':data.response.data.message}},
           });
-        console.log(req);
-        return req;
+        
+        return {data,status}
     } catch (error) {
-        console.log(error);
+        return {status:error.response.status}
     }
 }
 
@@ -75,7 +83,7 @@ export const updateUser = async (_id,userUpdate) => {
           });
         return req;
     } catch (error) {
-        console.log(error)
+        return {status:error.response.status}
     }
 }
 
@@ -91,6 +99,6 @@ export const deleteUserById = async(_id)=> {
         console.log(req);
         return req;
     }catch(error){
-        console.error(error)
+        return {status:error.response.status}
     }
 };

@@ -1,3 +1,4 @@
+
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { addToken } from '../../../utils/jwt';
@@ -23,7 +24,7 @@ export const getExercises = async()=> {
         console.log(req.data);
         return req;
     }catch(error){
-        console.error(error);
+        return {status:error.response.status}
     }
 };
 
@@ -35,7 +36,7 @@ export const getExerciseById = async(id)=> {
         req.data.status = req.status;
         return req.data;
     }catch(error){
-        console.error(error)
+        return {status:error.response.status}
     }
 };
 
@@ -48,7 +49,7 @@ export const registerExercise = async (exerciseRegister) => {
           });
         return req;
     } catch (error) {
-        console.log(error); 
+        return {status:error.response.status}
     }
 }
 
@@ -62,7 +63,7 @@ export const updateExerciseByID = async (_id,exerciseUpdate) => {
           });
         return req;
     } catch (error) {
-        console.log(error); 
+        return {status:error.response.status}
     }
 }
 
@@ -77,6 +78,6 @@ export const deleteExerciseById = async(_id)=> {
         
         return req;
     }catch(error){
-        console.error(error)
+        return {status:error.response.status}
     }
 };

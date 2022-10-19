@@ -30,7 +30,7 @@ export const getRoutineByIdUser = async(id)=> {
         const {data,status} = await axios.get(`${ROUTINE}/user/${id}`, config);
         return {data,status}
     }catch(error){
-        console.error(error)
+        return {status:error.response.status}
     }
 };
 
@@ -42,11 +42,11 @@ export const createRoutine = async (newRoutine) => {
         {
             pending: "Creando rutina...",
             success: `¡Rutina creada! `,
-            error: {render({data}){return data.response.data.message}},
+            error: {render({data}){return (data.response.message)}},
           });
         
         return req;
     } catch (error) {
-        toast.error('La rutina ya existe.'); 
+        console.log(error)
     }
 }
