@@ -5,8 +5,8 @@
   min-width: 0;
   word-wrap: break-word;
   background-clip: border-box;
-  background-color: $color--background--section--secundary;
-  box-shadow: $color--shadow--section 0px 3px 8px;
+  background-color: var(--color--background--section--secundary);
+  box-shadow: var(--color--shadow--section) 0px 3px 8px;
   border-color: white;
   border-radius: 5px;
   margin: 10px auto;
@@ -14,7 +14,7 @@
   
   //cursor: pointer;
   &:hover{
-    box-shadow: 0px 0px 10px $color--shadow--section;
+    box-shadow: 0px 0px 10px var(--color--shadow--section);
   }
 
   &--title{
@@ -22,10 +22,10 @@
     font-size: 20px;
     padding: 10px;
     font-weight: bold;
-    color: $color--text;
+    color: var(--color--text);
 	  background-repeat: no-repeat;
     border-bottom: 1px solid #000;
-    background-color: $color--primary;
+    background-color: var(--color--primary);
     //cursor: pointer;
   }
   &--content{
@@ -33,7 +33,7 @@
     margin: 10px;
     font-size: 16px;
     text-align: center;
-    color: $color--text;
+    color: var(--color--text);
     
   }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Login from './@pages/Login/Login';
 import { ToastContainer, toast } from 'react-toastify';
 import { Routes, Route, Outlet } from "react-router-dom";
@@ -9,6 +9,8 @@ import Navbar from "./_shared/components/core/Navbar/Navbar";
 import Dashboard from "./@pages/Dashboard/Dashboard";
 import Profile from "./@pages/Profile/Profile";
 
+import { MdDarkMode } from "react-icons/md";
+import { BsSun } from "react-icons/bs";
 import Admin from "./@pages/Admin/Admin";
 import ProtectAppRoutes from "./protect/app/ProtectAppRoutes";
 import ProtectAuthRoutes from "./protect/auth/ProtectAuthRoutes";
@@ -37,10 +39,24 @@ const ROLES = {
 
 function App() {
 
+  const [theme, setTheme] = useState(window.localStorage.getItem('theme-color')?0:1)
+
+  useEffect(()=>{
+    if(!window.localStorage.getItem('theme-color')){
+      window.localStorage.setItem('theme-color',0)
+      setTheme(theme => 0)
+    }
+  },[setTheme])
+
+  const changeTheme = ()=>{
+    setTheme(theme=> !theme);
+    console.log(theme)
+    window.localStorage.setItem('theme-color',theme?0:1)
+  }
   
   return (
      
-    <div className="App">
+    <div className={theme?'App theme--dark':'App theme--light'}>
         <ToastContainer 
             position="top-center"
             autoClose={5000}
@@ -76,7 +92,9 @@ function App() {
           <Route path='*' element={<h1>Not found</h1>}/>
         </Routes>
 
-      
+      <div className="button-theme" onClick={()=>changeTheme()}>
+          {theme? <MdDarkMode />: <BsSun/> }
+      </div>
     </div>
   );
 }

@@ -3,20 +3,27 @@ $greenLight:#025F1C;
 $greenLightToImage:rgba(2, 54, 1, 0.82);
 $light:white;
 
- /** night mode color **/
- $color--primary:#11101d;
- $color--secundary:#3c395a;
- 
- $color--text:white;
- $color--shadow-text:#252725;
- $color--shadow--section: rgba(255, 255, 255, 0.24);
- $color--background--global:#3c395a;
- $color--background--section:#312c6b70;
- $color--background--section--secundary: #1d1a3d;
- $color--background:#312c6b70;
- $color--background-image:#fff;
- $color--background-button: #5b13b9;
- 
+
+
+.theme--light{
+
+}
+
+.theme--dark{
+     /** night mode color **/
+    --color--primary:#11101d;
+    --color--secundary:#3c395a;
+    --color--text:white;
+    --color--shadow-text:#252725;
+    --color--shadow--section: rgba(255, 255, 255, 0.24);
+    --color--background--global:#3c395a;
+    --color--background--section:#312c6b70;
+    --color--background--section--secundary: #1d1a3d;
+    --color--background:#312c6b70;
+    --color--background-image:#fff;
+    --color--background-button: #5b13b9;
+}
+
  //  $color--text:white;
  //  $color--shadow-text:black;
  //  $color--background--section:white;
