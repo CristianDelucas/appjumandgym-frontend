@@ -2,11 +2,15 @@
     position: fixed;
     bottom:0px;
     right:0px;
-    padding: 10px;
-    
+    margin: 15px;
+    padding: 5px;
+    background-color: #11101d;
+  border-radius: 100%;
+  cursor: pointer;
     svg{
         width: 40px;
-    height: 40px;
-    cursor: pointer;
+        height: 40px;
+        color: white;
+        
     }
 }

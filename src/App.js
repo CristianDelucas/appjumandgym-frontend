@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Login from './@pages/Login/Login';
 import { ToastContainer, toast } from 'react-toastify';
 import { Routes, Route, Outlet } from "react-router-dom";
@@ -39,24 +39,30 @@ const ROLES = {
 
 function App() {
 
-  const [theme, setTheme] = useState(window.localStorage.getItem('theme-color')?0:1)
+  const [theme, setTheme] = useState('light')
+
+  const toggleTheme = () =>{
+    if(theme === 'dark'){
+      setTheme('light')
+      window.localStorage.setItem('theme','light')
+    }else{
+      setTheme('dark')
+      window.localStorage.setItem('theme','dark')
+    }
+  }
 
   useEffect(()=>{
-    if(!window.localStorage.getItem('theme-color')){
-      window.localStorage.setItem('theme-color',0)
-      setTheme(theme => 0)
+    const localTheme = window.localStorage.getItem('theme');
+    if(localTheme){
+      setTheme(localTheme);
+      window.localStorage.setItem('theme',localTheme)
     }
-  },[setTheme])
+  },[])
 
-  const changeTheme = ()=>{
-    setTheme(theme=> !theme);
-    console.log(theme)
-    window.localStorage.setItem('theme-color',theme?0:1)
-  }
   
   return (
      
-    <div className={theme?'App theme--dark':'App theme--light'}>
+    <div className={theme==="light"?'App theme--light':'App theme--dark'}>
         <ToastContainer 
             position="top-center"
             autoClose={5000}
@@ -92,8 +98,8 @@ function App() {
           <Route path='*' element={<h1>Not found</h1>}/>
         </Routes>
 
-      <div className="button-theme" onClick={()=>changeTheme()}>
-          {theme? <MdDarkMode />: <BsSun/> }
+      <div className="button-theme" onClick={toggleTheme}>
+          {theme === "light"? <BsSun/>:<MdDarkMode /> }
       </div>
     </div>
   );
