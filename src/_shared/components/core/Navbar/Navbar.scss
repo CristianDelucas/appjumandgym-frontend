@@ -27,7 +27,7 @@ $desktop: 1024px;
     top:0;
     width: 100%;
     height: 70px;
-    background-color: #11101d;
+    background-color: var(--color--primary);
     
     &__content{
         position: relative;
@@ -36,7 +36,7 @@ $desktop: 1024px;
 
         #btn{
             position: absolute;
-            color: #fff;
+            color: var(--color--text);
             left: 5%;
             top: 5px;
             font-size: 20px;
@@ -70,7 +70,7 @@ $desktop: 1024px;
     left: 0;
     height:100%;
     width:70px;
-    background: #11101d;
+    background: var(--color--primary);
     padding: 6px 14px;
     transition: all 0.3s ease;
 
@@ -191,7 +191,7 @@ $desktop: 1024px;
             }
             
             a{
-                color: #fff;
+                color: var(--color--text);
                 display:flex;
                 align-items: center;
                 text-decoration:none;
@@ -236,7 +236,7 @@ $desktop: 1024px;
 
     #btn{
         position: absolute;
-        color: #fff;
+        color: var(--color--text);
         left: 50%;
         top: 15px;
         font-size: 20px;
@@ -258,7 +258,7 @@ $desktop: 1024px;
             position: relative;
             padding: 10px 6px;
             height: 60px;
-            background: #333235;
+            background: rgb(36, 36, 36);
             
 
             &__details{
@@ -307,7 +307,8 @@ $desktop: 1024px;
 }
 
 .sidebar .logo_content .logo{
-    color: #fff;
+    color: var(--color--text);
+    font-weight: bold;
     display:flex;
     height:50px;
     width: 100%;

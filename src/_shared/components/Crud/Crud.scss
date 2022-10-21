@@ -1,11 +1,11 @@
 .c-admin {
-  color:white;
+  color:var(--color--text);
   .container {
     max-width: 100%;
     
 
     .input-boxes {
-      background-color: #3c395a;
+      background-color: var(--color--primary);
       margin-top: 10px;
       margin-bottom: 10px;
       border-radius: 5px;
@@ -34,7 +34,7 @@
         font-size: 17px;
         top: -20px;
         left: 20px;
-        color: white;
+        color: var(--color--text);
         font-weight: 700;
       }
 
@@ -79,7 +79,7 @@
       height: 50px;
       margin-top: 10px;
       color: #fff;
-      background: #11101d;
+      background: var(--color--background-button);
       border-radius: 6px;
       font-size: 20px;
       padding: 0;
@@ -87,7 +87,7 @@
       transition: all 0.4s ease;
 
       &:hover {
-        background: #5b13b9;
+        background: var(--color--background-button-hover);
       }
     }
   }
@@ -161,8 +161,8 @@
   }
 
   th{
-    background-color: #11101d;
-    color: white;
+    background-color: var(--color--primary);
+    color: var(--color--text);
   }
 
   th,

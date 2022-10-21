@@ -7,6 +7,20 @@ $light:white;
 
 .theme--light{
 
+     /** light mode color **/
+     --color--primary:#bfb8ff;
+     --color--secundary:#3c395a;
+     --color--text:rgb(51, 51, 51);
+     --color--shadow-text:#000000;
+     --color--shadow--section: rgba(255, 255, 255, 0.24);
+     --color--background--global:#ecebfa;
+     --color--background--section:#eeeeee70;
+     --color--background--section--secundary: #ffffff;
+     --color--background:#00000070;
+     --color--background-image:#fff;
+     --color--background-button-hover: #5b13b9;
+     --color--background-button: #11101d;
+
 }
 
 .theme--dark{
@@ -21,7 +35,8 @@ $light:white;
     --color--background--section--secundary: #1d1a3d;
     --color--background:#312c6b70;
     --color--background-image:#fff;
-    --color--background-button: #5b13b9;
+    --color--background-button-hover: #5b13b9;
+     --color--background-button: #11101d;
 }
 
  //  $color--text:white;
