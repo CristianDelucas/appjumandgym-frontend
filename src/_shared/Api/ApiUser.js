@@ -59,6 +59,7 @@ export const getRol = async(id)=> {
 
 export const registerUser = async (userRegister) => {
     try {
+        
         const {data,status} = await toast.promise(axios.post(USER, userRegister, config),
         {
             pending: "Registrando...",
@@ -72,13 +73,15 @@ export const registerUser = async (userRegister) => {
     }
 }
 
-export const updateUser = async (_id,userUpdate) => {
+export const updateUser = async (_id,_userUpdate) => {
     try {
+        config.headers.Authorization=addToken();
         //cambiar metodo
-        const req = await toast.promise(axios.put(`${USER}/${_id}`, userUpdate, config),
+        console.log(updateUser)
+        const req = await toast.promise(axios.put(`${USER}/${_id}`, _userUpdate, config),
         {
             pending: "Modificando usuario...",
-            success: `¡Usuario con email ${userUpdate.email} actualizado!`,
+            success: `¡Usuario con email ${_userUpdate.email} actualizado!`,
             error: {render({data}){return data.response.data.message}},
           });
         return req;

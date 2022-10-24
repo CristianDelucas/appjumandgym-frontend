@@ -91,14 +91,26 @@ const CrudFormExercises = ({
               })}
             >
               <option value="">--Musculo del ejercicio--</option>
-              <option value="cuadriceps">CUADRICEPS</option>
-              <option value="biceps">BICEPS</option>
-              <option value="isquios">ISQUIOS</option>
-              <option value="triceps">TRICEPS</option>
-              <option value="pecho">PECHO</option>
-              <option value="espalda">ESPALDA</option>
-              <option value="abdomen">ABDOMEN</option>
-              <option value="deltoides">DELTOIDES</option>
+              <option value="PECTORAL MAYOR">PECTORAL MAYOR</option>
+              <option value="DORSAL ANCHO">DORSAL ANCHO</option>
+              <option value="EXTENSORES TRONCO">EXTENSORES TRONCO</option>
+              <option value="DELTOIDES">DELTOIDES</option>
+              <option value="TRAPECIO">TRAPECIO</option>
+              <option value="SERRATO">SERRATO</option>
+              <option value="TRICEPS BRAQUIAL">TRICEPS BRAQUIAL</option>
+              <option value="BICEPS BRAQUIAL">BICEPS BRAQUIAL</option>
+              <option value="TREN INFERIOR">TREN INFERIOR</option>
+              <option value="CUADRICEPS">CUADRICEPS</option>
+              <option value="ISQUIOSURALES">ISQUIOSURALES</option>
+              <option value="TRICEPS SURAL">TRICEPS SURAL</option>
+              <option value="FLEXORES DORSALES PIE">FLEXORES DORSALES PIE</option>
+              <option value="FLEXORES TRONCO">FLEXORES TRONCO</option>
+              <option value="GLUTEOS">GLUTEOS</option>
+              <option value="MOVILIDAD">MOVILIDAD</option>
+              <option value="REHABILITACION">REHABILITACION</option>
+              <option value="CARDIO">CARDIO</option>
+              <option value="REPERTORIO FITBALL">REPERTORIO FITBALL</option>
+              <option value="REPERTORIO BOZU">REPERTORIO BOZU</option>
             </select>
             {errors.musculo && (
               <span className="error-message">{errors.musculo.message}</span>

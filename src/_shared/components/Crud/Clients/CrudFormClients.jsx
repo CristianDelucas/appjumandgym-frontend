@@ -10,7 +10,7 @@ import {
 import { BiKey } from "react-icons/bi";
 import { GiBodySwapping } from "react-icons/gi";
 import { HiOutlinePhone } from "react-icons/hi";
-import { refreshUser } from "../../../Api/ApiRefresh";
+import { ImMan,ImManWoman,ImWoman } from "react-icons/im";
 
 const roles = [{ id: "user" }, { id: "moderator" }, { id: "admin" }];
 
@@ -198,7 +198,7 @@ const CrudFormClients = ({
                     },
                   })}
                 />
-                Hombre
+                <ImMan alt="hombre"/>
               </div>
             </label>
             <label>
@@ -214,7 +214,7 @@ const CrudFormClients = ({
                     },
                   })}
                 />
-                Mujer
+                <ImWoman alt="mujer"/>
               </div>
             </label>
             {errors.sexo && (

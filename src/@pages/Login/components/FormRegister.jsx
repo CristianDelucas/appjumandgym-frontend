@@ -11,6 +11,7 @@ import { BiKey } from "react-icons/bi";
 import { GiBodySwapping } from "react-icons/gi";
 
 import { HiEye, HiEyeOff, HiOutlinePhone } from "react-icons/hi";
+import { ImMan, ImWoman } from "react-icons/im";
 import useAuth from "../../../hooks/auth";
 
 const FormRegister = () => {
@@ -29,7 +30,7 @@ const FormRegister = () => {
     console.log(data);
     signUp(data);
   };
-  const password = watch("password");
+  const password = watch("passwordRegister");
   return (
     <form onSubmit={handleSubmit(submit)} className="signup-form">
       <div className="title">Registro</div>
@@ -40,11 +41,11 @@ const FormRegister = () => {
           </i>
           <span className="title-input-box">Email</span>
           <input
-            style={errors.email && { border: "2px solid red" }}
+            style={errors.emailRegister && { border: "2px solid red" }}
             type="text"
             placeholder="Introduce tu email"
             name="email"
-            {...register("email", {
+            {...register("emailRegister", {
               required: { value: true, message: "'Email' es obligatorio" },
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -52,8 +53,8 @@ const FormRegister = () => {
               },
             })}
           />
-          {errors.email && (
-            <span className="error-message">{errors.email.message}</span>
+          {errors.emailRegister && (
+            <span className="error-message">{errors.emailRegister.message}</span>
           )}
         </div>
 
@@ -133,7 +134,7 @@ const FormRegister = () => {
                   },
                 })}
               />
-              Hombre
+              <ImMan alt="hombre"/>
             </div>
           </label>
           <label>
@@ -149,7 +150,7 @@ const FormRegister = () => {
                   },
                 })}
               />
-              Mujer
+              <ImWoman alt="mujer"/>
             </div>
           </label>
           {errors.sexo && (
@@ -279,11 +280,11 @@ const FormRegister = () => {
             <BiKey />
           </i>
           <input
-            style={errors.password && { border: "2px solid red" }}
+            style={errors.passwordRegister && { border: "2px solid red" }}
             type={show ? "text" : "password"}
             placeholder="Contraseña"
-            name="password"
-            {...register("password", {
+            name="passwordRegister"
+            {...register("passwordRegister", {
               required: { value: true, message: "'Contraseña' es obligatorio" },
               pattern:{
                         value:/^(\S)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹])[a-zA-Z0-9~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]{10,16}$/,
@@ -311,7 +312,7 @@ const FormRegister = () => {
             <BiKey />
           </i>
           <input
-            style={errors.passwordrepetido && { border: "2px solid red" }}
+            style={errors.confirmpassword && { border: "2px solid red" }}
             type={show ? "text" : "password"}
             placeholder="Repite la contraseña"
             name="passwordrepetido"

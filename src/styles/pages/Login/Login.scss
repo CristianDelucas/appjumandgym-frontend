@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: center;
     //background: #11101d;
-    background:linear-gradient(45deg, transparent, #11101d);
+    background:linear-gradient(45deg, transparent, var(--color--background--global));
     padding: 0 30px;
     
 
@@ -19,7 +19,7 @@
         max-width: 1000px;
         width: 100%;
         background: #fff;
-        padding: 0 30px;
+        
         box-shadow: 0 10px 15px rgba(0,0,0,0.2);
         //perspective: 9000px;
 
@@ -116,8 +116,11 @@
             height: 100%;
             width: 100%;
             background: #fff;
+            
 
             .form-content{
+                padding:10px;
+                background:var(--color--primary);
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -171,7 +174,7 @@
                     position: relative;
                     font-size: 24px;
                     font-weight: 500;
-                    color: #333;
+                    color: var(--color--text);
                     &::before{
                         content:"";
                         position: absolute;
@@ -179,7 +182,7 @@
                         bottom: 0;
                         height: 4px;
                         width: 25px;
-                        background: #11101d;
+                        background: var(--color--text);
                     }
                 }
 
@@ -209,7 +212,7 @@
                             font-size: 17px;
                             top:-20px;
                             left: 20px;
-                            color: #11101d;
+                            color: var(--color--text);
                             font-weight:700;
                             
                         }
@@ -247,14 +250,14 @@
                         .button{
                             margin-top: 10px;
                             color: #fff;
-                            background: #11101d;
+                            background: var(--color--background-button);
                             border-radius: 6px;
                             padding:0;
                             cursor: pointer;
                             transition: all 0.4s ease;
 
                             &:hover{
-                                background: #5b13b9;
+                                background: var(--color--background-button-hover);
                             }
         
                         }
@@ -266,7 +269,7 @@
                 .text{
                     font-size: 14px;
                     font-weight: 500;
-                    color: #333;
+                    color: var(--color--text);
 
                     a{
                         text-decoration: none;
@@ -336,3 +339,21 @@
 
     }
 }
+
+input[type=radio] { 
+    position: absolute;
+    opacity: 0;
+    width: 0px!important;
+    height: 0;
+
+    &+ svg{
+        height: 50px;
+        width: 50px;
+        color: var(--color--text);
+        padding: 5px;
+    }
+    &:checked + svg{
+        outline: 3px solid #5b13b9;
+        background-color: #9de4ad;
+    }
+  }
