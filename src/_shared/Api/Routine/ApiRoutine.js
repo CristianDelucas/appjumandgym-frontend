@@ -34,19 +34,51 @@ export const getRoutineByIdUser = async(id)=> {
     }
 };
 
-export const createRoutine = async (newRoutine) => {
+export const registerRoutine = async (newRoutine) => {
     try {
         config.headers.Authorization=addToken();
         
-        const req = await toast.promise(axios.post(ROUTINE, newRoutine, config),
+        const {data,status} = await toast.promise(axios.post(ROUTINE, newRoutine, config),
         {
             pending: "Creando rutina...",
             success: `¡Rutina creada! `,
-            error: {render({data}){return (data.response.message)}},
+            error: {render({data}){return (data.response.status===0)?'Error de red':data.response.data.message}},
           });
         
-        return req;
+          return {data,status};
     } catch (error) {
-        console.log(error)
+        return {status:error.response.status}
     }
 }
+
+export const updateRoutineByID = async (_id,routineUpdated) => {
+    try {
+        
+        config.headers.Authorization=addToken();
+        const {data,status} = await toast.promise(axios.put(`${ROUTINE}/${_id}`, routineUpdated, config),{
+            pending: `Modificando rutina de <${routineUpdated.id_user.email}>...`,
+            success: `¡Rutina de <${routineUpdated.id_user.email}> modificado!`,
+            error: {render({data}){return (data.response.status===0)?'Error de red':data.response.data.message}},
+          });
+
+          console.log(data);
+          return {data,status};
+    } catch (error) {
+        return {status:error.response.status}
+    }
+}
+
+export const deleteRoutineById = async(_id)=> {
+    try{
+        config.headers.Authorization=addToken();
+        const {data,status} = await toast.promise(axios.delete(`${ROUTINE}/${_id}`, config),{
+            pending: `Borrando rutina con ID <${_id}>...`,
+            success: `¡Rutina con ID: <${_id}> eliminado!`,
+            error: {render({data}){return (data.response.status===0)?'Error de red':data.response.data.message}},
+          });
+        
+          return {data,status};
+    }catch(error){
+        return {status:error.response.status}
+    }
+};

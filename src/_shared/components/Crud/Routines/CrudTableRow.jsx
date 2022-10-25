@@ -12,6 +12,7 @@ const CrudTableRow = ({el, editValues, deleteData}) => {
     <Tr key={_id}>
                         <Td >{_id}</Td>
                         <Td >{nombre_rutina}</Td>
+                        <Td>{el.id_user.email}</Td>
                         <Td >{numero_dias}</Td>
                         <Td >
                         <button className='button-update' onClick={() => editValues(el)}><AiOutlineForm/></button>

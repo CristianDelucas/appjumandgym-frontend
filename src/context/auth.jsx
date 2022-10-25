@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
   const [objetivo, setObjetivo] = useState(undefined);
   const [altura, setAltura] = useState(undefined);
   const [roles, setRoles] = useState(undefined);
-  const [routine, setRoutine] = useState(undefined);
+  const [routine, setRoutine] = useState([]);
 
   const removeUserProvider = () => {
     setUser(undefined);
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
     setAltura(undefined);
     setRoles(undefined);
     setAvatar(undefined);
-    setRoutine(undefined);
+    setRoutine([]);
     
   };
 
@@ -45,8 +45,8 @@ export const AuthProvider = ({ children }) => {
 
     const post = async () =>{
 
+      //const {routinedata,userdata,status} = await getUserAndRoutine(jwt.reqUserId);
       const {routinedata,userdata,status} = await getUserAndRoutine(jwt.reqUserId);
-
 
 
       if(status ===200){

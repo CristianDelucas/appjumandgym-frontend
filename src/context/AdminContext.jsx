@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import {  createContext, useEffect, useState } from "react";
 import {  useNavigate } from "react-router-dom";
 import {  logoutUserExpired } from "../_shared/Api/ApiLogout";
-import { getUsersAndExercises } from "../_shared/Api/AxiosAll/AxiosAll";
+import {  getUsersExercisesRoutines } from "../_shared/Api/AxiosAll/AxiosAll";
 
 export const AdminContext = createContext({});
 
@@ -23,9 +23,9 @@ export const AdminProvider = ( { children } ) =>{
 
     }
 
-    const getUsersAndExercisesProvider = useCallback(() =>{
+    const getUsersAndExercisesRoutinesProvider = useCallback(() =>{
       const post = async () =>{
-        const {_users,_exercises,_routines,status} = await getUsersAndExercises();
+        const {_users,_exercises,_routines,status} = await getUsersExercisesRoutines();
 
         console.log(_exercises)
 
@@ -35,7 +35,7 @@ export const AdminProvider = ( { children } ) =>{
           setRoutines(_routines);
         }
         if(status === 403){
-          removeAdminProvider();
+            removeAdminProvider();
             await logoutUserExpired();
             navigate('/login')
         }
@@ -45,8 +45,8 @@ export const AdminProvider = ( { children } ) =>{
     },[navigate])
 
     useEffect(() => {
-      getUsersAndExercisesProvider()
-      }, [getUsersAndExercisesProvider]);
+      getUsersAndExercisesRoutinesProvider()
+      }, [getUsersAndExercisesRoutinesProvider]);
 
 
     return(

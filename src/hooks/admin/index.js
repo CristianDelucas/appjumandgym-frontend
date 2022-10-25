@@ -16,6 +16,7 @@ import {
   updateExerciseByID,
 } from "../../_shared/Api/Exercise/ApiExercise";
 import { logoutUser } from "../../_shared/Api/ApiLogout";
+import { deleteRoutineById, registerRoutine, updateRoutineByID } from "../../_shared/Api/Routine/ApiRoutine";
 
 function useAdmin() {
   const [state, setState] = useState({ loading: false, error: false });
@@ -25,6 +26,7 @@ function useAdmin() {
     setUsers,
     exercises,
     setExercises,
+    setRoutines,
     addUserState,
     removeAdminProvider,
   } = useContext(AdminContext);
@@ -259,6 +261,88 @@ function useAdmin() {
     post();
   }, [navigate,setExercises,removeAdminProvider]);
 
+
+  //creación de rutina
+  const createRoutine = useCallback(
+    (_data) => {
+      const post = async () => {
+        try {
+          setState({ loading: true, error: false });
+          //modificar
+          const {data,status} = await registerRoutine(_data);
+
+          if (status === 201) {
+            setRoutines((routines) => [...routines, data]);
+            setState({ loading: false, error: false });
+          }
+          //sesión caducada
+          if (status === 403) {
+            await logoutUser();
+            removeAdminProvider();
+            navigate("/login");
+          }
+        } catch (err) {
+          setState({ loading: false, error: true });
+          console.error(err);
+        }
+      };
+      post();
+    },
+    [navigate,setRoutines ,removeAdminProvider]
+  );
+
+  const updateRoutine = useCallback((_data) => {
+    const post = async () => {
+      try {
+        console.log('editando')
+        const {data,status} = await updateRoutineByID(_data._id, _data);
+
+        if (status === 200) {
+          setRoutines((routines) =>
+            routines.map((el) => (el._id === data._id ? data : el))
+          );
+
+          setState({ loading: false, error: false });
+        }
+        if (status === 403) {
+          //sesión caducada
+          await logoutUser();
+          removeAdminProvider();
+          navigate("/login");
+        }
+      } catch (err) {
+        setState({ loading: false, error: true });
+        console.error(err);
+      }
+    };
+    post();
+  }, [navigate,setRoutines,removeAdminProvider]);
+
+    //eliminación de rutina
+    const deleteRoutine = useCallback((_id) => {
+      const post = async () => {
+        try {
+          const {status} = await deleteRoutineById(_id);
+          
+          if (status === 204) {
+            setRoutines((routines) => routines.filter((el) => el._id !== _id));
+            setState({ loading: false, error: false });
+          }
+          //sesión caducada
+          if (status === 403) {
+            await logoutUser();
+            removeAdminProvider();
+            navigate("/login");
+          }
+        } catch (err) {
+          setState({ loading: false, error: true });
+          console.error(err);
+        }
+      };
+      post();
+    }, [navigate,setRoutines,removeAdminProvider]);
+
+
   return {
     getUsersAPI,
     createUser,
@@ -268,6 +352,9 @@ function useAdmin() {
     createExercise,
     updateExercise,
     deleteExercise,
+    createRoutine,
+    updateRoutine,
+    deleteRoutine,
     loadingAuth: state.loading,
     hashError: state.error,
   };

@@ -8,31 +8,11 @@ import { AiOutlineProfile } from "react-icons/ai";
 import Select from "react-select";
 import { createRoutine } from "../../../Api/Routine/ApiRoutine";
 import { BiBookmarks, BiPencil } from "react-icons/bi";
-const initialDb = [
-  {
-    idRutina: "1",
-    id_user: "62e29735ee75a0b1f0504794",
-    indicaciones:"En este entrenamiento quiero que se haga siempre sin cardio, durante 4 semanas.",
-    nombreRutina: "Rutina para hipertrofia",
-    nDias: "1",
-    dias: [
-      {
-        musculos: ["BICEPS","TRICEPS"],
-        ejercicios: [
-          {
-            nameExercise: ["Curl de biceps"],
-            series: "2",
-            repeticiones: ["10"],
-            descanso: "60",
-            rir:"2"
-          }
-        ],
-      }
-    ],
-  },
-];
+import useAdmin from "../../../../hooks/admin";
+
 
 const CrudRoutines = () => {
+  const {createRoutine,updateRoutine,deleteRoutine } = useAdmin();
   const { users,exercises } = useContext(AdminContext);
   const USERSOPTIONS = users.map((user) => {
     return { value: user._id, label: user.nombre + " " + user.apellidos };
@@ -40,30 +20,25 @@ const CrudRoutines = () => {
   const OPTIONSEXERCISES = exercises.map((exercise) => {
     return { value: exercise._id, label: exercise.nombre};
   });
-  const [db, setDb] = useState(initialDb);
+  
   const [dataToEdit, setDataToEdit] = useState();
 
   //variable de estado para la rutina que se esta editando
   const [rutina, setRutina] = useState({});
 
   const addData = async(data) => {
-    //data.idRutina = db.length + 1;
-    const createRoutineUser = await createRoutine(data);
-    console.log(createRoutineUser)
-    setDb(db=>[...db, data]);
+    createRoutine(data);
   };
   const updateData = (data) => {
-    console.log(data);
-    let newData = db.map((el) => (el.id === data.id ? data : el));
-    setDb(newData);
+    console.log('editandoooo!!')
+    updateRoutine(data);
   };
-  const deleteData = (idRutina) => {
+  const deleteData = (_id) => {
     let isDelete = window.confirm(
-      `¿Estás seguro de eliminar la rutina ´${idRutina}´`
+      `¿Estás seguro de eliminar la rutina ´${_id}´`
     );
     if (isDelete) {
-      let newData = db.filter((el) => el.idRutina !== idRutina);
-      setDb(newData);
+      deleteRoutine(_id)
     }
     return;
   };
@@ -99,12 +74,14 @@ const CrudRoutines = () => {
 
   const editValues = (el) => {
     reset();
+    setDataToEdit(dataToEdit => el)
     console.log(el)
     console.log("rutina a editar");
-    setValue("nombreRutina", el.nombreRutina);
+    setValue("_id", el._id);
+    setValue("nombreRutina", el.nombre_rutina);
     setValue("diasRutina", el.dias.length);
     setValue("indicaciones", el.indicaciones);
-    setValue("id_user", USERSOPTIONS.find(user => user.value===el.idCliente));
+    setValue("id_user", USERSOPTIONS.find(user => user.value===el.id_user._id));
     
     el.dias.forEach((day, index) => {
       const dia = index + 1;
@@ -118,27 +95,32 @@ const CrudRoutines = () => {
       day.ejercicios.forEach((el, index) => {
         //console.log(index)
         const nejercicio = index + 1;
+        console.log(el);
         console.log(el.repeticiones)
-        setValue(`nameDia${dia}ejercicio${nejercicio}`, el.nameExercise.map(element => OPTIONSEXERCISES.find(exercise => exercise.value===element )));
+        setValue(`nameDia${dia}ejercicio${nejercicio}`, el.id_exercise.map(element => OPTIONSEXERCISES.find(exercise => exercise.value===element )));
         setValue(`seriesDia${dia}ejercicio${nejercicio}`, el.series);
         setValue(
           `repeticionesDia${dia}ejercicio${nejercicio}`,
           el.repeticiones.map(repes => ({value:repes,label:repes})));
+          console.log(el.descanso)
         setValue(`descansoDia${dia}ejercicio${nejercicio}`, el.descanso);
+        setValue(`rirDia${dia}ejercicio${nejercicio}`, el.rir);
       });
     });
 
     console.log(watch());
-    setRutina(initialDb[0]);
   };
 
   const submit = (data,e) => {
     //inicializamos la variable de la rutina con parametros predeterminados
     console.log(data)
     e.preventDefault();
+    console.log(data._id)
+    
     const rutina = {
       nombre_rutina: data.nombreRutina,
       id_user: data.id_user.value,
+      user_name: data.id_user.label,
       numero_dias: data.diasRutina,
       indicaciones: data.indicaciones,
       nivel: "Principiante",
@@ -173,12 +155,20 @@ const CrudRoutines = () => {
     }
     console.log(rutina);
     //añadimos la rutina a nuestra base de datos
-    addData(rutina);
+    if (!data._id) {
+      addData(rutina);
+    }else{
+      console.log('editando')
+      rutina._id = data._id;
+      updateData(rutina);
+      setDataToEdit(null);
+    }
+  
   };
 
   const reiniciar = () => {
     reset();
-
+    setDataToEdit(null);
     setRutina(rutina => {});
   };
 
@@ -310,7 +300,7 @@ const CrudRoutines = () => {
             ))}
         <div className="input-buttons">
           <button className="col-6" type="submit">
-            Crear rutina
+            {dataToEdit? "Editar": "Crear"} rutina
           </button>
           <button className="col-6" onClick={() => reiniciar()}>
             Limpiar
@@ -318,7 +308,7 @@ const CrudRoutines = () => {
         </div>
       </form>
 
-      <CrudTable data={db} deleteData={deleteData} editValues={editValues} />
+      <CrudTable deleteData={deleteData} editValues={editValues} />
     </>
   );
 };

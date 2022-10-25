@@ -28,7 +28,7 @@ const Training = () => {
     <div className='c-training'>
     <div className='wrapper'>
         <div className='accordion'>
-        {routine===undefined ? 
+        {routine.length ===0?  
         <div className='card'>
         <div className='card--title'>SIN RUTINA ASIGNADA</div></div>:routine.dias.map((item, i) => {
           return (

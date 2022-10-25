@@ -25,28 +25,22 @@ export const getUserAndRoutine = async(id)=> {
                 axios.get(`${ROUTINE}/user/${id}`, config)
             ]
         )
-        // .then(response =>{
-        //     console.log(response[0].data);
-        //     console.log(response[1].data);
-        // });
-
-        console.log(response)
 
         return {userdata:response[0].data,'routinedata':response[1].data, status: response[0].status}
-
+        
     }catch(error){
         return {status:error.response.status}
     }
 };
 
-export const getUsersAndExercises = async()=> {
+export const getUsersExercisesRoutines = async()=> {
     try{
         config.headers.Authorization=addToken();
         const response = await axios.all(
             [
                 await axios.get(`${USER}/`, config),
                 await axios.get(`${EXERCISE}/`, config),
-                await axios.get(`${ROUTINE}/`, config)
+                await axios.get(`${ROUTINE}/?extended=true` , config)
             ]
         )
 

@@ -4,7 +4,7 @@ import { AdminContext } from "../../../../context/AdminContext";
 import Paginacion from "../../Paginacion/Paginacion";
 import CrudTableRow from "./CrudTableRow";
 
-const CrudTable = ({ data, editValues, deleteData }) => {
+const CrudTable = ({editValues, deleteData }) => {
   const { routines } = useContext(AdminContext);
 
   const [pagina, setPagina] = useState(1);
@@ -16,6 +16,10 @@ const CrudTable = ({ data, editValues, deleteData }) => {
     setFiltro(e.target.value);
     setPagina(1);
   };
+    
+
+
+
 
   return (
     <div>
@@ -36,18 +40,19 @@ const CrudTable = ({ data, editValues, deleteData }) => {
           <Tr >
             <Th >Id rutina</Th>
             <Th >Nombre Rutina</Th>
+            <Th >Email</Th>
             <Th >Días</Th>
             <Th >Acciones</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {data.length === 0 ? (
+          {routines.length === 0 ? (
             <Tr>
-              <Td colSpan={4}>Sin datos</Td>
+              <Td>Sin datos</Td>
             </Tr>
           ) : (
             routines
-            .filter((el) => el.id_user.toLowerCase().includes(filtro.toLowerCase()))
+            .filter((el) => el.id_user.email.toLowerCase().includes(filtro.toLowerCase()))
               .slice(
                 (pagina - 1) * porPagina,
                 (pagina - 1) * porPagina + porPagina
@@ -55,7 +60,7 @@ const CrudTable = ({ data, editValues, deleteData }) => {
             .map((el) => (
               <CrudTableRow
                 el={el}
-                key={el.idRutina}
+                key={el._id}
                 editValues={editValues}
                 deleteData={deleteData}
               />
