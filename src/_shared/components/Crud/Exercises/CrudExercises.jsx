@@ -28,14 +28,14 @@ const CrudExercises = () => {
   };
 
   return (
-    <div>
+    <div >
       <CrudFormExercises
         addData={addData}
         updateData={updateData}
         dataToEdit={dataToEdit}
         setDataToEdit={setDataToEdit}
       />
-      <CrudTable deleteData={deleteData} setDataToEdit={setDataToEdit} />
+      <CrudTable  deleteData={deleteData} setDataToEdit={setDataToEdit} />
     </div>
   );
 };

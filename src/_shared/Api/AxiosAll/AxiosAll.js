@@ -45,13 +45,14 @@ export const getUsersAndExercises = async()=> {
         const response = await axios.all(
             [
                 await axios.get(`${USER}/`, config),
-                await axios.get(`${EXERCISE}/`, config)
+                await axios.get(`${EXERCISE}/`, config),
+                await axios.get(`${ROUTINE}/`, config)
             ]
         )
 
         console.log(response)
 
-        return {_users:response[0].data,_exercises:response[1].data, status: response[0].status}
+        return {_users:response[0].data,_exercises:response[1].data, _routines:response[2].data, status: response[0].status}
 
     }catch(error){
         return {status:error.response.status}

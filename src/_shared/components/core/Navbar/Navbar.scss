@@ -137,6 +137,7 @@ $desktop: 1024px;
 
             @include phone(){
                 width: 100%;
+                z-index: 100;
             }
 
     }

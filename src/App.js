@@ -17,6 +17,7 @@ import ProtectAuthRoutes from "./protect/auth/ProtectAuthRoutes";
 import { AdminProvider } from "./context/AdminContext";
 import ForgotPassword from "./@pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "./@pages/ResetPassword/ResetPassword";
+import ButtonTheme from "./_shared/components/ButtonTheme/ButtonTheme";
 
 //  const ProtectedRoute = ({ children }) =>{
 //    const { isAuthenticated } = useAuth();
@@ -39,17 +40,7 @@ const ROLES = {
 
 function App() {
 
-  const [theme, setTheme] = useState('light')
-
-  const toggleTheme = () =>{
-    if(theme === 'dark'){
-      setTheme('light')
-      window.localStorage.setItem('theme','light')
-    }else{
-      setTheme('dark')
-      window.localStorage.setItem('theme','dark')
-    }
-  }
+  const [theme, setTheme] = useState('light');
 
   useEffect(()=>{
     const localTheme = window.localStorage.getItem('theme');
@@ -57,9 +48,8 @@ function App() {
       setTheme(localTheme);
       window.localStorage.setItem('theme',localTheme)
     }
-  },[])
+  },[setTheme]);
 
-  
   return (
      
     <div className={`App theme--${theme}`}>
@@ -98,9 +88,7 @@ function App() {
           <Route path='*' element={<h1>Not found</h1>}/>
         </Routes>
 
-      <div className="button-theme" onClick={toggleTheme}>
-          {theme === "light"? <BsSun/>:<MdDarkMode /> }
-      </div>
+        <ButtonTheme theme={theme} setTheme={setTheme}/>
     </div>
   );
 }

@@ -183,7 +183,7 @@ const CrudRoutines = () => {
   };
 
   return (
-    <div>
+    <>
       <form className="container" onSubmit={handleSubmit(submit)}>
         <div className="row input-boxes ">
           <div className="col-12 col-lg-4 col-xl-3  input-box">
@@ -319,7 +319,7 @@ const CrudRoutines = () => {
       </form>
 
       <CrudTable data={db} deleteData={deleteData} editValues={editValues} />
-    </div>
+    </>
   );
 };
 

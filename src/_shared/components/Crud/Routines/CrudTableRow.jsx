@@ -5,17 +5,17 @@ import { Td, Tr } from 'react-super-responsive-table';
 
 const CrudTableRow = ({el, editValues, deleteData}) => {
 
-    const {idRutina,nombreRutina, nDias} = el;
+    const {_id,nombre_rutina, numero_dias} = el;
   
 
   return (
-    <Tr className='row' key={idRutina}>
-                        <Td  className='col-12 col-sm' >{idRutina}</Td>
-                        <Td className='col-12 col-sm'>{nombreRutina}</Td>
-                        <Td className='col-12 col-sm'>{nDias}</Td>
-                        <Td className='col-12 col-sm'>
+    <Tr key={_id}>
+                        <Td >{_id}</Td>
+                        <Td >{nombre_rutina}</Td>
+                        <Td >{numero_dias}</Td>
+                        <Td >
                         <button className='button-update' onClick={() => editValues(el)}><AiOutlineForm/></button>
-                            <button className='button-delete' onClick={()=>  deleteData(idRutina)}><FiTrash2/></button>
+                            <button className='button-delete' onClick={()=>  deleteData(_id)}><FiTrash2/></button>
                         </Td>
     </Tr>
   )

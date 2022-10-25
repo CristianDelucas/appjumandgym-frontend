@@ -25,13 +25,14 @@ export const AdminProvider = ( { children } ) =>{
 
     const getUsersAndExercisesProvider = useCallback(() =>{
       const post = async () =>{
-        const {_users,_exercises,status} = await getUsersAndExercises();
+        const {_users,_exercises,_routines,status} = await getUsersAndExercises();
 
         console.log(_exercises)
 
         if(status === 200){
           setUsers(_users);
           setExercises(_exercises);
+          setRoutines(_routines);
         }
         if(status === 403){
           removeAdminProvider();
