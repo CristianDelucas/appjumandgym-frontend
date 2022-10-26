@@ -4,7 +4,7 @@ import { logoutUserExpired } from "../_shared/Api/ApiLogout";
 import { useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 import { getUserAndRoutine } from "../_shared/Api/AxiosAll/AxiosAll";
-
+import { getUser } from "../_shared/Api/ApiUser";
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
@@ -48,6 +48,25 @@ export const AuthProvider = ({ children }) => {
       //const {routinedata,userdata,status} = await getUserAndRoutine(jwt.reqUserId);
       const {routinedata,userdata,status} = await getUserAndRoutine(jwt.reqUserId);
 
+      if(status ===404){
+        const {userdata,status} = await getUser(jwt.reqUserId);
+
+        if(status===200){
+          setUser(userdata);
+          setUserId(userdata._id);
+          setFullname(userdata.nombre + " " + userdata.apellidos);
+          setUserName(userdata.nombre);
+          setFechaNacimiento(userdata.fecha_nacimiento);
+          setMovil(userdata.movil);
+          setEmail(userdata.email);
+          setObjetivo(userdata.objetivo);
+          setAltura(userdata.altura);
+          setRoles(userdata.roles);
+          setAvatar(userdata.avatar?.url);
+        }
+        
+
+      }
 
       if(status ===200){
           setUser(userdata);

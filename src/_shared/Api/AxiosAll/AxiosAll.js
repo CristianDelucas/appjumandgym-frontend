@@ -29,6 +29,7 @@ export const getUserAndRoutine = async(id)=> {
         return {userdata:response[0].data,'routinedata':response[1].data, status: response[0].status}
         
     }catch(error){
+        console.log(error);
         return {status:error.response.status}
     }
 };

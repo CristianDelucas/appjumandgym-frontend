@@ -18,9 +18,6 @@ const Training = () => {
     setSelected(i);
   }
 
-  console.log(routine)
-
-  
 
   
 
@@ -32,7 +29,7 @@ const Training = () => {
         <div className='card'>
         <div className='card--title'>SIN RUTINA ASIGNADA</div></div>:routine.dias.map((item, i) => {
           return (
-            <div className='item'>
+            <div key={`${routine._id}${i}`} className='item'>
                 <div className='title' onClick={() => toggle(i)}>
                   <h1>Día {i+1}</h1>
                   <h2>{item.musculos.map((musculo,index)=>  {
@@ -42,9 +39,9 @@ const Training = () => {
 
                 <div className={selected === i ? 'accordion-content show' : 'accordion-content'}>
               {/* Entrenamientos asociados a ese día */}
-              {item.ejercicios.map((ejercicios, indexExercises) => {
+              {item.ejercicios.map((ejercicios, index) => {
                 return(
-                  <CardsTraining ejercicios={ejercicios} indexExercises={indexExercises}/>
+                  <CardsTraining key={`${index}`} ejercicios={ejercicios} indexExercises={index}/>
               )})}
               </div>
 

@@ -1,19 +1,20 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
-import useAuth from "../../hooks/auth";
 import Chart from "../../_shared/components/Charts/Chart";
-
+import walker from '../../assets/img/walker.png';
 const Dashboard = () => {
   const [data, setData] = useState([]);
   const { userName,objetivo, roles, routine } = useContext(AuthContext);
-
+//<img src={walker} alt='walker'/>
   
   console.log(roles);
 
   return (
     <div className="c-dashboard">
+      
       <div className="c-dashboard__header">
+      
         <div className="c-dashboard__header-title">
           <div className="c-dashboard__header-title-text">
             Bienvenid@ a JUM AND GYM, ¡{userName}!
