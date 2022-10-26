@@ -42,6 +42,7 @@ export const getExerciseById = async(id)=> {
 
 export const registerExercise = async (exerciseRegister) => {
     try {
+        config.headers.Authorization=addToken();
         const req = await toast.promise(axios.post(EXERCISE, exerciseRegister, config),{
             pending: `Creando ejercicio <${exerciseRegister.nombre}>...`,
             success: `¡Ejercicio <${exerciseRegister.nombre}> creado!`,
