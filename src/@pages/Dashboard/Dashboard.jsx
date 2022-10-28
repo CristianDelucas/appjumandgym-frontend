@@ -6,7 +6,8 @@ import walker from '../../assets/img/walker.png';
 const Dashboard = () => {
   const [data, setData] = useState([]);
   const { userName,objetivo, roles, routine } = useContext(AuthContext);
-//<img src={walker} alt='walker'/>
+
+  //<img src={walker} alt='walker'/>
   
   console.log(roles);
 
