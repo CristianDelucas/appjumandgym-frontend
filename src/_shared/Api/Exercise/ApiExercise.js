@@ -8,8 +8,9 @@ const config= {
     headers : {
         
         "Accept": "application/json",
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
         "Access-Control-Allow-Origin": "*"
+        
     }
 }
 

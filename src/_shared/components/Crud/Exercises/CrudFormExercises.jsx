@@ -39,8 +39,15 @@ const CrudFormExercises = ({
     }
   }, [dataToEdit]);
 
+
+
   const submit = (data, e) => {
     e.preventDefault();
+
+    const aux = data.url_video[0];
+
+    data.url_video= aux;
+    console.log(data);
     if (!data._id) {
       addData(data);
     } else {
@@ -165,7 +172,7 @@ const CrudFormExercises = ({
             <span className="input-box__title">Url video</span>
             <input
               className="input"
-              type="text"
+              type="file"
               name="url_video"
               placeholder="Url video"
               {...register("url_video", {
