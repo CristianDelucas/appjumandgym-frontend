@@ -14,9 +14,10 @@ import {
   getExercises,
   registerExercise,
   updateExerciseByID,
+  updateImageExerciseByID,
 } from "../../_shared/Api/Exercise/ApiExercise";
-import { logoutUser } from "../../_shared/Api/ApiLogout";
 import { deleteRoutineById, registerRoutine, updateRoutineByID } from "../../_shared/Api/Routine/ApiRoutine";
+import { logoutUser } from "../../_shared/Api/Auth/ApiAuth";
 
 function useAdmin() {
   const [state, setState] = useState({ loading: false, error: false });
@@ -41,7 +42,7 @@ function useAdmin() {
       try {
         // console.log('estoy pasando por aqui')
 
-        const {data,status} = await getUsers();
+        const {data,status} = await new Promise(getUsers());
 
         console.log("hola");
         console.log(status);
@@ -74,7 +75,7 @@ function useAdmin() {
           //modificar
           _data.password = "123456";
           _data.movil = 123456;
-          const {data,status} = await registerUser(_data);
+          const {data,status} = await new Promise(registerUser(_data));
 
           if (status === 201) {
             setUsers((users) => [...users, data]);
@@ -237,6 +238,34 @@ function useAdmin() {
     post();
   }, [navigate,setExercises,removeAdminProvider]);
 
+
+   //actualización imagen ejercicio
+   const updateImageExercise = useCallback((_data) => {
+    const post = async () => {
+      try {
+        const {data,status} = await updateImageExerciseByID(_data._id);
+
+        if (status === 200) {
+          setExercises((exercises) =>
+            exercises.map((el) => (el._id === data._id ? data : el))
+          );
+
+          setState({ loading: false, error: false });
+        }
+        if (status === 403) {
+          //sesión caducada
+          await logoutUser();
+          removeAdminProvider();
+          navigate("/login");
+        }
+      } catch (err) {
+        setState({ loading: false, error: true });
+        console.error(err);
+      }
+    };
+    post();
+  }, [navigate,setExercises,removeAdminProvider]);
+
   //eliminación de ejercicio
   const deleteExercise = useCallback((_id) => {
     const post = async () => {
@@ -351,6 +380,7 @@ function useAdmin() {
     getExercisesAPI,
     createExercise,
     updateExercise,
+    updateImageExercise,
     deleteExercise,
     createRoutine,
     updateRoutine,

@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import {  createContext, useEffect, useState } from "react";
 import {  useNavigate } from "react-router-dom";
-import {  logoutUserExpired } from "../_shared/Api/ApiLogout";
+import { logoutUserExpired } from "../_shared/Api/Auth/ApiAuth";
 import {  getUsersExercisesRoutines } from "../_shared/Api/AxiosAll/AxiosAll";
 
 export const AdminContext = createContext({});

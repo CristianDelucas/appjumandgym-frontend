@@ -5,7 +5,7 @@ import "../Crud.scss";
 import useAdmin from "../../../../hooks/admin";
 
 const CrudExercises = () => {
-  const { createExercise, deleteExercise, updateExercise } = useAdmin();
+  const { createExercise, deleteExercise, updateExercise, updateImageExercise } = useAdmin();
 
   const [dataToEdit, setDataToEdit] = useState(null);
 
@@ -16,6 +16,11 @@ const CrudExercises = () => {
   const updateData = (data) => {
     updateExercise(data);
   };
+
+  const updateImage = (data) =>{
+    updateImageExercise(data);
+  }
+
   const deleteData = (_id) => {
     let isDelete = window.confirm(
       `¿Estás seguro de eliminar el ejercicio ´${_id}´`
@@ -35,7 +40,7 @@ const CrudExercises = () => {
         dataToEdit={dataToEdit}
         setDataToEdit={setDataToEdit}
       />
-      <CrudTable  deleteData={deleteData} setDataToEdit={setDataToEdit} />
+      <CrudTable  deleteData={deleteData} setDataToEdit={setDataToEdit} updateImage={updateImage} />
     </div>
   );
 };

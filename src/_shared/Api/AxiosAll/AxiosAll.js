@@ -1,6 +1,6 @@
 
 
-import axios from 'axios';
+import axios from '../Axios';
 import { toast } from 'react-toastify';
 import { addToken } from '../../../utils/jwt';
 
@@ -29,7 +29,6 @@ export const getUserAndRoutine = async(id)=> {
         return {userdata:response[0].data,'routinedata':response[1].data, status: response[0].status}
         
     }catch(error){
-        console.log(error);
         return {status:error.response.status}
     }
 };
@@ -44,8 +43,6 @@ export const getUsersExercisesRoutines = async()=> {
                 await axios.get(`${ROUTINE}/?extended=true` , config)
             ]
         )
-
-        console.log(response)
 
         return {_users:response[0].data,_exercises:response[1].data, _routines:response[2].data, status: response[0].status}
 

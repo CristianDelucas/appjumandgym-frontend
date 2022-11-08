@@ -30,7 +30,7 @@ const FormRegister = () => {
     console.log(data);
     signUp(data);
   };
-  const password = watch("passwordRegister");
+  const _password = watch("password");
   return (
     <form onSubmit={handleSubmit(submit)} className="signup-form">
       <div className="title">Registro</div>
@@ -41,11 +41,11 @@ const FormRegister = () => {
           </i>
           <span className="title-input-box">Email</span>
           <input
-            style={errors.emailRegister && { border: "2px solid red" }}
+            style={errors.email && { border: "2px solid red" }}
             type="text"
             placeholder="Introduce tu email"
             name="email"
-            {...register("emailRegister", {
+            {...register("email", {
               required: { value: true, message: "'Email' es obligatorio" },
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -240,9 +240,9 @@ const FormRegister = () => {
             })}
           >
             <option value="">--OBJETIVO--</option>
-            <option value="perder grasa">Perder grasa</option>
-            <option value="mantener peso">Mantener peso</option>
-            <option value="ganar musculo">Ganar músculo</option>
+            <option value="PERDER GRASA">Perder grasa</option>
+            <option value="MANTENER PESO">Mantener peso</option>
+            <option value="GANAR MUSCULO">Ganar músculo</option>
           </select>
           {errors.objetivo && (
             <span className="error-message">{errors.objetivo.message}</span>
@@ -263,11 +263,11 @@ const FormRegister = () => {
             })}
           >
             <option value="">--NIVEL--</option>
-            <option value="Sedentario">Sedentario (0 días)</option>
-            <option value="Ligero">Ligero (2-3 días)</option>
-            <option value="Moderado">Moderado (4-5 días)</option>
-            <option value="Alto">Alto (6-7 días)</option>
-            <option value="Profesional">Profesional (6-7 días)</option>
+            <option value="SEDENTARIO">Sedentario (0 días)</option>
+            <option value="LIGERO">Ligero (2-3 días)</option>
+            <option value="MODERADO">Moderado (4-5 días)</option>
+            <option value="ALTO">Alto (6-7 días)</option>
+            <option value="PROFESIONAL">Profesional (6-7 días)</option>
           </select>
           {errors.actividad && (
             <span className="error-message">{errors.actividad.message}</span>
@@ -280,11 +280,11 @@ const FormRegister = () => {
             <BiKey />
           </i>
           <input
-            style={errors.passwordRegister && { border: "2px solid red" }}
+            style={errors.password && { border: "2px solid red" }}
             type={show ? "text" : "password"}
             placeholder="Contraseña"
-            name="passwordRegister"
-            {...register("passwordRegister", {
+            name="password"
+            {...register("password", {
               required: { value: true, message: "'Contraseña' es obligatorio" },
               pattern:{
                         value:/^(\S)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹])[a-zA-Z0-9~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]{10,16}$/,
@@ -315,7 +315,7 @@ const FormRegister = () => {
             style={errors.confirmpassword && { border: "2px solid red" }}
             type={show ? "text" : "password"}
             placeholder="Repite la contraseña"
-            name="passwordrepetido"
+            name="confirmpassword"
             {...register("confirmpassword", {
               required: { value: true, message: "'Contraseña' es obligatorio" },
               pattern:{
@@ -327,7 +327,7 @@ const FormRegister = () => {
                 message: "Longitud minima de 8",
               },
               validate: (value) =>
-                value === password || "La contraseña no coincide",
+                value === _password || "La contraseña no coincide",
             })}
           />
           {show ? (

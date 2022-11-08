@@ -25,9 +25,8 @@ const Training = () => {
     <div className='c-training'>
     <div className='wrapper'>
         <div className='accordion'>
-        {routine.length ===0?  
-        <div className='card'>
-        <div className='card--title'>SIN RUTINA ASIGNADA</div></div>:routine.dias.map((item, i) => {
+        {routine?
+        routine.dias.map((item, i) => {
           return (
             <div key={`${routine._id}${i}`} className='item'>
                 <div className='title' onClick={() => toggle(i)}>
@@ -37,7 +36,7 @@ const Training = () => {
                   <span>{selected === i ? <FaArrowAltCircleUp/>: <FaArrowAltCircleDown/>}</span>
                 </div>
 
-                <div className={selected === i ? 'accordion-content show' : 'accordion-content'}>
+                <div className={selected === i ? 'accordion-content row show' : 'accordion-content row'}>
               {/* Entrenamientos asociados a ese día */}
               {item.ejercicios.map((ejercicios, index) => {
                 return(
@@ -47,7 +46,11 @@ const Training = () => {
 
               </div>
           )
-        })}
+        })
+        :
+        <div className='card'>
+          <div className='card--title'>SIN RUTINA ASIGNADA</div>
+        </div>}
               
         </div>
       </div>

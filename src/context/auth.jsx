@@ -1,10 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
-import { logoutUserExpired } from "../_shared/Api/ApiLogout";
+
 import { useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 import { getUserAndRoutine } from "../_shared/Api/AxiosAll/AxiosAll";
 import { getUser } from "../_shared/Api/ApiUser";
+import { logoutUserExpired } from "../_shared/Api/Auth/ApiAuth";
+import { getRoutineByIdUser } from "../_shared/Api/Routine/ApiRoutine";
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
@@ -25,7 +27,7 @@ export const AuthProvider = ({ children }) => {
   const [objetivo, setObjetivo] = useState(undefined);
   const [altura, setAltura] = useState(undefined);
   const [roles, setRoles] = useState(undefined);
-  const [routine, setRoutine] = useState([]);
+  const [routine, setRoutine] = useState(undefined);
 
   const removeUserProvider = () => {
     setUser(undefined);
@@ -37,52 +39,56 @@ export const AuthProvider = ({ children }) => {
     setAltura(undefined);
     setRoles(undefined);
     setAvatar(undefined);
-    setRoutine([]);
+    setRoutine(undefined);
     
   };
 
-  const getUserAndRoutineProvider = useCallback(() => {
+  const getUserProvider = useCallback(() => {
 
     const post = async () =>{
 
       //const {routinedata,userdata,status} = await getUserAndRoutine(jwt.reqUserId);
-      const {routinedata,userdata,status} = await getUserAndRoutine(jwt.reqUserId);
+      const {userdata,status} = await getUser(jwt.reqUserId);
 
-      if(status ===404){
-        const {userdata,status} = await getUser(jwt.reqUserId);
+      
+      console.log(status);
+        if(status===200){
+          setUser(user => userdata);
+          setUserId(userdata._id);
+          setFullname(userdata.nombre + " " + userdata.apellidos);
+          setUserName(userdata.nombre);
+          setFechaNacimiento(userdata.fecha_nacimiento);
+          setMovil(userdata.movil);
+          setEmail(userdata.email);
+          setObjetivo(userdata.objetivo);
+          setAltura(userdata.altura);
+          setRoles(userdata.roles);
+          setAvatar(userdata.avatar?.url);
+          getRoutineProvider();
+        }
+
+      if(status ===403){
+        removeUserProvider();
+        await logoutUserExpired(status);
+        navigate("/login");
+      }
+
+    }
+
+    post()
+
+  },[jwt,navigate])
+
+  const getRoutineProvider = useCallback(() => {
+
+    const post = async () =>{
+console.log('hola')
+      //const {routinedata,userdata,status} = await getUserAndRoutine(jwt.reqUserId);
+      const {data,status} = await getRoutineByIdUser(jwt.reqUserId);
 
         if(status===200){
-          setUser(userdata);
-          setUserId(userdata._id);
-          setFullname(userdata.nombre + " " + userdata.apellidos);
-          setUserName(userdata.nombre);
-          setFechaNacimiento(userdata.fecha_nacimiento);
-          setMovil(userdata.movil);
-          setEmail(userdata.email);
-          setObjetivo(userdata.objetivo);
-          setAltura(userdata.altura);
-          setRoles(userdata.roles);
-          setAvatar(userdata.avatar?.url);
+          setRoutine(routine=>data);
         }
-        
-
-      }
-
-      if(status ===200){
-          setUser(userdata);
-          setUserId(userdata._id);
-          setFullname(userdata.nombre + " " + userdata.apellidos);
-          setUserName(userdata.nombre);
-          setFechaNacimiento(userdata.fecha_nacimiento);
-          setMovil(userdata.movil);
-          setEmail(userdata.email);
-          setObjetivo(userdata.objetivo);
-          setAltura(userdata.altura);
-          setRoles(userdata.roles);
-          setAvatar(userdata.avatar?.url);
-          
-          setRoutine((prev) => routinedata);
-      }
 
       if(status ===403){
         removeUserProvider();
@@ -98,8 +104,11 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (Boolean(jwt)) {
-      getUserAndRoutineProvider();
+      getUserProvider();
+      
+      
     }
+    
   }, [jwt]);
 
   return (

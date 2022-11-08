@@ -4,17 +4,12 @@ const BASE_URL= process.env.REACT_APP_API_URL
 //const BASE_URL= "https://appjumandgym-api-production.up.railway.app"
 const USER=`${BASE_URL}/users`
 const AUTH=`${BASE_URL}/auth`
-const LOGIN=  `${BASE_URL}/users/login`;
-const LOGOUT=  `${BASE_URL}/users/auth/logout`;
 const REFRESH=  `${BASE_URL}/users/token/refresh`;
 const EXERCISE= `${BASE_URL}/exercises`
 const ROUTINE= `${BASE_URL}/routines`
 
 export {
-    LOGIN,
     AUTH,
-    LOGOUT,
-    REFRESH,
     USER,
     EXERCISE,
     ROUTINE

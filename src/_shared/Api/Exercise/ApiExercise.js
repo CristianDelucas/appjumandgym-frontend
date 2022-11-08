@@ -70,6 +70,21 @@ export const updateExerciseByID = async (_id,exerciseUpdate) => {
     }
 }
 
+export const updateImageExerciseByID = async (_id) => {
+    try {
+        //cambiar metodo
+        config.headers.Authorization=addToken();
+        const req = await toast.promise(axios.get(`${EXERCISE}/image/${_id}`, config),{
+            pending: `Actualizando imagen de ejercicio...`,
+            success: `¡Imagen actualizada!`,
+            error: {render({data}){return data.response.data.message}},
+          });
+        return req;
+    } catch (error) {
+        return {status:error.response.status}
+    }
+}
+
 export const deleteExerciseById = async(_id)=> {
     try{
         config.headers.Authorization=addToken();

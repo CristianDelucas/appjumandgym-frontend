@@ -10,62 +10,79 @@
 
         .accordion{
             width: 100%;
-
+            border: 10px solid var(--color--primary);
 
             .item{
-                background-color: var(--color--primary);
-                margin-bottom: 5px;
-                padding: 10px 20px;
-
+                background-color: #d1cdff7d;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                
                 .title{
+                    background-color: var(--color--primary);
                     color: var(--color--text);
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+                    padding:20px;
                     cursor: pointer;
+                    width: 100%;
+                    
                 }
 
                 .accordion-content{
-                    display: grid;
+                    //display: grid;
                     max-height: 0;
                     overflow: hidden;
-                    max-width: 100%;
                     max-width: 70%;
-                    margin: 0 auto;
-                    grid-template-columns: repeat(
-                    auto-fit,
-                    /* min-content editar --> */
-                    minmax(100%
-                        ,2fr
-                        )
-                    );
-                    @media (max-width: 730px){
-                        max-width: 100%;
-                       grid-template-columns: repeat(
-                           auto-fit,
-                           minmax(330px
-                                ,1fr
-                                )
-                            );
+                    // margin: 0 auto;
+                    // grid-template-columns: repeat(
+                    // auto-fit,
+                    // /* min-content editar --> */
+                    // minmax(100%
+                    //     ,2fr
+                    //     )
+                    // );
+                     @media (max-width: 1070px){
+                         max-width: 90%;
+                    //    grid-template-columns: repeat(
+                    //        auto-fit,
+                    //        minmax(330px
+                    //             ,1fr
+                    //             )
+                    //         );
                            
+                     }
+
+                     @media (max-width: 860px){
+                        max-width: 98%;
+                   //    grid-template-columns: repeat(
+                   //        auto-fit,
+                   //        minmax(330px
+                   //             ,1fr
+                   //             )
+                   //         );
+                          
                     }
 
                     
-                    @include tablet{
-                        max-width: 60%;
-                        grid-template-columns: repeat(
-                            auto-fit,
+                     @include tablet{
+                    //     max-width: 60%;
+                    //     grid-template-columns: repeat(
+                    //         auto-fit,
                             
-                            minmax(430px
-                               ,1fr
-                               )
-                           );
-                     }
+                    //         minmax(430px
+                    //            ,1fr
+                    //            )
+                    //        );
+                      }
                
-                    gap:16px;
-                    transition: all 0.7s cubic-bezier(0,1,0,1);
+                    // gap:16px;
+                     transition: all 0.7s cubic-bezier(0,1,0,1);
                
                     &.show{
+                           padding: 20px 0;
                            height: auto;
                            max-height: 99999px;
                            transition: all 0.8s cubic-bezier(1,0,1,0);
@@ -77,6 +94,12 @@
                         border-radius: 5px;
                         align-items: center;
                         text-align: center;
+                        justify-content: center;
+                        height: 100%;
+                        background-repeat: no-repeat!important;
+                        background-size: cover!important;
+                        background-position: center!important;
+
 
                         &.isBiserie{
                             border: 5px solid var(--toastify-color-info);

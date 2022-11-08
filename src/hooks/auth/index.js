@@ -1,10 +1,9 @@
 import { AuthContext } from "../../context/auth";
 import { useContext } from "react";
 import { useCallback, useState } from "react";
-import { loginUser } from "../../_shared/Api/ApiLogin";
 import { registerUser } from "../../_shared/Api/ApiUser";
 import { useNavigate } from "react-router-dom";
-import { logoutUser } from "../../_shared/Api/ApiLogout";
+import { loginUser, logoutUser } from "../../_shared/Api/Auth/ApiAuth";
 
 
 function useAuth() {

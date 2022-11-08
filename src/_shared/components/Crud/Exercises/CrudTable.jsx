@@ -4,7 +4,7 @@ import CrudTableRow from "./CrudTableRow";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import Paginacion from "../../Paginacion/Paginacion";
 
-const CrudTable = ({ setDataToEdit, deleteData }) => {
+const CrudTable = ({ setDataToEdit, deleteData,updateImage }) => {
   const { exercises } = useContext(AdminContext);
 
   const [pagina, setPagina] = useState(1);
@@ -60,6 +60,7 @@ const CrudTable = ({ setDataToEdit, deleteData }) => {
                 key={el._id}
                 setDataToEdit={setDataToEdit}
                 deleteData={deleteData}
+                updateImage={updateImage}
               />
             ))
           )}

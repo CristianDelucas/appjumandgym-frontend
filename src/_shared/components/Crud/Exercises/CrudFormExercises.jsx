@@ -18,6 +18,9 @@ const CrudFormExercises = ({
   dataToEdit,
   setDataToEdit,
 }) => {
+
+  const [_file, _setFile] = useState(undefined);
+
   const {
     register,
     handleSubmit,
@@ -44,22 +47,25 @@ const CrudFormExercises = ({
   const submit = (data, e) => {
     e.preventDefault();
 
-    const aux = data.url_video[0];
+    if(data.url_video[0]){
+      data.url_video= data.url_video[0];
+    }
 
-    data.url_video= aux;
-    console.log(data);
     if (!data._id) {
       addData(data);
+      _setFile(undefined)
     } else {
       console.log("intentando editar");
       updateData(data);
       setDataToEdit(null);
+      _setFile(undefined)
     }
     reset(initialForm);
   };
 
   const handleReset = () => {
     setDataToEdit(null);
+    _setFile(undefined)
     reset(initialForm);
   };
 
@@ -74,13 +80,14 @@ const CrudFormExercises = ({
             </i>
             <span className="input-box__title">Nombre del ejercicio</span>
             <input
+              style={errors.nombre && { border: "2px solid red" }}
               className="input"
               type="text"
               label="email"
               name="nombre"
               placeholder="Nombre de ejercicio"
               {...register("nombre", {
-                required: { value: true, message: "Es obligatorio" },
+                required: { value: true, message: "Campo requerido" },
               })}
             />
             {errors.nombre && (
@@ -93,8 +100,9 @@ const CrudFormExercises = ({
             </i>
             <span className="input-box__title">Músculo</span>
             <select
+              style={errors.musculo && { border: "2px solid red" }}
               {...register("musculo", {
-                required: { value: true, message: "Zona de musculo requerido" },
+                required: { value: true, message: "Campo requerido" },
               })}
             >
               <option value="">--Musculo del ejercicio--</option>
@@ -129,13 +137,14 @@ const CrudFormExercises = ({
             </i>
             <span className="input-box__title">Indicaciones del ejercicio</span>
             <input
+            style={errors.indicaciones && { border: "2px solid red" }}
               className="input"
               type="text"
               label="indicaciones"
               name="indicaciones"
               placeholder="Indicaciones del ejercicio"
               {...register("indicaciones", {
-                required: { value: true, message: "Es obligatorio" },
+                required: { value: true, message: "Campo requerido" },
               })}
             />
             {errors.indicaciones && (
@@ -150,35 +159,37 @@ const CrudFormExercises = ({
             </i>
             <span className="input-box__title">Url imagen</span>
             <input
+              style={errors.imagen && { border: "2px solid red" }}
               className="input"
               type="text"
               name="imagen"
               placeholder="Url miniatura"
-              {...register("url_miniatura", {
-                required: { value: true, message: "Se requiere url miniatura" },
-              })}
+              {...register("url_miniatura")}
             />
-            {errors.url_miniatura && (
-              <span className="error-message">
-                {errors.url_miniatura.message}
-              </span>
-            )}
           </div>
 
           <div className="col-12 col-lg-4 col-xl-3  input-box">
             <i>
               <BiMoviePlay />
             </i>
-            <span className="input-box__title">Url video</span>
+            <span className="input-box__title">Video de ejercicio</span>
+            <button
+            style={errors.url_video && { border: "2px solid red" }} 
+            className="button-file">
+            {_file?_file.substring(12):'Subir archivo...'}</button>
             <input
+              
               className="input"
               type="file"
               name="url_video"
-              placeholder="Url video"
+              placeholder="Selecciona el video"
               {...register("url_video", {
-                required: { value: true, message: "Se requiere url video" },
+                required: { value: dataToEdit ? false:true, message: "Campo requerido" },
+                onChange: (e) => {_setFile(e.target.value)},
+              
               })}
             />
+            
             {errors.url_video && (
               <span className="error-message">{errors.url_video.message}</span>
             )}

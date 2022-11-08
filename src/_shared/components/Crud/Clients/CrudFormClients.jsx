@@ -304,9 +304,9 @@ const CrudFormClients = ({
               })}
             >
               <option value="">--OBJETIVO--</option>
-              <option value="perder grasa">Perder grasa</option>
-              <option value="mantener peso">Mantener peso</option>
-              <option value="ganar musculo">Ganar músculo</option>
+              <option value="PERDER GRASA">Perder grasa</option>
+              <option value="MANTENER PESO">Mantener peso</option>
+              <option value="GANAR MUSCULO">Ganar músculo</option>
             </select>
             {errors.objetivo && (
               <span className="error-message">{errors.objetivo.message}</span>
@@ -330,11 +330,11 @@ const CrudFormClients = ({
               })}
             >
               <option value="">--NIVEL--</option>
-              <option value="Sedentario">Sedentario (0 días)</option>
-              <option value="Ligero">Ligero (2-3 días)</option>
-              <option value="Moderado">Moderado (4-5 días)</option>
-              <option value="Alto">Alto (6-7 días)</option>
-              <option value="Profesional">Profesional (6-7 días)</option>
+              <option value="SEDENTARIO">Sedentario (0 días)</option>
+              <option value="LIGERO">Ligero (2-3 días)</option>
+              <option value="MODERADO">Moderado (4-5 días)</option>
+              <option value="ALTO">Alto (6-7 días)</option>
+              <option value="PROFESIONAL">Profesional (6-7 días)</option>
             </select>
             {errors.actividad && (
               <span className="error-message">{errors.actividad.message}</span>

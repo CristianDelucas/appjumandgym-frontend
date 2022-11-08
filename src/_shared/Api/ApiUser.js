@@ -1,9 +1,9 @@
 
 
-import axios from 'axios';
+import axios from './Axios';
 import { toast } from 'react-toastify';
 import { addToken } from '../../utils/jwt';
-import {USER} from './ApiRoutes';
+import { USER} from './ApiRoutes';
 
 const config= {
     headers : {
@@ -13,15 +13,6 @@ const config= {
         "Access-Control-Allow-Origin": "*"
     }
 }
-
-// axios.interceptors.response.use(
-//     response => response,
-//     error => {
-//         if(error.response.status === 403){
-//             console.log('hola');
-//         }
-//     }
-// )
 
 export const getUsers = async()=> {
     try{
@@ -42,6 +33,7 @@ export const getUser = async(_id)=> {
         console.log(data);
         return {userdata:data,status}
     }catch(error){
+        console.log(error)
         return {status:error.response.status}
     }
 };

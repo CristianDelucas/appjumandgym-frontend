@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../Axios';
 import { toast } from 'react-toastify';
 import { addToken } from '../../../utils/jwt';
 import { ROUTINE } from '../ApiRoutes';

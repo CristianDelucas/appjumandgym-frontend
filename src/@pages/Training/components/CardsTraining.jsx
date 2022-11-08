@@ -20,18 +20,15 @@ export default function CardsTraining({ ejercicios, indexExercises }) {
       {ejercicios.id_exercise.length > 1
         ? ejercicios.id_exercise.map((ejercicio, index) => {
             return (
+              <div key={ejercicio._id} className="col-12 col-md-6">
               <div
-                key={ejercicio._id}
+                
                 className="card-training isBiserie"
                 style={{
                   background:
-                    `linear-gradient(180deg, rgba(0, 0, 0, 0.697) 10%, grey 180%),url(` +
+                    `linear-gradient(180deg, rgba(0, 0, 0, 0.4) 10%, grey 180%),url(` +
                     ejercicio.url_miniatura +
                     `)`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundPositionX: "center",
-                  backgroundPositionY: "10%",
-                  backgroundSize: "cover",
                 }}
               >
                 <div className="card-training--number">
@@ -74,32 +71,33 @@ export default function CardsTraining({ ejercicios, indexExercises }) {
                   <ReactTooltip place="left" type="light" effect="solid" />
                 </div>
               </div>
+              </div>
             );
           })
         : ejercicios.id_exercise.map((ejercicio, index) => {
             return (
+              <div key={ejercicio._id} className="col-12 col-md-6">
               <div
                 className="card-training"
                 style={{
                   background:
-                    `linear-gradient(180deg, rgba(0, 0, 0, 0.697) 10%, grey 180%),url(` +
+                    `linear-gradient(180deg, rgba(0, 0, 0, 0.4) 10%, grey 180%),url(` +
                     ejercicio.url_miniatura +
                     `)`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundPositionX: "center",
-                  backgroundPositionY: "10%",
-                  backgroundSize: "cover",
+                  
                 }}
               >
                 <div className="card-training--number">
                   <label>{indexExercises + 1}</label>
+                </div>
+                <div className="card-training--biserie">
                 </div>
                 <div className="card-training-content">
                   <div className="card-training-content--title">
                     {ejercicio.nombre}
                   </div>
                   <div className="card-training-content--zone">
-                    <b>Grupo muscular:</b> {ejercicios.zona}
+                    <b>Grupo muscular:</b> {ejercicio.musculo}
                   </div>
                   <div className="card-training-content--series">
                     <b>Series:</b> {ejercicios.series}
@@ -117,6 +115,14 @@ export default function CardsTraining({ ejercicios, indexExercises }) {
                     onClick={() => openVideo(ejercicio.url_video)}
                   />
                 </div>
+                <div className="card-training-info">
+                  <AiOutlineInfoCircle
+                    data-tip={ejercicio.indicaciones}
+                    alt="info"
+                  />
+                  <ReactTooltip place="left" type="light" effect="solid" />
+                </div>
+              </div>
               </div>
             );
           })}
