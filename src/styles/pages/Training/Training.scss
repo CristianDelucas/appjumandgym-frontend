@@ -23,6 +23,7 @@
                 
                 .title{
                     background-color: var(--color--primary);
+                    border: 10px solid var(--color--primary);
                     color: var(--color--text);
                     display: flex;
                     justify-content: space-between;
@@ -30,6 +31,8 @@
                     padding:0 20px;
                     cursor: pointer;
                     width: 100%;
+                    margin: 0;
+                    padding: 0;
                     
                 }
 
