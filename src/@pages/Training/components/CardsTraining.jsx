@@ -20,10 +20,10 @@ export default function CardsTraining({ ejercicios, indexExercises }) {
       {ejercicios.id_exercise.length > 1
         ? ejercicios.id_exercise.map((ejercicio, index) => {
             return (
-              <div key={ejercicio._id} className="col-12 col-md-6">
+              <div key={ejercicio._id} className="card-training col-12 col-md-6">
               <div
                 
-                className="card-training isBiserie"
+                className="body-training isBiserie"
                 style={{
                   background:
                     `linear-gradient(180deg, rgba(0, 0, 0, 0.4) 10%, grey 180%),url(` +
@@ -31,39 +31,39 @@ export default function CardsTraining({ ejercicios, indexExercises }) {
                     `)`,
                 }}
               >
-                <div className="card-training--number">
+                <div className="body-training--number">
                   <label>{indexExercises + 1}</label>
                 </div>
-                <div className="card-training--biserie">
+                <div className="body-training--biserie">
                   <label>BISERIE</label>
                 </div>
-                <div className="card-training-content">
-                  <div className="card-training-content--title">
+                <div className="body-training-content">
+                  <div className="body-training-content--title">
                     {ejercicio.nombre}
                   </div>
-                  <div className="card-training-content--zone">
-                    <b>Grupo muscular:</b> {ejercicio.musculo}
+                  <div className="body-training-content--zone">
+                    <b>Músculo:</b> {ejercicio.musculo}
                   </div>
-                  <div className="card-training-content--series">
+                  <div className="body-training-content--series">
                     <b>Series:</b> {ejercicios.series}
                   </div>
-                  <div className="card-training-content--reps">
+                  <div className="body-training-content--reps">
                     <b>Repeticiones:</b>{" "}
                     {ejercicios.repeticiones[index]
                       ? ejercicios.repeticiones[index]
                       : ejercicios.repeticiones[index - 1]}
                   </div>
-                  <div className="card-training-content--descanso">
+                  <div className="body-training-content--descanso">
                     <b>Descanso:</b> {ejercicios.descanso}''
                   </div>
                 </div>
-                <div className="card-training-button">
+                <div className="body-training-button">
                   <AiOutlinePlayCircle
                     alt="video"
                     onClick={() => openVideo(ejercicio.url_video)}
                   />
                 </div>
-                <div className="card-training-info">
+                <div className="body-training-info">
                   <AiOutlineInfoCircle
                     data-tip={ejercicio.indicaciones}
                     alt="info"
@@ -76,9 +76,9 @@ export default function CardsTraining({ ejercicios, indexExercises }) {
           })
         : ejercicios.id_exercise.map((ejercicio, index) => {
             return (
-              <div key={ejercicio._id} className="col-12 col-md-6">
+              <div key={ejercicio._id} className="card-training col-12 col-md-6">
               <div
-                className="card-training"
+                className="body-training"
                 style={{
                   background:
                     `linear-gradient(180deg, rgba(0, 0, 0, 0.4) 10%, grey 180%),url(` +
@@ -87,35 +87,35 @@ export default function CardsTraining({ ejercicios, indexExercises }) {
                   
                 }}
               >
-                <div className="card-training--number">
+                <div className="body-training--number">
                   <label>{indexExercises + 1}</label>
                 </div>
-                <div className="card-training--biserie">
+                <div className="body-training--biserie">
                 </div>
-                <div className="card-training-content">
-                  <div className="card-training-content--title">
+                <div className="body-training-content">
+                  <div className="body-training-content--title">
                     {ejercicio.nombre}
                   </div>
-                  <div className="card-training-content--zone">
-                    <b>Grupo muscular:</b> {ejercicio.musculo}
+                  <div className="body-training-content--zone">
+                    <b>Músculo:</b> {ejercicio.musculo}
                   </div>
-                  <div className="card-training-content--series">
+                  <div className="body-training-content--series">
                     <b>Series:</b> {ejercicios.series}
                   </div>
-                  <div className="card-training-content--reps">
+                  <div className="body-training-content--reps">
                     <b>Repeticiones:</b> {ejercicios.repeticiones[index]}
                   </div>
-                  <div className="card-training-content--descanso">
+                  <div className="body-training-content--descanso">
                     <b>Descanso:</b> {ejercicios.descanso}''
                   </div>
                 </div>
-                <div className="card-training-button">
+                <div className="body-training-button">
                   <AiOutlinePlayCircle
                     alt="video"
                     onClick={() => openVideo(ejercicio.url_video)}
                   />
                 </div>
-                <div className="card-training-info">
+                <div className="body-training-info">
                   <AiOutlineInfoCircle
                     data-tip={ejercicio.indicaciones}
                     alt="info"

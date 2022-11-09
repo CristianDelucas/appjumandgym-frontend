@@ -33,7 +33,7 @@ const Training = () => {
                   <h1>Día {i+1}</h1>
                   <h2>{item.musculos.map((musculo,index)=>  {
                     return index >= (item.musculos.length-1) ? musculo + '' :musculo +' y '})}</h2>
-                  <span>{selected === i ? <FaArrowAltCircleUp/>: <FaArrowAltCircleDown/>}</span>
+                  {selected === i ? <FaArrowAltCircleUp/>: <FaArrowAltCircleDown/>}
                 </div>
 
                 <div className={selected === i ? 'accordion-content row show' : 'accordion-content row'}>
