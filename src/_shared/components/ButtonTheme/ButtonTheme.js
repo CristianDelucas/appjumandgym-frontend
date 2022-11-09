@@ -17,8 +17,8 @@ const ButtonTheme = ({theme,setTheme}) => {
   }
 
   return (
-    <div className="button-theme" onClick={toggleTheme}>
-          {theme === "light"? <BsSun/>:<MdDarkMode /> }
+    <div className={`button-theme`} onClick={toggleTheme}>
+          {theme === "light"? <MdDarkMode />:<BsSun/> }
       </div>
   )
 }

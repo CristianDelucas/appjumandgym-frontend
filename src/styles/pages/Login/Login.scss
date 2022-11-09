@@ -272,6 +272,7 @@
                     color: var(--color--text);
 
                     a{
+                        color:var(--color--text--links);
                         text-decoration: none;
                         &:hover{
                             text-decoration: underline;
@@ -280,7 +281,7 @@
                 }
 
                 label{
-                    color:#5b13b9;
+                    color:var(--color--text--links);
                     cursor: pointer;
                     &:hover{
                         text-decoration: underline;
