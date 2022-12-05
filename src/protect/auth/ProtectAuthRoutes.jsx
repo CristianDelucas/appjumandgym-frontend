@@ -1,16 +1,16 @@
 
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/auth";
+import { AuthContext } from "../../context/AuthContext";
 
 const ProtectAuthRoutes = ({ allowedRoles, children }) => {
 
-  const { roles } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   
   
-  const resultado = roles?.find(role => allowedRoles?.includes(role));
+  const resultado = user?.roles?.find(role => allowedRoles?.includes(role));
   
 
   useEffect(() => {

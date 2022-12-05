@@ -35,7 +35,7 @@ export default function CardsTraining({ ejercicios, indexExercises }) {
                   <label>{indexExercises + 1}</label>
                 </div>
                 <div className="body-training--biserie">
-                  <label>BISERIE</label>
+                  <label>SUPERSERIE</label>
                 </div>
                 <div className="body-training-content">
                   <div className="body-training-content--title">

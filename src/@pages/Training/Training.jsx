@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { AuthContext } from '../../context/auth';
+import { AuthContext } from '../../context/AuthContext';
 import CardsTraining from './components/CardsTraining';
 import { FaArrowAltCircleUp,FaArrowAltCircleDown } from "react-icons/fa";
 

@@ -106,6 +106,7 @@ const CrudFormExercises = ({
               })}
             >
               <option value="">--Musculo del ejercicio--</option>
+              <option value="ABDOMEN">ABDOMEN</option>
               <option value="PECTORAL MAYOR">PECTORAL MAYOR</option>
               <option value="DORSAL ANCHO">DORSAL ANCHO</option>
               <option value="EXTENSORES TRONCO">EXTENSORES TRONCO</option>
@@ -116,6 +117,7 @@ const CrudFormExercises = ({
               <option value="BICEPS BRAQUIAL">BICEPS BRAQUIAL</option>
               <option value="TREN INFERIOR">TREN INFERIOR</option>
               <option value="CUADRICEPS">CUADRICEPS</option>
+              <option value="PIERNA">PIERNA</option>
               <option value="ISQUIOSURALES">ISQUIOSURALES</option>
               <option value="TRICEPS SURAL">TRICEPS SURAL</option>
               <option value="FLEXORES DORSALES PIE">FLEXORES DORSALES PIE</option>

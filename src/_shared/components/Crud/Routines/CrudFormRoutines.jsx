@@ -89,6 +89,8 @@ const CrudFormRoutines = ({
               options={[
                 { value: "ISQUIOS", label: "ISQUIOS" },
                 { value: "BICEPS", label: "BICEPS" },
+                { value: "TORSO", label: "TORSO" },
+                { value: "PIERNAS", label: "PIERNAS" },
               ]}
               isMulti
             />

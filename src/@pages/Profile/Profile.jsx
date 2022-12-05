@@ -1,7 +1,7 @@
 import moment from 'moment/moment';
 import React, { useState } from 'react'
 import { useContext } from 'react';
-import { AuthContext } from '../../context/auth';
+import { AuthContext } from '../../context/AuthContext';
 import Chart from '../../_shared/components/Charts/Chart'
 
 const Profile = () => {

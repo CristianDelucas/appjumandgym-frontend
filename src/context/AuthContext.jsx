@@ -7,7 +7,9 @@ import { getUserAndRoutine } from "../_shared/Api/AxiosAll/AxiosAll";
 import { getUser } from "../_shared/Api/ApiUser";
 import { logoutUserExpired } from "../_shared/Api/Auth/ApiAuth";
 import { getRoutineByIdUser } from "../_shared/Api/Routine/ApiRoutine";
+import useUser from "../hooks/useUser";
 export const AuthContext = createContext({});
+
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
@@ -16,29 +18,10 @@ export const AuthProvider = ({ children }) => {
   const [jwt, setJWT] = useState(() =>
     JSON.parse(window.sessionStorage.getItem("token"))
   );
-  const [userId, setUserId] = useState(undefined);
-  const [user, setUser] = useState(undefined);
-  const [userName, setUserName] = useState(undefined);
-  const [fullname, setFullname] = useState(undefined);
-  const [movil, setMovil] = useState(undefined);
-  const [fechaNacimiento, setFechaNacimiento] = useState(undefined);
-  const [email, setEmail] = useState(undefined);
-  const [avatar, setAvatar] = useState(undefined);
-  const [objetivo, setObjetivo] = useState(undefined);
-  const [altura, setAltura] = useState(undefined);
-  const [roles, setRoles] = useState(undefined);
-  const [routine, setRoutine] = useState(undefined);
+  const {user,routine,setRoutine,setUser} = useUser();
 
   const removeUserProvider = () => {
     setUser(undefined);
-    setUserId(undefined);
-    setFullname(undefined);
-    setUserName(undefined);
-    setEmail(undefined);
-    setObjetivo(undefined);
-    setAltura(undefined);
-    setRoles(undefined);
-    setAvatar(undefined);
     setRoutine(undefined);
     
   };
@@ -53,17 +36,7 @@ export const AuthProvider = ({ children }) => {
       
       console.log(status);
         if(status===200){
-          setUser(user => userdata);
-          setUserId(userdata._id);
-          setFullname(userdata.nombre + " " + userdata.apellidos);
-          setUserName(userdata.nombre);
-          setFechaNacimiento(userdata.fecha_nacimiento);
-          setMovil(userdata.movil);
-          setEmail(userdata.email);
-          setObjetivo(userdata.objetivo);
-          setAltura(userdata.altura);
-          setRoles(userdata.roles);
-          setAvatar(userdata.avatar?.url);
+          setUser(userdata);
           getRoutineProvider();
         }
 
@@ -87,7 +60,7 @@ console.log('hola')
       const {data,status} = await getRoutineByIdUser(jwt.reqUserId);
 
         if(status===200){
-          setRoutine(routine=>data);
+          setRoutine(data);
         }
 
       if(status ===403){
@@ -116,19 +89,7 @@ console.log('hola')
       value={{
         jwt,
         user,
-        userId,
-        fullname,
-        userName,
-        fechaNacimiento,
-        avatar,
-        movil,
-        email,
-        objetivo,
-        altura,
-        roles,
         routine,
-
-        setUserId,
         setJWT,
         removeUserProvider,
       }}

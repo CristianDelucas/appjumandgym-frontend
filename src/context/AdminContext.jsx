@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import {  createContext, useEffect, useState } from "react";
 import {  useNavigate } from "react-router-dom";
+import useReducerAdmin from "../hooks/useReducerAdmin";
 import { logoutUserExpired } from "../_shared/Api/Auth/ApiAuth";
 import {  getUsersExercisesRoutines } from "../_shared/Api/AxiosAll/AxiosAll";
 
@@ -13,13 +14,15 @@ export const AdminProvider = ( { children } ) =>{
     //recoger estas variables en una misma
     const [users, setUsers] = useState([]);
     const [exercises, setExercises] = useState([]);
-    const [routines, setRoutines] = useState([]);
+    //const [routines, setRoutines] = useState([]);
+
+    const {routines,setRoutines} = useReducerAdmin();
     const navigate = useNavigate();
     const removeAdminProvider = () =>{
 
         setUsers(users=>[]);
         setExercises(exercises=>[]);
-        setRoutines(routines=>[]);
+        setRoutines([]);
 
     }
 

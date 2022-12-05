@@ -1,15 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/auth";
+import { AuthContext } from "../../context/AuthContext";
 import Chart from "../../_shared/components/Charts/Chart";
 import walker from '../../assets/img/walker.png';
 const Dashboard = () => {
   const [data, setData] = useState([]);
-  const { userName,objetivo, roles, routine } = useContext(AuthContext);
+  const {routine , user} = useContext(AuthContext);
 
-  //<img src={walker} alt='walker'/>
-  
-  console.log(roles);
 
   return (
     <div className="c-dashboard">
@@ -18,7 +15,7 @@ const Dashboard = () => {
       
         <div className="c-dashboard__header-title">
           <div className="c-dashboard__header-title-text">
-            Bienvenid@ a JUM AND GYM, ¡{userName}!
+            Bienvenid@ a JUM AND GYM, ¡{user?.nombre}!
           </div>
         </div>
       </div>
@@ -28,7 +25,7 @@ const Dashboard = () => {
           <div className="card">
             <div className="card--title">PLAN CONTRATADO</div>
             <div className="card--content">
-              Plan: <strong>{objetivo}</strong>
+              Plan: <strong>{user?.objetivo}</strong>
               <br />
               <br />
               Duración: <strong>2 meses</strong>

@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.scss";
 import useAuth from '../../../../hooks/auth';
 import ProtectAuthRoutes from '../../../../protect/auth/ProtectAuthRoutes';
-import { AuthContext } from '../../../../context/auth';
+import { AuthContext } from '../../../../context/AuthContext';
 
 
 const ROLES = {

@@ -1,4 +1,4 @@
-import { AuthContext } from "../../context/auth";
+import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
 import { useCallback, useState } from "react";
 import { registerUser } from "../../_shared/Api/ApiUser";
