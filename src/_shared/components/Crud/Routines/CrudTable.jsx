@@ -16,8 +16,6 @@ const CrudTable = ({editValues, deleteData }) => {
     setFiltro(e.target.value);
     setPagina(1);
   };
-    
-
 
 
 

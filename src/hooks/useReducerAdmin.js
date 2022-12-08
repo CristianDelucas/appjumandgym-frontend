@@ -18,29 +18,56 @@ const ACTIONS = {
 }
 
 const ACTIONS_REDUCERS = {
+
     [ACTIONS.SET_USERS]: (state,action) =>({
             ...state,
-            routines: [...state.routines,action.payload],
+            users: action.payload,
     }),
     [ACTIONS.ADD_USER]: (state,action) =>({
         ...state,
-        routines: action.payload,
+        users: [...state.users,action.payload]
     }),
     [ACTIONS.UPDATE_USER]: (state,action) =>({
         ...state,
-        routines: action.payload,
+        users: state.users.map((el) => (el._id === action.payload._id ? action.payload : el))
     }),
     [ACTIONS.DELETE_USER]: (state,action) =>({
         ...state,
-        routines: action.payload,
+        users: state.users.filter((el) => el._id !== action.payload),
     }),
+
+    [ACTIONS.SET_EXERCISES]: (state,action) =>({
+        ...state,
+        exercises: action.payload,
+    }),
+    [ACTIONS.ADD_EXERCISE]: (state,action) =>({
+        ...state,
+        exercises: [...state.exercises,action.payload]
+    }),
+    [ACTIONS.UPDATE_EXERCISE]: (state,action) =>({
+        ...state,
+        exercises: state.exercises.map((el) => (el._id === action.payload._id ? action.payload : el))
+    }),
+    [ACTIONS.DELETE_EXERCISE]: (state,action) =>({
+        ...state,
+        exercises: state.exercises.filter((el) => el._id !== action.payload),
+    }),
+
     [ACTIONS.SET_ROUTINES]: (state,action) =>({
         ...state,
         routines: action.payload,
     }),
+    [ACTIONS.ADD_ROUTINE]: (state,action) =>({
+        ...state,
+        routines: [...state.routines,action.payload]
+    }),
+    [ACTIONS.UPDATE_ROUTINE]: (state,action) =>({
+        ...state,
+        routines: state.routines.map((el) => (el._id === action.payload._id ? action.payload : el))
+    }),
     [ACTIONS.DELETE_ROUTINE]: (state,action) =>({
         ...state,
-        routines: state.routines.filter((el) => el.action.payload !== action.payload),
+        routines: state.routines.filter((el) => el._id !== action.payload),
     }),
     
 }
@@ -70,24 +97,40 @@ export default function useReducerAdmin(){
 
     const [state, dispatch] = useReducer(REDUCER,{
         users: [],
+        exercises:[],
         routines:[]
     })
 
-    const {users,routines} = state
+    const {users,exercises,routines} = state
 
     return{
         users,
         routines,
-        updateUser: user => 
+        exercises,
+        _setUsers: users => 
+            dispatch({type: ACTIONS.SET_USERS, payload: users}),
+        _addUser: user => 
+            dispatch({type: ACTIONS.ADD_USER, payload: user}),  
+        _updateUser: user => 
             dispatch({type: ACTIONS.UPDATE_USER, payload: user}),
-        setUser: user => 
-            dispatch({type: ACTIONS.SET_USER, payload: user}),
-        updateRoutine: routine => 
-            dispatch({type: ACTIONS.UPDATE_ROUTINE, payload: routine}),
-        setRoutines: routines => 
+        _deleteUser: id => 
+            dispatch({type: ACTIONS.DELETE_USER, payload: id}),
+        _setExercises: exercises => 
+            dispatch({type: ACTIONS.SET_EXERCISES, payload: exercises}),
+        _addExercise: exercise => 
+            dispatch({type: ACTIONS.ADD_EXERCISE, payload: exercise}),  
+        _updateExercise: exercise => 
+            dispatch({type: ACTIONS.UPDATE_EXERCISE, payload: exercise}),
+        _deleteExercise: id => 
+            dispatch({type: ACTIONS.DELETE_EXERCISE, payload: id}),
+        _setRoutines: routines => 
             dispatch({type: ACTIONS.SET_ROUTINES, payload: routines}),
-        deleteRoutine: id => 
-            dispatch({type: ACTIONS.SET_ROUTINES, payload: id}),
+        _addRoutine: routine => 
+            dispatch({type: ACTIONS.ADD_ROUTINE, payload: routine}),  
+        _updateRoutine: routine => 
+            dispatch({type: ACTIONS.UPDATE_ROUTINE, payload: routine}),
+        _deleteRoutine: id => 
+            dispatch({type: ACTIONS.DELETE_ROUTINE, payload: id}),
         
     }
 

@@ -12,17 +12,33 @@ export const AdminContext = createContext({});
 export const AdminProvider = ( { children } ) =>{
 
     //recoger estas variables en una misma
-    const [users, setUsers] = useState([]);
-    const [exercises, setExercises] = useState([]);
+    //const [users, setUsers] = useState([]);
+    //const [exercises, setExercises] = useState([]);
     //const [routines, setRoutines] = useState([]);
 
-    const {routines,setRoutines} = useReducerAdmin();
+    const {
+      users,
+      exercises,
+      routines,
+      _setUsers,
+      _addUser,
+      _updateUser,
+      _deleteUser,
+      _setExercises,
+      _addExercise,
+      _updateExercise,
+      _deleteExercise,
+      _setRoutines,
+      _updateRoutine,
+      _deleteRoutine,
+      _addRoutine
+    } = useReducerAdmin();
     const navigate = useNavigate();
     const removeAdminProvider = () =>{
 
-        setUsers(users=>[]);
-        setExercises(exercises=>[]);
-        setRoutines([]);
+        _setUsers([]);
+        _setExercises([]);
+        _setRoutines([]);
 
     }
 
@@ -33,9 +49,9 @@ export const AdminProvider = ( { children } ) =>{
         console.log(_exercises)
 
         if(status === 200){
-          setUsers(_users);
-          setExercises(_exercises);
-          setRoutines(_routines);
+          _setUsers(_users);
+          _setExercises(_exercises);
+          _setRoutines(_routines);
         }
         if(status === 403){
             removeAdminProvider();
@@ -55,13 +71,23 @@ export const AdminProvider = ( { children } ) =>{
     return(
         <AdminContext.Provider 
         value={{
-                users,
-                setUsers,
-                exercises,
-                setExercises,
-                routines,
-                setRoutines,
-                removeAdminProvider
+          users,
+          exercises,
+          routines,
+          
+          _setUsers,
+          _addUser,
+          _updateUser,
+          _deleteUser,
+          _setExercises,
+          _addExercise,
+          _updateExercise,
+          _deleteExercise,
+          _updateRoutine,
+          _deleteRoutine,
+          _addRoutine,
+                
+          removeAdminProvider
                }}>
             {children}
         </AdminContext.Provider>

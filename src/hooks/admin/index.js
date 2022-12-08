@@ -23,12 +23,17 @@ function useAdmin() {
   const [state, setState] = useState({ loading: false, error: false });
 
   const {
-    users,
-    setUsers,
-    exercises,
-    setExercises,
-    setRoutines,
-    addUserState,
+    _setUsers,
+    _addUser,
+    _updateUser,
+    _deleteUser,
+    _setExercises,
+    _addExercise,
+    _updateExercise,
+    _deleteExercise,
+    _updateRoutine,
+    _deleteRoutine,
+    _addRoutine,
     removeAdminProvider,
   } = useContext(AdminContext);
 
@@ -47,7 +52,7 @@ function useAdmin() {
         console.log("hola");
         console.log(status);
         if (status === 200) {
-          setUsers(data);
+         _setUsers(data);
 
           toast.success("¡Usuarios cargados ✅!");
           setState({ loading: false, error: false });
@@ -64,7 +69,7 @@ function useAdmin() {
       }
     };
     post();
-  }, [setUsers, navigate, removeAdminProvider]);
+  }, [_setUsers, navigate, removeAdminProvider]);
 
   //creación de usuario
   const createUser = useCallback(
@@ -78,7 +83,7 @@ function useAdmin() {
           const {data,status} = await new Promise(registerUser(_data));
 
           if (status === 201) {
-            setUsers((users) => [...users, data]);
+            _addUser(data);
             setState({ loading: false, error: false });
           }
           //sesión caducada
@@ -94,7 +99,7 @@ function useAdmin() {
       };
       post();
     },
-    [navigate, setUsers, removeAdminProvider]
+    [navigate, _addUser, removeAdminProvider]
   );
 
   //actualización de usuario
@@ -106,9 +111,7 @@ function useAdmin() {
           const {data,status} = await updateUser(_data._id, _data);
 
           if (status === 200) {
-            setUsers((users) =>
-              users.map((el) => (el._id === data._id ? data : el))
-            );
+            _updateUser(data)
             setState({ loading: false, error: false });
           }
           //sesión caducada
@@ -124,7 +127,7 @@ function useAdmin() {
       };
       post();
     },
-    [navigate, setUsers, removeAdminProvider]
+    [navigate, _updateUser, removeAdminProvider]
   );
 
   //eliminación de usuario
@@ -136,7 +139,7 @@ function useAdmin() {
           const {status} = await deleteUserById(_id);
 
           if (status === 204) {
-            setUsers((users) => users.filter((el) => el._id !== _id));
+            _deleteUser(_id);
             setState({ loading: false, error: false });
           }
           //sesión caducada
@@ -152,7 +155,7 @@ function useAdmin() {
       };
       post();
     },
-    [navigate, setUsers, removeAdminProvider]
+    [navigate, _deleteUser, removeAdminProvider]
   );
 
   //ejercicios
@@ -167,7 +170,7 @@ function useAdmin() {
 
         console.log(status);
         if (status === 200) {
-          setExercises(data);
+          _setExercises(data);
 
           setState({ loading: false, error: false });
         }
@@ -183,7 +186,7 @@ function useAdmin() {
       }
     };
     post();
-  }, [navigate,setExercises,removeAdminProvider]);
+  }, [navigate,_setExercises,removeAdminProvider]);
 
   //creación de usuario
   const createExercise = useCallback((_data) => {
@@ -194,7 +197,7 @@ function useAdmin() {
         const {data,status} = await registerExercise(_data);
         console.log(status);
         if (status === 201) {
-          setExercises((exercises) => [...exercises, data]);
+          _addExercise(data);
           setState({ loading: false, error: false });
         }
         if (status === 403) {
@@ -209,7 +212,7 @@ function useAdmin() {
       }
     };
     post();
-  }, [navigate,setExercises,removeAdminProvider]);
+  }, [navigate,_addExercise,removeAdminProvider]);
 
   //actualización de ejercicio
   const updateExercise = useCallback((_data) => {
@@ -218,9 +221,7 @@ function useAdmin() {
         const {data,status} = await updateExerciseByID(_data._id, _data);
 
         if (status === 200) {
-          setExercises((exercises) =>
-            exercises.map((el) => (el._id === data._id ? data : el))
-          );
+          _updateExercise(data);
 
           setState({ loading: false, error: false });
         }
@@ -236,7 +237,7 @@ function useAdmin() {
       }
     };
     post();
-  }, [navigate,setExercises,removeAdminProvider]);
+  }, [navigate,_updateExercise,removeAdminProvider]);
 
 
    //actualización imagen ejercicio
@@ -246,9 +247,7 @@ function useAdmin() {
         const {data,status} = await updateImageExerciseByID(_data._id);
 
         if (status === 200) {
-          setExercises((exercises) =>
-            exercises.map((el) => (el._id === data._id ? data : el))
-          );
+          _updateExercise(data)
 
           setState({ loading: false, error: false });
         }
@@ -264,7 +263,7 @@ function useAdmin() {
       }
     };
     post();
-  }, [navigate,setExercises,removeAdminProvider]);
+  }, [navigate,_updateExercise,removeAdminProvider]);
 
   //eliminación de ejercicio
   const deleteExercise = useCallback((_id) => {
@@ -273,7 +272,7 @@ function useAdmin() {
         const {status} = await deleteExerciseById(_id);
         console.log(status);
         if (status === 204) {
-          setExercises((exercises) => exercises.filter((el) => el._id !== _id));
+          _deleteExercise(_id);
           setState({ loading: false, error: false });
         }
         //sesión caducada
@@ -288,7 +287,7 @@ function useAdmin() {
       }
     };
     post();
-  }, [navigate,setExercises,removeAdminProvider]);
+  }, [navigate,_deleteExercise,removeAdminProvider]);
 
 
   //creación de rutina
@@ -301,7 +300,7 @@ function useAdmin() {
           const {data,status} = await registerRoutine(_data);
 
           if (status === 201) {
-            setRoutines((routines) => [...routines, data]);
+            _addRoutine(data);
             setState({ loading: false, error: false });
           }
           //sesión caducada
@@ -317,7 +316,7 @@ function useAdmin() {
       };
       post();
     },
-    [navigate,setRoutines ,removeAdminProvider]
+    [navigate,_addRoutine ,removeAdminProvider]
   );
 
   const updateRoutine = useCallback((_data) => {
@@ -327,10 +326,10 @@ function useAdmin() {
         const {data,status} = await updateRoutineByID(_data._id, _data);
 
         if (status === 200) {
-          setRoutines((routines) =>
-            routines.map((el) => (el._id === data._id ? data : el))
-          );
-
+          // setRoutines((routines) =>
+          //   routines.map((el) => (el._id === data._id ? data : el))
+          // );
+          _updateRoutine(data);
           setState({ loading: false, error: false });
         }
         if (status === 403) {
@@ -345,7 +344,7 @@ function useAdmin() {
       }
     };
     post();
-  }, [navigate,setRoutines,removeAdminProvider]);
+  }, [navigate,_updateRoutine,removeAdminProvider]);
 
     //eliminación de rutina
     const deleteRoutine = useCallback((_id) => {
@@ -354,7 +353,9 @@ function useAdmin() {
           const {status} = await deleteRoutineById(_id);
           
           if (status === 204) {
-            setRoutines((routines) => routines.filter((el) => el._id !== _id));
+
+            _deleteRoutine(_id)
+
             setState({ loading: false, error: false });
           }
           //sesión caducada
@@ -369,7 +370,7 @@ function useAdmin() {
         }
       };
       post();
-    }, [navigate,setRoutines,removeAdminProvider]);
+    }, [navigate,_deleteRoutine,removeAdminProvider]);
 
 
   return {
