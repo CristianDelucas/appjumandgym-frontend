@@ -21,14 +21,6 @@ const ProtectAuthRoutes = ({ allowedRoles, children }) => {
   return (
     <>{resultado && <>{children}</>}</>
   )
-
-  // return (
-  //   roles?.find(role => allowedRoles?.includes(role))
-  //   ? <Outlet/>
-  //   :isLogged
-  //     ? <Navigate to="/unauthorized" state={{ from: location }}  replace />
-  //     :  <Navigate to="/login" state={{ from: location }} replace />
-  // );
 }
 
 export default ProtectAuthRoutes;
