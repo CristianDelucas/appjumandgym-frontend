@@ -8,43 +8,28 @@ const ACTIONS = {
 }
 
 const ACTIONS_REDUCERS = {
-    [ACTIONS.UPDATE_USER]: (state,action) =>({
-            ...state,
-            user: action.payload,
-    }),
     [ACTIONS.SET_USER]: (state,action) =>({
         ...state,
         user: action.payload,
     }),
-    [ACTIONS.UPDATE_ROUTINE]: (state,action) =>({
-        ...state,
-        routine: action.payload,
+    [ACTIONS.UPDATE_USER]: (state,action) =>({
+            ...state,
+            user: action.payload,
     }),
     [ACTIONS.SET_ROUTINE]: (state,action) =>({
         ...state,
         routine: action.payload,
     }),
-    
+    [ACTIONS.UPDATE_ROUTINE]: (state,action) =>({
+        ...state,
+        routine: action.payload,
+    })
 }
 
 const REDUCER = (state, action) =>{
 
     const actionReducer = ACTIONS_REDUCERS[action.type]
         return actionReducer ? actionReducer(state,action): state;
-    // switch(action.type){
-    //     case ACTIONS.UPDATE_USER: 
-    //         return {
-    //             ...state,
-    //             users: action.payload,
-    //         }
-    //     case ACTIONS.SET_USER:
-    //         return {
-    //             ...state,
-    //             users: action.payload,
-    //         }
-    //         default:
-    //             return state;
-    // }
 }
 
 
